@@ -1,0 +1,123 @@
+[
+  {
+    "nameTag": "salto de linea",
+    "tagHTML": "<br/>",
+    "content": "salto de linea",
+    "tagAndContent": "<br/>",
+    "syntaxUser": "/salto de linea/",
+    "modelUse": "/salto de linea/"
+  },
+  {
+    "nameTag": "linea divisora",
+    "tagHTML": "<hr>",
+    "content": "linea divisora",
+    "tagAndContent": "<hr>",
+    "syntaxUser": "/linea divisora/",
+    "modelUse": "/linea divisora/"
+  },
+  {
+    "nameTag": "negrita",
+    "tagHTML": "<b></b>",
+    "content": "texto en negrita",
+    "tagAndContent": "<b>content</b>",
+    "syntaxUser": "negrita = \"[0-9a-z ]{0,}\"",
+    "modelUse": "negrita = \"texto en negrita\""
+  },
+  {
+    "nameTag": "italica",
+    "tagHTML": "<i></i>",
+    "content": "texto en italica",
+    "tagAndContent": "<i>content</i>",
+    "syntaxUser": "italica = \"[0-9a-z ]{0,}\"",
+    "modelUse": "italica = \"texto en italica\""
+  },
+  {
+    "nameTag": "parrafo",
+    "tagHTML": "<p></p>",
+    "content": "parrafo",
+    "tagAndContent": "<p>content</p>",
+    "syntaxUser": "parrafo = \"[0-9a-z ]{0,}\"",
+    "modelUse": "parrafo = \"parrafo\""
+  },
+  {
+    "nameTag": "subrayado",
+    "tagHTML": "<u></u>",
+    "content": "texto subrayado",
+    "tagAndContent": "<u>content</u>",
+    "syntaxUser": "subrayado = \"[0-9a-z ]{0,}\"",
+    "modelUse": "subrayado = \"texto subrayado\""
+  },
+  {
+    "nameTag": "titulo tipo 1",
+    "tagHTML": "<h1></h1>",
+    "content": "titulo tipo 1",
+    "tagAndContent": "<h1>content</h1>",
+    "syntaxUser": "titulo tipo 1 = \"[0-9a-z ]{0,}\"",
+    "modelUse": "titulo tipo 1 = \"titulo tipo 1\""
+  },
+  {
+    "nameTag": "titulo tipo 2",
+    "tagHTML": "<h2></h2>",
+    "content": "titulo tipo 2",
+    "tagAndContent": "<h2>content</h2>",
+    "syntaxUser": "titulo tipo 2 = \"[0-9a-z ]{0,}\"",
+    "modelUse": "titulo tipo 2 = \"titulo tipo 2\""
+  },
+  {
+    "nameTag": "titulo tipo 3",
+    "tagHTML": "<h3></h3>",
+    "content": "titulo tipo 3",
+    "tagAndContent": "<h3>content</h3>",
+    "syntaxUser": "titulo tipo 3 = \"[0-9a-z ]{0,}\"",
+    "modelUse": "titulo tipo 3 = \"titulo tipo 3\""
+  },
+  {
+    "nameTag": "titulo tipo 4",
+    "tagHTML": "<h4></h4>",
+    "content": "titulo tipo 4",
+    "tagAndContent": "<h4>content</h4>",
+    "syntaxUser": "titulo tipo 4 = \"[0-9a-z ]{0,}\"",
+    "modelUse": "titulo tipo 4 = \"titulo tipo 4\""
+  },
+  {
+    "nameTag": "titulo tipo 5",
+    "tagHTML": "<h5></h5>",
+    "content": "titulo tipo 5",
+    "tagAndContent": "<h5>content</h5>",
+    "syntaxUser": "titulo tipo 5 = \"[0-9a-z ]{0,}\"",
+    "modelUse": "titulo tipo 5 = \"titulo tipo 5\""
+  },
+  {
+    "nameTag": "enlace",
+    "tagHTML": "<a></a>",
+    "content": "texto del enlace",
+    "tagAndContent": "<a href=value target=\"_blank\">content</a>",
+    "syntaxUser": "enlace = \/\"[0-9a-z ]{0,}\"\/( \/direccion=\"[?:/.0-9a-zA-Z-_ ]{0,}\"\/){1,}",
+    "modelUse": "enlace = \/\"texto del enlace\"\/ \/direccion=\"url del enlace\"\/"
+  },
+  {
+    "nameTag": "imagen",
+    "tagHTML": "<img>",
+    "content": "imagen",
+    "tagAndContent": "<img src=value alt=\"content\" class=\"media\" width=\"100%\">",
+    "syntaxUser": "imagen = \/\"[0-9a-z ]{0,}\"\/( \/url=\"[?:/.0-9a-zA-Z-_ ]{0,}\"\/){1,}",
+    "modelUse": "imagen = \/\"descripcion de la imagen\"\/ \/url=\"url de la imagen\"\/"
+  },
+  {
+    "nameTag": "lista desordenada",
+    "tagHTML": "<ul></ul>",
+    "content": "lista desordenada",
+    "tagAndContent": "<ul>content</ul>",
+    "syntaxUser": "lista desordenada >(( |-)\/opcion=\"[a-z0-9 ]{1,}\"\/){1,}",
+    "modelUse": "lista desordenada > \/opcion=\"valor de la opcion\"\/-\/opcion=\"valor de la opcion\"\/"
+  },
+  {
+    "nameTag": "lista ordenada",
+    "tagHTML": "<ol></ol>",
+    "content": "lista ordenada",
+    "tagAndContent": "<ol>content</ol>",
+    "syntaxUser": "lista ordenada >(( |-)\/opcion=\"[a-z0-9 ]{1,}\"\/){1,}",
+    "modelUse": "lista ordenada > \/opcion=\"valor de la opcion\"\/-\/opcion=\"valor de la opcion\"\/"
+  }
+  
+]

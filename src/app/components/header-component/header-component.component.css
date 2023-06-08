@@ -1,0 +1,42 @@
+header{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.spacer:nth-child(1) {
+  text-align: left;
+}
+
+.spacer:nth-child(2) {
+  text-align: center;
+}
+
+.spacer:nth-child(3) {
+  text-align: right;
+}
+
+form.spacer {
+  text-align: center;
+}
+
+mat-toolbar-row:nth-child(1) {
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.color-icon-search {
+  color: #000;
+  cursor: pointer;
+}
+
+form.ng-untouched.ng-pristine.ng-valid {
+  height: 6vh;
+}

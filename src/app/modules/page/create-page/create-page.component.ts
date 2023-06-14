@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Directive, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import {Location} from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import tags from '../../../../assets/tags.json';
@@ -9,7 +9,7 @@ import {map, startWith} from 'rxjs/operators';
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
-  styleUrls: ['./create-page.component.css']
+  styleUrls: ['./create-page.component.css'],
 })
 export class CreatePageComponent implements OnInit {
   @ViewChild('textArea') textAreaElement: ElementRef<HTMLTextAreaElement>;
@@ -18,8 +18,10 @@ export class CreatePageComponent implements OnInit {
   nameUserControl = new FormControl('', [Validators.required]);
 
   formCreatePage: FormGroup;
+  tagsControl = new FormControl('');
+  contentEdit = new FormControl('',[Validators.required]);
 
-
+  allTagsSyntax: RegExpMatchArray | null;
   renderContent: String;
   selectableTags: Tag[] = tags;
   filteredTags: Observable<Tag[]>;
@@ -27,11 +29,8 @@ export class CreatePageComponent implements OnInit {
   
   constructor(
     private location: Location,
-    private renderer: Renderer2
+    private el: ElementRef
   ) {
-
-    
-
     this.formBuilds();
   }
 
@@ -44,7 +43,6 @@ export class CreatePageComponent implements OnInit {
       map(nameTag => nameTag ? this._filter(nameTag): this.selectableTags.slice())
     );
     
-
     this.formCreatePage.controls['contentEdit'].valueChanges.subscribe((data => this.changeContenrRendered(data)));
    
   }
@@ -52,7 +50,6 @@ export class CreatePageComponent implements OnInit {
   private _filter(value: string): Tag[]{
     const filterValue = value.toLowerCase();
     return this.selectableTags.filter(tag => tag.nameTag.toLowerCase().includes(filterValue));
-
   } 
 
 
@@ -64,8 +61,8 @@ export class CreatePageComponent implements OnInit {
     });
 
     this.formCreatePage = new FormGroup({
-      tagsControl: new FormControl(''),
-      contentEdit: new FormControl(''),
+      tagsControl: this.tagsControl,
+      contentEdit: this.contentEdit,
     });
 
   }
@@ -79,12 +76,12 @@ export class CreatePageComponent implements OnInit {
       patternTagWithElements: '[a-z ]{0,} >(( |-)\/[a-z]{1,}="[a-z0-9 ]{1,}"\/){1,}'
     }
 
-    let allTagsSyntax: RegExpMatchArray | null = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g'));
+    this.allTagsSyntax = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g'));
      
     let contentInHTML:string = "";
 
-    if (allTagsSyntax) {
-      for (let tagSyntax of allTagsSyntax) { 
+    if (this.allTagsSyntax) {
+      for (let tagSyntax of this.allTagsSyntax) { 
         
         let contentValue = tagSyntax.match(new RegExp('"[/:.0-9a-zA-Z-_ ]{0,}"', 'g'));
         
@@ -154,6 +151,37 @@ export class CreatePageComponent implements OnInit {
     
     this.formCreatePage.controls['tagsControl'].setValue('');
   }
+
+
+  createPage() {
+
+    this.formMetaDataPage.markAllAsTouched();
+    this.formCreatePage.markAllAsTouched();
+    const firstInvalidControl: HTMLInputElement = this.el.nativeElement.querySelector(
+      "form .ng-invalid"
+    );
+
+    if (firstInvalidControl !== null) {
+      window.scroll({
+        top: this.getTopOffset(firstInvalidControl),
+        left: 0,
+        behavior: "smooth"
+      });  
+    }
+    
+ 
+   
+
+  }
+
+
+  private getTopOffset(controlEl: HTMLInputElement): number {
+    const labelOffset = 100;
+    return controlEl.getBoundingClientRect().top + window.scrollY - labelOffset;
+  }
+
+  
+
 
   back() {
     this.location.back();

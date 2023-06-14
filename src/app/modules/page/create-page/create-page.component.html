@@ -6,7 +6,7 @@
 <div class="content-meta-datos-page">
   
   <form [formGroup]="formMetaDataPage">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Titulo de la página</mat-label>
       <input matInput placeholder="Titulo de la página" formControlName="titlePageControl">
       <mat-icon matSuffix>title</mat-icon>
@@ -44,11 +44,15 @@
         cdkTextareaAutosize 
         cdkAutosizeMinRows="35" 
         cdkAutosizeMaxRows="40"
-      
         ></textarea>
+        <mat-error *ngIf="contentEdit.invalid || allTagsSyntax === undefined || allTagsSyntax === null">Debe indicar algun contenido valido</mat-error>
       </mat-form-field>
     </form>
   </div>
   <div class="rendered-content" [innerHTML]="renderContent"></div>
   
+</div>
+
+<div class="buttons">
+  <button mat-stroked-button color="primary" (click)="createPage()" >Crear página</button>
 </div>

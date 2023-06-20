@@ -8,17 +8,21 @@ import {map, startWith} from 'rxjs/operators';
 import { PageService } from 'src/app/services/page/page.service';
 import { CreatePageResponse } from 'src/app/models/createPageResponse.model';
 import Swal, { SweetAlertResult } from 'sweetalert2'
+import { SharingService } from 'src/app/core/services/sharing.service';
+import { Page } from 'src/app/models/page.model';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-page',
-  templateUrl: './create-page.component.html',
-  styleUrls: ['./create-page.component.css'],
+  selector: 'app-modify-page',
+  templateUrl: './modify-page.component.html',
+  styleUrls: ['./modify-page.component.css'],
 })
-export class CreatePageComponent implements OnInit {
+export class ModifyPageComponent implements OnInit {
   @ViewChild('textArea') textAreaElement: ElementRef<HTMLTextAreaElement>;
   formMetaDataPage: FormGroup;
   titlePageControl = new FormControl('', [Validators.required]);
   nameUserControl = new FormControl('', [Validators.required]);
+  isSolvedControl = new FormControl(false);
 
   formCreatePage: FormGroup;
   tagsControl = new FormControl('');
@@ -28,12 +32,14 @@ export class CreatePageComponent implements OnInit {
   renderContent: string;
   selectableTags: Tag[] = tags;
   filteredTags: Observable<Tag[]>;
-
+  page: Page;
   
   constructor(
     private location: Location,
     private el: ElementRef,
     private pageService: PageService,
+    private sharingService: SharingService,
+    private router:Router
     
   ) {
     this.formBuilds();
@@ -49,6 +55,17 @@ export class CreatePageComponent implements OnInit {
     );
     
     this.formCreatePage.controls['contentEdit'].valueChanges.subscribe((data => this.changeContenrRendered(data)));
+
+    this.sharingService.sharingPageObservable.subscribe((page: Page) => {
+
+      this.page = page;
+
+      this.nameUserControl.setValue(page.username);
+      this.titlePageControl.setValue(page.title_page);
+      this.contentEdit.setValue(page.contents_user);
+      this.isSolvedControl.setValue(page.is_solved ? true : false) 
+
+    });
    
   }
   
@@ -62,7 +79,8 @@ export class CreatePageComponent implements OnInit {
 
     this.formMetaDataPage = new FormGroup({
       titlePageControl: this.titlePageControl,
-      nameUserControl: this.nameUserControl
+      nameUserControl: this.nameUserControl,
+      isSolvedControl: this.isSolvedControl
     });
 
     this.formCreatePage = new FormGroup({
@@ -158,7 +176,7 @@ export class CreatePageComponent implements OnInit {
   }
 
 
-  async createPage()  {
+  async modifyPage()  {
 
     this.formMetaDataPage.markAllAsTouched();
     this.formCreatePage.markAllAsTouched();
@@ -177,7 +195,7 @@ export class CreatePageComponent implements OnInit {
     }
 
     let result: SweetAlertResult = await Swal.fire({
-      title: '¿Confirmas la creación de la página?',
+      title: '¿Confirmas la modificación de la página?',
       showDenyButton: true,
       confirmButtonText: 'Si',
       denyButtonText: `No`,
@@ -185,14 +203,17 @@ export class CreatePageComponent implements OnInit {
 
     if (!result.isConfirmed) return;
     
-    this.pageService.createPage({
-      title_page: this.titlePageControl.value,
+    this.pageService.modifyPage({
+      id_page: this.page.id_page,
+      title_page: this.page.title_page,
       contents_user: this.contentEdit.value,
       contents_html: this.renderContent,
-      username: this.nameUserControl.value,
-      is_solved: '0'
+      username: this.page.username,
+      creation_date: this.page.creation_date,
+      is_solved: this.isSolvedControl.value ? '1' : '0'
     }).subscribe({
       next: (data: CreatePageResponse) => {
+        this.sharingService.sharingPageObservableData = data.page;
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -200,9 +221,6 @@ export class CreatePageComponent implements OnInit {
           showConfirmButton: false,
           timer: 2500
         });
-        this.titlePageControl.reset('');
-        this.contentEdit.reset('');
-        this.nameUserControl.reset('');
       },
       error: (err: any) => {
         Swal.fire({
@@ -223,12 +241,17 @@ export class CreatePageComponent implements OnInit {
     return controlEl.getBoundingClientRect().top + window.scrollY - labelOffset;
   }
 
-  
+  goTo(path: string) {
+    
+    this.router.navigate([`/${path}`]);
+
+  }
 
 
   back() {
     this.location.back();
   }
+
 
 
 }

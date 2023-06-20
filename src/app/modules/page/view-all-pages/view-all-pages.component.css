@@ -1,0 +1,15 @@
+h1{
+  text-align: center;
+}
+
+.icon{
+  text-align: center;
+}
+
+.icon_verified{
+  color: #11c011;
+}
+
+.icon_cancel {
+  color: #c01111;
+}

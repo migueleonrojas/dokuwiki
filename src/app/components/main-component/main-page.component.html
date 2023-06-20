@@ -1,17 +1,23 @@
 
-<main class="main-div">
-  <mat-card>
+
+<div class="create-page">
+  <mat-card class="card-buttons">
     <mat-card-header>
-      <mat-card-title>Empiece a crear sus páginas</mat-card-title>
+      <mat-card-title-group>
+        <mat-card-title>Agregar incidencia</mat-card-title>
+      </mat-card-title-group>
     </mat-card-header>
     <mat-card-content>
-      <div class="buttons-container">
-        <button mat-fab color="primary" (click)="addPage()">
-          <mat-icon>add</mat-icon>
-        </button>
-        <p>Agregue aquí</p>
-        
-      </div>
+      <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="addPage()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
+<main class="main-div">
+  <mat-card>
+    <mat-card-content>
+      <app-view-all-pages></app-view-all-pages>
     </mat-card-content>
   </mat-card>
 </main>

@@ -1,0 +1,64 @@
+<div class="buttons">
+  <button mat-icon-button color="primary" (click)="back()">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <button mat-icon-button color="primary" (click)="goTo('main-component')">
+    <mat-icon>home</mat-icon>
+  </button>
+</div>
+
+
+<h1>Resultado de la busqueda</h1>
+
+<div class="content">
+  <mat-form-field>
+    <mat-label>Buscador</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Buscador" #input>
+  </mat-form-field>
+
+  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 demo-table" >
+  
+    <ng-container matColumnDef="title_page">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Título.</th>
+      <td mat-cell *matCellDef="let page">{{page.title_page}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre del Usuario</th>
+      <td mat-cell *matCellDef="let page">{{page.username}}</td>
+    </ng-container>
+
+  
+    <ng-container matColumnDef="creation_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Creación</th>
+      <td mat-cell *matCellDef="let page">{{ page.creation_date | dateExactly | date: 'dd/MM/yyyy hh:mm:ss a'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="modification_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Modificación</th>
+      <td mat-cell *matCellDef="let page">{{ page.modification_date | dateExactly | date:'dd/MM/yyyy hh:mm:ss a'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="is_solved">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>¿Incidente resulto?</th>
+      <td mat-cell class="icon" *matCellDef="let page">
+        <mat-icon class="icon_verified" *ngIf="page.is_solved">verified</mat-icon>
+        <mat-icon class="icon_cancel" *ngIf="!page.is_solved">cancel</mat-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let page;">
+        <button mat-icon-button  matTooltip="Ver página" (click)="view(page)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

@@ -40,3 +40,9 @@ mat-toolbar-row:nth-child(1) {
 form.ng-untouched.ng-pristine.ng-valid {
   height: 6vh;
 }
+
+@media only screen and (max-width: 600px) {
+  mat-form-field{
+    display: none;
+  }
+}

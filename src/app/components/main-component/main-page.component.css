@@ -1,14 +1,40 @@
-.main-div {
-  height: 90vh;
+.create-page {
+  display: block;
+  width: 40vw;
+  margin: auto;
+  justify-content: center;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.card-buttons {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.buttons-container{
+mat-card-title {
+  justify-content: center;
+}
+
+.main-div {
+  height: 10vh;
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  gap: .3rem;
 }
+
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+
+<div class="buttons-top">
+  <button mat-icon-button color="primary" (click)="back()">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <button mat-icon-button color="primary" (click)="goTo('main-component')">
+    <mat-icon>home</mat-icon>
+  </button>
+</div>
+<h1>Modifique su página usando los elementos de la lista</h1>
+<div class="content-meta-datos-page">
+  
+  <form [formGroup]="formMetaDataPage">
+    <mat-form-field appearance="outline">
+      <mat-label>Titulo de la página</mat-label>
+      <input matInput placeholder="Titulo de la página" formControlName="titlePageControl" [readonly]="true">
+      <mat-icon matSuffix>title</mat-icon>
+      <mat-error *ngIf="titlePageControl.invalid">Debe indicar el titulo</mat-error>
+    </mat-form-field>
+    
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre del Usuario</mat-label>
+      <input matInput placeholder="Nombre del Usuario" formControlName="nameUserControl" [readonly]="true">
+      <mat-icon matSuffix>person</mat-icon>
+      <mat-error *ngIf="nameUserControl.invalid">Debe indicar el nombre de usuario</mat-error>
+    </mat-form-field>
+    
+  
+
+    <mat-checkbox class="example-margin" formControlName="isSolvedControl">¿Incidente resuelto?</mat-checkbox>
+
+  </form>
+
+</div>
+<div class="content-create-page">
+  <div class="edited-content">
+    <form [formGroup]="formCreatePage">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Elementos</mat-label>
+        <input type="text" placeholder="Escoge un elemento" aria-label="Tag" matInput formControlName="tagsControl"
+          [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="chooseElement($event.option.value)">
+          <mat-option *ngFor="let filteredTag of filteredTags | async" [value]="filteredTag.syntaxUser">
+            {{filteredTag.nameTag}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Defina contenido</mat-label>
+        <textarea matInput #textArea formControlName="contentEdit"
+        cdkTextareaAutosize 
+        cdkAutosizeMinRows="35" 
+        cdkAutosizeMaxRows="40"
+        ></textarea>
+        <mat-error *ngIf="contentEdit.invalid || allTagsSyntax === undefined || allTagsSyntax === null">Debe indicar algun contenido valido</mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="rendered-content" [innerHTML]="renderContent"></div>
+  
+</div>
+
+<div class="buttons">
+  <button mat-stroked-button color="primary" (click)="modifyPage()" >Modificar página</button>
+</div>

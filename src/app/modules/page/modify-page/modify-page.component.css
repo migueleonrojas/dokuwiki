@@ -1,0 +1,57 @@
+
+h1{
+  text-align: center;
+}
+
+.buttons-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-create-page{
+  height: 85vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.content-meta-datos-page form{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  
+}
+.edited-content {
+  width: 40vw;
+  height: 70vh;
+}
+
+.edited-content form{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+
+.rendered-content{
+  width: 40vw;
+  height: 80vh;
+  border: 0.2rem solid black;
+  overflow-y: auto;
+}
+
+.media {
+  max-width: 100%;
+}
+
+hr {
+  flex-grow: 1;
+ 
+}
+
+.buttons{
+  padding: 2rem 0 2rem 0;
+  text-align: center;
+}

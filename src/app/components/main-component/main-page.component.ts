@@ -14,10 +14,7 @@ export class MainPageComponent {
   }
 
   addPage() {
-
     this.router.navigate(['/create-page']);
-
-
-
   }
+
 }

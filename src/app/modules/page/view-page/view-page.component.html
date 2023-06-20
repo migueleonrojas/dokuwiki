@@ -1,0 +1,25 @@
+<div class="buttons">
+  <button mat-icon-button color="primary" (click)="back()">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <button mat-icon-button color="primary" (click)="goTo('main-component')">
+    <mat-icon>home</mat-icon>
+  </button>
+</div>
+
+<h1>Titulo del incidente: {{page.title_page}}</h1>
+<h2>Nombre del usuario autor: {{page.username}}</h2>
+<div class="icons">
+  <h3>
+    ¿Se resolvio el incidente?:
+  </h3>
+  <mat-icon class="icon icon_verified" *ngIf="page.is_solved">verified</mat-icon>
+  <mat-icon class="icon icon_cancel" *ngIf="!page.is_solved">cancel</mat-icon>
+
+</div>
+  
+<div class="buttons-row">
+  <button mat-raised-button (click)="goTo('modify-page')" >Modificar Página</button>
+</div>
+
+<div class="rendered-content" [innerHTML]="renderContent"></div>

@@ -79,10 +79,10 @@ export class CreatePageComponent implements OnInit {
   changeContentRendered(contentEditValue: string) {
 
     let patternTags = {
-      patternSimpleTag: '\/[0-9a-z ]{1,}\/',
-      patternTagNoAttributes: '[0-9a-z ]{1,} = "[0-9a-z ]{0,}"',
-      patternTagWithAttributes: '[a-z ]{0,} = \/"[0-9a-z ]{0,}"\/( \/[a-z]{0,}="[?:/.0-9a-zA-Z-_ ]{0,}"\/){1,}',
-      patternTagWithElements: '[a-z ]{0,} >(( |-)\/[a-z]{1,}="[a-z0-9 ]{1,}"\/){1,}'
+      patternSimpleTag: '\/[0-9a-zA-Z ]{1,}\/',
+      patternTagNoAttributes: '[0-9a-zA-Z ]{1,} = "[0-9a-zA-Z ]{0,}"',
+      patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"[0-9a-zA-Z ]{0,}"\/( \/[a-zA-Z]{0,}="[?:/.0-9a-zA-Z-_ ]{0,}"\/){1,}',
+      patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="[a-zA-Z0-9 ]{1,}"\/){1,}'
     }
 
     this.allTagsSyntax = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g'));
@@ -122,11 +122,11 @@ export class CreatePageComponent implements OnInit {
             
           else if (new RegExp(`${patternTags.patternTagWithElements}`).test(tagSyntax)) {
 
-            let options = tagSyntax.match(new RegExp('"[0-9a-z ]{1,}"', 'g'));
+            let options = tagSyntax.match(new RegExp('"[0-9a-zA-Z ]{1,}"', 'g'));
 
             let contentListItem: string = "";
             for (let option of options) {
-              contentListItem += `<li>${option.match(new RegExp('"[0-9a-z ]+"'))[0].replaceAll('"',"")}</li>`;
+              contentListItem += `<li>${option.match(new RegExp('"[0-9a-zA-Z ]+"'))[0].replaceAll('"',"")}</li>`;
             }
 
             
@@ -157,9 +157,6 @@ export class CreatePageComponent implements OnInit {
     let tag = (this.selectableTags.filter(tag => tag.syntaxUser.indexOf(value) === 0))[0];
 
     if (tag.modelUse.includes('imagen')) {
-
-      
-      
 
       let dialogImage: MatDialogRef<DialogImageComponent, any> = this.dialog.open(DialogImageComponent);
       

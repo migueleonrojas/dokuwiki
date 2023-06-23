@@ -40,6 +40,7 @@ h1{
   height: 80vh;
   border: 0.2rem solid black;
   overflow-y: auto;
+  word-wrap: break-word;
 }
 
 .media {

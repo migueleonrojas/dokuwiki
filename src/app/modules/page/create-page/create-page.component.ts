@@ -8,6 +8,9 @@ import {map, startWith} from 'rxjs/operators';
 import { PageService } from 'src/app/services/page/page.service';
 import { CreatePageResponse } from 'src/app/models/createPageResponse.model';
 import Swal, { SweetAlertResult } from 'sweetalert2'
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogImageComponent } from 'src/app/components/dialog-image/dialog-image.component';
+import { CreateImageResponse } from 'src/app/models/createImageResponse.model';
 
 @Component({
   selector: 'app-create-page',
@@ -25,15 +28,16 @@ export class CreatePageComponent implements OnInit {
   contentEdit = new FormControl('',[Validators.required]);
 
   allTagsSyntax: RegExpMatchArray | null;
+  allTagsSyntaxAux: RegExpMatchArray | null;
   renderContent: string;
   selectableTags: Tag[] = tags;
   filteredTags: Observable<Tag[]>;
-
   
   constructor(
     private location: Location,
     private el: ElementRef,
     private pageService: PageService,
+    public dialog: MatDialog
     
   ) {
     this.formBuilds();
@@ -48,7 +52,7 @@ export class CreatePageComponent implements OnInit {
       map(nameTag => nameTag ? this._filter(nameTag): this.selectableTags.slice())
     );
     
-    this.formCreatePage.controls['contentEdit'].valueChanges.subscribe((data => this.changeContenrRendered(data)));
+    this.formCreatePage.controls['contentEdit'].valueChanges.subscribe((data => this.changeContentRendered(data)));
    
   }
   
@@ -72,7 +76,7 @@ export class CreatePageComponent implements OnInit {
 
   }
 
-  changeContenrRendered(contentEditValue: string) {
+  changeContentRendered(contentEditValue: string) {
 
     let patternTags = {
       patternSimpleTag: '\/[0-9a-z ]{1,}\/',
@@ -82,9 +86,11 @@ export class CreatePageComponent implements OnInit {
     }
 
     this.allTagsSyntax = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g'));
-     
-    let contentInHTML:string = "";
 
+    this.allTagsSyntaxAux = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g'));
+
+
+    let contentInHTML:string = "";
     if (this.allTagsSyntax) {
       for (let tagSyntax of this.allTagsSyntax) { 
         
@@ -100,12 +106,15 @@ export class CreatePageComponent implements OnInit {
 
           }
           else if (new RegExp(`${patternTags.patternTagWithAttributes}`).test(tagSyntax)) { 
+            
+            
 
             contentInHTML += tag.tagAndContent.replace("content", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
 
           }
 
           else if (new RegExp(`${patternTags.patternSimpleTag}`).test(tagSyntax)) {
+
 
             contentInHTML += tag.tagAndContent;
 
@@ -143,18 +152,55 @@ export class CreatePageComponent implements OnInit {
 
   chooseElement(value: string) {
 
+    
 
     let tag = (this.selectableTags.filter(tag => tag.syntaxUser.indexOf(value) === 0))[0];
 
-    this.formCreatePage.controls['contentEdit'].setValue(
-      this.formCreatePage.value.contentEdit +
-      `${this.formCreatePage.value.contentEdit === ""
-        ? `${tag.modelUse}`
-        : `\n\n${tag.modelUse}`
-      }`
-    );
+    if (tag.modelUse.includes('imagen')) {
+
+      
+      
+
+      let dialogImage: MatDialogRef<DialogImageComponent, any> = this.dialog.open(DialogImageComponent);
+      
+      dialogImage.afterClosed().subscribe((result: string) => {
+        
+        
+        if (result !== null && result !== "") {
+          let tagWithImage = tag.modelUse.replace("url de la imagen", result);
+
+          this.formCreatePage.controls['contentEdit'].setValue(
+            this.formCreatePage.value.contentEdit +
+            `${this.formCreatePage.value.contentEdit === ""
+              ? `${tagWithImage}`
+              : `\n\n${tagWithImage}`
+            }`
+          );
+
+        }
+      });
+
+      
+
+      
+      
+    }
+    else{
+      this.formCreatePage.controls['contentEdit'].setValue(
+        this.formCreatePage.value.contentEdit +
+        `${this.formCreatePage.value.contentEdit === ""
+          ? `${tag.modelUse}`
+          : `\n\n${tag.modelUse}`
+        }`
+      );
+    }
+
+    
     
     this.formCreatePage.controls['tagsControl'].setValue('');
+
+    
+
   }
 
 
@@ -204,10 +250,10 @@ export class CreatePageComponent implements OnInit {
         this.contentEdit.reset('');
         this.nameUserControl.reset('');
       },
-      error: (err: any) => {
+      error: (err: CreatePageResponse) => {
         Swal.fire({
           position: 'center',
-          icon: 'success',
+          icon: 'error',
           title: err.message,
           showConfirmButton: false,
           timer: 2500
@@ -222,9 +268,6 @@ export class CreatePageComponent implements OnInit {
     const labelOffset = 100;
     return controlEl.getBoundingClientRect().top + window.scrollY - labelOffset;
   }
-
-  
-
 
   back() {
     this.location.back();

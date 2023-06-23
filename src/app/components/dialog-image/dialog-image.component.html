@@ -1,0 +1,33 @@
+
+<div>
+  <h1 mat-dialog-title>Insertar imagen</h1>
+  <div mat-dialog-content>
+
+    <div class="info" *ngIf="!isReady" >
+      <mat-label>La imagen no debe superar los 5 MB de tamaño</mat-label>
+    </div>
+
+    <div class="upload">
+      <button type="button" mat-raised-button (click)="fileInput.click()">Subir Imagen</button>
+      <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file" [accept]="acceptedFiles">
+    </div>
+    
+    <div *ngIf="isLoading" class="loader">
+      <mat-label>Cargando</mat-label>
+      <img class="image-loader" src="../../../assets/circles.svg" alt="Photo of a Shiba Inu">
+      <mat-progress-bar mode="determinate" [value]="loadingPercentage"></mat-progress-bar>
+    </div>
+    <div *ngIf="isReady" class="ready-loader">
+      <mat-label>Listo</mat-label>
+      <mat-label>Nombre del Archivo: {{fileUpLoaded.name}}</mat-label>
+      <mat-label>Peso del Archivo: {{fileUpLoaded.size | sizeFile}} MB</mat-label>
+      <img mat-card-image  [src]="srcImageUpLoad" alt="Photo of a Shiba Inu">
+
+    </div>
+    
+  </div>
+  
+  <div class="buttons" mat-dialog-actions>
+    <button *ngIf="!isReady" mat-button (click)="close()">Cancelar</button>
+  </div>
+</div>

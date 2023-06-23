@@ -18,6 +18,10 @@ import { ModifyPageComponent } from './modules/page/modify-page/modify-page.comp
 import { DateExactly } from './pipes/date.pipe';
 import { DatePipe } from '@angular/common';
 import { ViewSearchPagesComponent } from './modules/page/view-search-pages/view-search-pages.component';
+import { DialogImageComponent } from './components/dialog-image/dialog-image.component';
+import { SizeFile } from './pipes/sizeFileConvert.pipe';
+
+
 
 @NgModule({
   declarations: [
@@ -30,6 +34,8 @@ import { ViewSearchPagesComponent } from './modules/page/view-search-pages/view-
     ModifyPageComponent,
     ViewSearchPagesComponent,
     DateExactly,
+    DialogImageComponent,
+    SizeFile
     
   ],
   imports: [
@@ -44,7 +50,7 @@ import { ViewSearchPagesComponent } from './modules/page/view-search-pages/view-
     HttpClientModule,
     CoreModule
   ],
-  providers: [DateExactly, DatePipe],
+  providers: [DateExactly, DatePipe, SizeFile],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

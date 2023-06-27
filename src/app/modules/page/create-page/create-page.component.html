@@ -31,12 +31,13 @@
         <mat-label>Elementos</mat-label>
         <input type="text" placeholder="Escoge un elemento" aria-label="Tag" matInput formControlName="tagsControl"
           [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="chooseElement($event.option.value)">
+        <mat-autocomplete  #auto="matAutocomplete" (optionSelected)="chooseElement($event.option.value)">
           <mat-option *ngFor="let filteredTag of filteredTags | async" [value]="filteredTag.syntaxUser">
             {{filteredTag.nameTag}}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+    
 
       <mat-form-field>
         <mat-label>Defina contenido</mat-label>
@@ -49,7 +50,7 @@
       </mat-form-field>
     </form>
   </div>
-  <div class="rendered-content" [innerHTML]="renderContent"></div>
+  <div class="rendered-content" [innerHTML]="renderContent | sanitizeHtml"></div>
   
 </div>
 

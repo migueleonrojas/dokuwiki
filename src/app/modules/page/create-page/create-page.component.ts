@@ -10,7 +10,6 @@ import { CreatePageResponse } from 'src/app/models/createPageResponse.model';
 import Swal, { SweetAlertResult } from 'sweetalert2'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogImageComponent } from 'src/app/components/dialog-image/dialog-image.component';
-import { CreateImageResponse } from 'src/app/models/createImageResponse.model';
 
 @Component({
   selector: 'app-create-page',
@@ -25,13 +24,16 @@ export class CreatePageComponent implements OnInit {
 
   formCreatePage: FormGroup;
   tagsControl = new FormControl('');
+  alignsControl = new FormControl('');
   contentEdit = new FormControl('',[Validators.required]);
 
   allTagsSyntax: RegExpMatchArray | null;
-  allTagsSyntaxAux: RegExpMatchArray | null;
   renderContent: string;
   selectableTags: Tag[] = tags;
   filteredTags: Observable<Tag[]>;
+
+
+  
   
   constructor(
     private location: Location,
@@ -71,6 +73,7 @@ export class CreatePageComponent implements OnInit {
 
     this.formCreatePage = new FormGroup({
       tagsControl: this.tagsControl,
+      alignsControl: this.alignsControl,
       contentEdit: this.contentEdit,
     });
 
@@ -87,12 +90,10 @@ export class CreatePageComponent implements OnInit {
 
     this.allTagsSyntax = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g'));
 
-    this.allTagsSyntaxAux = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g'));
-
-
-    let contentInHTML:string = "";
+    let contentInHTML: string = "";
+    
     if (this.allTagsSyntax) {
-      for (let tagSyntax of this.allTagsSyntax) { 
+      for (let tagSyntax of this.allTagsSyntax) {
         
         let contentValue = tagSyntax.match(new RegExp('"[/:.0-9a-zA-Z-_ ]{0,}"', 'g'));
         
@@ -101,21 +102,20 @@ export class CreatePageComponent implements OnInit {
         try {
           
           if (new RegExp(`${patternTags.patternTagNoAttributes}`).test(tagSyntax)) {
-            
-            contentInHTML += tag.tagAndContent.replace("content", contentValue[0].replaceAll("\"", "")) + " ";
+
+            contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll("\"", "")) +  ' ';
 
           }
           else if (new RegExp(`${patternTags.patternTagWithAttributes}`).test(tagSyntax)) { 
             
             
 
-            contentInHTML += tag.tagAndContent.replace("content", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
+            contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
 
           }
 
           else if (new RegExp(`${patternTags.patternSimpleTag}`).test(tagSyntax)) {
-
-
+            
             contentInHTML += tag.tagAndContent;
 
           }
@@ -130,7 +130,7 @@ export class CreatePageComponent implements OnInit {
             }
 
             
-            contentInHTML += tag.tagAndContent.replace("content", contentListItem) + " ";
+            contentInHTML += tag.tagAndContent.replace("innerContent", contentListItem) + " ";
             
           }
 
@@ -199,6 +199,7 @@ export class CreatePageComponent implements OnInit {
     
 
   }
+
 
 
   async createPage()  {

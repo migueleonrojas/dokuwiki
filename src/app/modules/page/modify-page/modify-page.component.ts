@@ -114,12 +114,12 @@ export class ModifyPageComponent implements OnInit {
           
           if (new RegExp(`${patternTags.patternTagNoAttributes}`).test(tagSyntax)) {
             
-            contentInHTML += tag.tagAndContent.replace("content", contentValue[0].replaceAll("\"", "")) + " ";
+            contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll("\"", "")) + " ";
 
           }
           else if (new RegExp(`${patternTags.patternTagWithAttributes}`).test(tagSyntax)) { 
 
-            contentInHTML += tag.tagAndContent.replace("content", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
+            contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
 
           }
 
@@ -139,7 +139,7 @@ export class ModifyPageComponent implements OnInit {
             }
 
             
-            contentInHTML += tag.tagAndContent.replace("content", contentListItem) + " ";
+            contentInHTML += tag.tagAndContent.replace("innerContent", contentListItem) + " ";
             
           }
 

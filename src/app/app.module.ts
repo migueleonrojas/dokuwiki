@@ -20,6 +20,7 @@ import { DatePipe } from '@angular/common';
 import { ViewSearchPagesComponent } from './modules/page/view-search-pages/view-search-pages.component';
 import { DialogImageComponent } from './components/dialog-image/dialog-image.component';
 import { SizeFile } from './pipes/sizeFileConvert.pipe';
+import { SanitizeHtml } from './pipes/sanitize.pipe';
 
 
 
@@ -35,7 +36,8 @@ import { SizeFile } from './pipes/sizeFileConvert.pipe';
     ViewSearchPagesComponent,
     DateExactly,
     DialogImageComponent,
-    SizeFile
+    SizeFile,
+    SanitizeHtml
     
   ],
   imports: [
@@ -50,7 +52,7 @@ import { SizeFile } from './pipes/sizeFileConvert.pipe';
     HttpClientModule,
     CoreModule
   ],
-  providers: [DateExactly, DatePipe, SizeFile],
+  providers: [DateExactly, DatePipe, SizeFile, SanitizeHtml],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -22,4 +22,4 @@
   <button mat-raised-button (click)="goTo('modify-page')" >Modificar Página</button>
 </div>
 
-<div class="rendered-content" [innerHTML]="renderContent"></div>
+<div class="rendered-content" [innerHTML]="renderContent | sanitizeHtml"></div>

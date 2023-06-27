@@ -59,7 +59,7 @@
       </mat-form-field>
     </form>
   </div>
-  <div class="rendered-content" [innerHTML]="renderContent"></div>
+  <div class="rendered-content" [innerHTML]="renderContent | sanitizeHtml"></div>
   
 </div>
 

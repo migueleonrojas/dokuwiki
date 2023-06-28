@@ -21,6 +21,7 @@ export class CreatePageComponent implements OnInit {
   formMetaDataPage: FormGroup;
   titlePageControl = new FormControl('', [Validators.required]);
   nameUserControl = new FormControl('', [Validators.required]);
+  typePageControl = new FormControl('', [Validators.required]);
 
   formCreatePage: FormGroup;
   tagsControl = new FormControl('');
@@ -31,7 +32,10 @@ export class CreatePageComponent implements OnInit {
   renderContent: string;
   selectableTags: Tag[] = tags;
   filteredTags: Observable<Tag[]>;
-
+  types_of_pages: {name:string, value:string}[] = [
+    {name: 'Documentación', value: 'documentación'},
+    {name: 'Incidente',     value: 'incidente'},
+  ];
 
   
   
@@ -68,7 +72,8 @@ export class CreatePageComponent implements OnInit {
 
     this.formMetaDataPage = new FormGroup({
       titlePageControl: this.titlePageControl,
-      nameUserControl: this.nameUserControl
+      nameUserControl: this.nameUserControl,
+      typePageControl: this.typePageControl,
     });
 
     this.formCreatePage = new FormGroup({
@@ -108,8 +113,6 @@ export class CreatePageComponent implements OnInit {
           }
           else if (new RegExp(`${patternTags.patternTagWithAttributes}`).test(tagSyntax)) { 
             
-            
-
             contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
 
           }
@@ -234,7 +237,8 @@ export class CreatePageComponent implements OnInit {
       contents_user: this.contentEdit.value,
       contents_html: this.renderContent,
       username: this.nameUserControl.value,
-      is_solved: '0'
+      is_solved: '0',
+      type_of_page: this.typePageControl.value
     }).subscribe({
       next: (data: CreatePageResponse) => {
         Swal.fire({

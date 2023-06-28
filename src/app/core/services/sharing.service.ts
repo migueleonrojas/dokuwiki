@@ -9,7 +9,8 @@ export class SharingService {
     contents_user: "",
     contents_html: "",
     title_page: "",
-    is_solved: '0'
+    is_solved: '0',
+    type_of_page: ''
   })
 
   private sharingPagesObservablePrivate: BehaviorSubject<Page[]> = new BehaviorSubject<Page[]>([]);

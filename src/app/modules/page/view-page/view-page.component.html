@@ -7,9 +7,10 @@
   </button>
 </div>
 
+<h1>{{page.type_of_page | uppercase}}</h1>
 <h1>Titulo del incidente: {{page.title_page}}</h1>
 <h2>Nombre del usuario autor: {{page.username}}</h2>
-<div class="icons">
+<div *ngIf="page.type_of_page === 'incidente'" class="icons">
   <h3>
     ¿Se resolvio el incidente?:
   </h3>

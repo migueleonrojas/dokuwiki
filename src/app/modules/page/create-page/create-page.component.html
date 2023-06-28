@@ -20,6 +20,16 @@
       <mat-icon matSuffix>person</mat-icon>
       <mat-error *ngIf="nameUserControl.invalid">Debe indicar el nombre de usuario</mat-error>
     </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tipo de página</mat-label>
+      <mat-select formControlName="typePageControl">
+        <mat-option *ngFor="let type_of_page of types_of_pages" [value]="type_of_page.value">
+          {{type_of_page.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="typePageControl.invalid">Debe indicar el tipo de página a crear</mat-error>
+    </mat-form-field>
   </form>
 
 </div>

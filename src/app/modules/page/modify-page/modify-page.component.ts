@@ -22,7 +22,12 @@ export class ModifyPageComponent implements OnInit {
   formMetaDataPage: FormGroup;
   titlePageControl = new FormControl('', [Validators.required]);
   nameUserControl = new FormControl('', [Validators.required]);
+  typePageControl = new FormControl({value: '', disabled: true}, [Validators.required]);
   isSolvedControl = new FormControl(false);
+  types_of_pages: {name:string, value:string}[] = [
+    {name: 'Documentación', value: 'documentación'},
+    {name: 'Incidente',     value: 'incidente'},
+  ];
 
   formCreatePage: FormGroup;
   tagsControl = new FormControl('');
@@ -63,6 +68,7 @@ export class ModifyPageComponent implements OnInit {
       this.nameUserControl.setValue(page.username);
       this.titlePageControl.setValue(page.title_page);
       this.contentEdit.setValue(page.contents_user);
+      this.typePageControl.setValue(page.type_of_page);
       this.isSolvedControl.setValue(page.is_solved ? true : false) 
 
     });
@@ -80,7 +86,8 @@ export class ModifyPageComponent implements OnInit {
     this.formMetaDataPage = new FormGroup({
       titlePageControl: this.titlePageControl,
       nameUserControl: this.nameUserControl,
-      isSolvedControl: this.isSolvedControl
+      typePageControl: this.typePageControl,
+      isSolvedControl: this.isSolvedControl,
     });
 
     this.formCreatePage = new FormGroup({
@@ -210,7 +217,8 @@ export class ModifyPageComponent implements OnInit {
       contents_html: this.renderContent,
       username: this.page.username,
       creation_date: this.page.creation_date,
-      is_solved: this.isSolvedControl.value ? '1' : '0'
+      is_solved: this.isSolvedControl.value ? '1' : '0',
+      type_of_page: this.page.type_of_page
     }).subscribe({
       next: (data: CreatePageResponse) => {
         this.sharingService.sharingPageObservableData = data.page;

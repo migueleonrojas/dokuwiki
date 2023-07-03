@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { PageService } from 'src/app/services/page/page.service';
   templateUrl: './mat-drawer-elements.component.html',
   styleUrls: ['./mat-drawer-elements.component.css']
 })
-export class MatDrawerElementsComponent {
+export class MatDrawerElementsComponent implements OnInit {
   searchFormControl = new FormControl('', [Validators.required]);
   matSide: MatSidenav;
 
@@ -21,6 +21,11 @@ export class MatDrawerElementsComponent {
     private router: Router,
   ) {
     
+  }
+  ngOnInit(): void {
+    this.sharingService.sharingSideNavObservable.subscribe((matSidenav:MatSidenav) => {
+      this.matSide = matSidenav;
+    });
   }
 
   async search() {
@@ -33,9 +38,7 @@ export class MatDrawerElementsComponent {
 
       this.sharingService.sharingPagesObservableData = data.pages;
 
-      this.sharingService.sharingSideNavObservable.subscribe((matSidenav:MatSidenav) => {
-        this.matSide = matSidenav;
-      });
+      
 
     });
 
@@ -43,5 +46,9 @@ export class MatDrawerElementsComponent {
 
     this.router.navigate(['/view-search-page']);
 
+  }
+
+  async closeMatSidenav() {
+    await this.matSide.close();
   }
 }

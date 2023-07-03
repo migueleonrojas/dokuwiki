@@ -1,6 +1,6 @@
 .create-page {
   display: block;
-  width: 40vw;
+  max-width: 30%;
   margin: auto;
   justify-content: center;
   padding-top: 5rem;
@@ -16,6 +16,7 @@
 
 mat-card-title {
   text-align: center;
+  word-break: break-all;
 }
 
 .main-div {
@@ -24,12 +25,23 @@ mat-card-title {
   justify-content: center;
   align-items: center;
 }
+.main-div mat-card-content{
+  
+  
+}
 
 mat-card {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 800px) {
+  .create-page {
+    max-width: 80%;
+  }
+
 }
 
 

@@ -15,5 +15,53 @@ h1{
 }
 
 .content {
-  padding: 3rem;
+  margin: 1rem;
+}
+
+.title-matcell {
+  display: none;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+
+  .title-matcell {
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    word-wrap: break-word;
+  }
+
+  tr[mat-header-row] {
+    display: none;
+  }
+
+  .index-row {
+    text-align: center;
+    font-weight: bolder;
+  }
+
+  td[mat-cell]:nth-child(1) {
+    display: flex;
+    justify-content: center;
+  }
+
+  td[mat-cell] {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  td[mat-cell] .title-matcell {
+    text-align: left;
+    text-align-last: left;
+  }
+
+  td[mat-cell] .title-content {
+    text-align: right;
+    text-align-last: right;
+  }
+
 }

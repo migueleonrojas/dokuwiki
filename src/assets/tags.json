@@ -20,7 +20,7 @@
     "tagHTML": "b",
     "content": "texto en negrita",
     "tagAndContent": "<b style=\"value\">innerContent</b>",
-    "syntaxUser": "negrita = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "negrita = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "negrita = \"texto en negrita\""
   },
   {
@@ -28,7 +28,7 @@
     "tagHTML": "b",
     "content": "texto en negrita centrado",
     "tagAndContent": "<b style=\"display: flex;justify-content: center;\">innerContent</b>",
-    "syntaxUser": "negrita centrado = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "negrita centrado = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "negrita centrado = \"texto en negrita centrado\""
   },
   {
@@ -36,7 +36,7 @@
     "tagHTML": "b",
     "content": "texto en negrita a la derecha",
     "tagAndContent": "<b style=\"display: flex;justify-content: flex-end;\">innerContent</b>",
-    "syntaxUser": "negrita a la derecha = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "negrita a la derecha = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "negrita a la derecha = \"texto en negrita\""
   },
   {
@@ -44,7 +44,7 @@
     "tagHTML": "i",
     "content": "texto en italica",
     "tagAndContent": "<i>innerContent</i>",
-    "syntaxUser": "italica = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "italica = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "italica = \"texto en italica\""
   },
   {
@@ -52,7 +52,7 @@
     "tagHTML": "i",
     "content": "texto en italica centrada",
     "tagAndContent": "<i style=\"display: flex;justify-content: center;\">innerContent</i>",
-    "syntaxUser": "italica centrada = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "italica centrada = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "italica centrada = \"texto en italica centrada\""
   },
   {
@@ -60,7 +60,7 @@
     "tagHTML": "i",
     "content": "texto en italica a la derecha",
     "tagAndContent": "<i style=\"display: flex;justify-content: flex-end;\">innerContent</i>",
-    "syntaxUser": "italica a la derecha = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "italica a la derecha = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "italica a la derecha = \"texto en italica a la derecha\""
   },
   {
@@ -68,7 +68,7 @@
     "tagHTML": "p",
     "content": "parrafo",
     "tagAndContent": "<p>innerContent</p>",
-    "syntaxUser": "parrafo = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "parrafo = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "parrafo = \"parrafo\""
   },
   {
@@ -76,7 +76,7 @@
     "tagHTML": "p",
     "content": "parrafo centrado",
     "tagAndContent": "<p style=\"text-align: center;\">innerContent</p>",
-    "syntaxUser": "parrafo centrado = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "parrafo centrado = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "parrafo centrado = \"parrafo centrado\""
   },
   {
@@ -84,7 +84,7 @@
     "tagHTML": "p",
     "content": "parrafo a la derecha",
     "tagAndContent": "<p style=\"text-align: end;\">innerContent</p>",
-    "syntaxUser": "parrafo a la derecha = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "parrafo a la derecha = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "parrafo a la derecha = \"parrafo a la derecha\""
   },
   {
@@ -92,7 +92,7 @@
     "tagHTML": "u",
     "content": "texto subrayado",
     "tagAndContent": "<u>innerContent</u>",
-    "syntaxUser": "subrayado = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "subrayado = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "subrayado = \"texto subrayado\""
   },
   {
@@ -100,7 +100,7 @@
     "tagHTML": "u",
     "content": "texto subrayado centrado",
     "tagAndContent": "<u style=\"display: flex;justify-content: center;\">innerContent</u>",
-    "syntaxUser": "subrayado centrado = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "subrayado centrado = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "subrayado centrado = \"texto subrayado centrado\""
   },
   {
@@ -108,7 +108,7 @@
     "tagHTML": "u",
     "content": "texto subrayado a la derecha",
     "tagAndContent": "<u style=\"display: flex;justify-content: flex-end;\">innerContent</u>",
-    "syntaxUser": "subrayado a la derecha = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "subrayado a la derecha = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "subrayado a la derecha = \"texto subrayado a la derecha\""
   },
   {
@@ -116,7 +116,7 @@
     "tagHTML": "h1",
     "content": "titulo tipo 1",
     "tagAndContent": "<h1>innerContent</h1>",
-    "syntaxUser": "titulo tipo 1 = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 1 = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 1 = \"titulo tipo 1\""
   },
   {
@@ -124,7 +124,7 @@
     "tagHTML": "h1",
     "content": "titulo tipo 1 centrado",
     "tagAndContent": "<h1 style=\"text-align: center;\">innerContent</h1>",
-    "syntaxUser": "titulo tipo 1 centrado = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 1 centrado = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 1 centrado = \"titulo tipo 1 centrado\""
   },
   {
@@ -132,7 +132,7 @@
     "tagHTML": "h1",
     "content": "titulo tipo 1 a la derecha",
     "tagAndContent": "<h1 style=\"text-align: end;\">innerContent</h1>",
-    "syntaxUser": "titulo tipo 1 a la derecha = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 1 a la derecha = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 1 a la derecha = \"titulo tipo 1 a la derecha\""
   },
   {
@@ -140,7 +140,7 @@
     "tagHTML": "h2",
     "content": "titulo tipo 2",
     "tagAndContent": "<h2>innerContent</h2>",
-    "syntaxUser": "titulo tipo 2 = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 2 = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 2 = \"titulo tipo 2\""
   },
   {
@@ -148,7 +148,7 @@
     "tagHTML": "h2",
     "content": "titulo tipo 2 centrado",
     "tagAndContent": "<h2 style=\"text-align: center;\">innerContent</h2>",
-    "syntaxUser": "titulo tipo 2 centrado = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 2 centrado = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 2 centrado = \"titulo tipo 2 centrado\""
   },
   {
@@ -156,7 +156,7 @@
     "tagHTML": "h2",
     "content": "titulo tipo 2 a la derecha",
     "tagAndContent": "<h2 style=\"text-align: end;\">innerContent</h2>",
-    "syntaxUser": "titulo tipo 2 a la derecha = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 2 a la derecha = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 2 a la derecha = \"titulo tipo 2 a la derecha\""
   },
   {
@@ -164,7 +164,7 @@
     "tagHTML": "h3",
     "content": "titulo tipo 3",
     "tagAndContent": "<h3>innerContent</h3>",
-    "syntaxUser": "titulo tipo 3 = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 3 = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 3 = \"titulo tipo 3\""
   },
   {
@@ -172,7 +172,7 @@
     "tagHTML": "h3",
     "content": "titulo tipo 3 centrado",
     "tagAndContent": "<h3 style=\"text-align: center;\">innerContent</h3>",
-    "syntaxUser": "titulo tipo 3 centrado = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 3 centrado = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 3 centrado = \"titulo tipo 3 centrado\""
   },
   {
@@ -180,7 +180,7 @@
     "tagHTML": "h3",
     "content": "titulo tipo 3 a la derecha",
     "tagAndContent": "<h3 style=\"text-align: end;\">innerContent</h3>",
-    "syntaxUser": "titulo tipo 3 a la derecha = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 3 a la derecha = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 3 a la derecha = \"titulo tipo 3 a la derecha\""
   },
   {
@@ -188,7 +188,7 @@
     "tagHTML": "h4",
     "content": "titulo tipo 4",
     "tagAndContent": "<h4>innerContent</h4>",
-    "syntaxUser": "titulo tipo 4 = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 4 = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 4 = \"titulo tipo 4\""
   },
   {
@@ -196,7 +196,7 @@
     "tagHTML": "h4",
     "content": "titulo tipo 4 centrado",
     "tagAndContent": "<h4 style=\"text-align: center;\">innerContent</h4>",
-    "syntaxUser": "titulo tipo 4 centrado = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 4 centrado = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 4 centrado = \"titulo tipo 4 centrado\""
   },
   {
@@ -204,7 +204,7 @@
     "tagHTML": "h4",
     "content": "titulo tipo 4 a la derecha",
     "tagAndContent": "<h4 style=\"text-align: end;\">innerContent</h4>",
-    "syntaxUser": "titulo tipo 4 a la derecha = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 4 a la derecha = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 4 a la derecha = \"titulo tipo 4 a la derecha\""
   },
   {
@@ -212,7 +212,7 @@
     "tagHTML": "h5",
     "content": "titulo tipo 5",
     "tagAndContent": "<h5>innerContent</h5>",
-    "syntaxUser": "titulo tipo 5 = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 5 = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 5 = \"titulo tipo 5\""
   },
   {
@@ -220,7 +220,7 @@
     "tagHTML": "h5",
     "content": "titulo tipo 5 centrado",
     "tagAndContent": "<h5 style=\"text-align: center;\">innerContent</h5>",
-    "syntaxUser": "titulo tipo 5 centrado = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 5 centrado = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 5 centrado = \"titulo tipo 5 centrado\""
   },
   {
@@ -228,7 +228,7 @@
     "tagHTML": "h5",
     "content": "titulo tipo 5 a la derecha",
     "tagAndContent": "<h5 style=\"text-align: end;\">innerContent</h5>",
-    "syntaxUser": "titulo tipo 5 a la derecha = \"[0-9a-zA-Z ]{0,}\"",
+    "syntaxUser": "titulo tipo 5 a la derecha = \"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"",
     "modelUse": "titulo tipo 5 a la derecha = \"titulo tipo 5 a la derecha\""
   },
   {
@@ -236,7 +236,7 @@
     "tagHTML": "a",
     "content": "texto del enlace",
     "tagAndContent": "<a href=value target=\"_blank\">innerContent</a>",
-    "syntaxUser": "enlace = \/\"[0-9a-zA-Z ]{0,}\"\/( \/direccion=\"[?:/.0-9a-zA-Z-_ ]{0,}\"\/){1,}",
+    "syntaxUser": "enlace = \/\"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"\/( \/direccion=\"[?:/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}\"\/){1,}",
     "modelUse": "enlace = \/\"texto del enlace\"\/ \/direccion=\"url del enlace\"\/"
   },
   {
@@ -244,7 +244,7 @@
     "tagHTML": "a",
     "content": "texto del enlace centrado",
     "tagAndContent": "<a style=\"display: flex;justify-content: center;\" href=value target=\"_blank\">innerContent</a>",
-    "syntaxUser": "enlace centrado = \/\"[0-9a-zA-Z ]{0,}\"\/( \/direccion=\"[?:/.0-9a-zA-Z-_ ]{0,}\"\/){1,}",
+    "syntaxUser": "enlace centrado = \/\"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"\/( \/direccion=\"[?:/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}\"\/){1,}",
     "modelUse": "enlace centrado = \/\"texto del enlace centrado\"\/ \/direccion=\"url del enlace\"\/"
   },
   {
@@ -252,15 +252,15 @@
     "tagHTML": "a",
     "content": "texto del enlace a la derecha",
     "tagAndContent": "<a style=\"display: flex;justify-content: flex-end;\" href=value target=\"_blank\">innerContent</a>",
-    "syntaxUser": "enlace a la derecha = \/\"[0-9a-zA-Z ]{0,}\"\/( \/direccion=\"[?:/.0-9a-zA-Z-_ ]{0,}\"\/){1,}",
+    "syntaxUser": "enlace a la derecha = \/\"[/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"\/( \/direccion=\"[?:/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}\"\/){1,}",
     "modelUse": "enlace a la derecha = \/\"texto del enlace a la derecha\"\/ \/direccion=\"url del enlace\"\/"
   },
   {
     "nameTag": "imagen",
     "tagHTML": "img",
     "content": "imagen",
-    "tagAndContent": "<img src=value alt=\"innerContent\" class=\"media\" width=\"100%\">",
-    "syntaxUser": "imagen = \/\"[0-9a-zA-Z ]{0,}\"\/( \/url=\"[?:/.0-9a-zA-Z-_ ]{0,}\"\/){1,}",
+    "tagAndContent": "<img style=\"max-width: 100%; height: 50vh\" src=value alt=\"innerContent\" class=\"media\">",
+    "syntaxUser": "imagen = \/\"[/.,0-9a-zA-Z ]{0,}\"\/( \/url=\"[?:/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}\"\/){1,}",
     "modelUse": "imagen = \/\"descripcion de la imagen\"\/ \/url=\"url de la imagen\"\/"
   },
   {
@@ -268,7 +268,7 @@
     "tagHTML": "ul",
     "content": "lista desordenada",
     "tagAndContent": "<ul>innerContent</ul>",
-    "syntaxUser": "lista desordenada >(( |-)\/opcion=\"[A-Za-z0-9 ]{1,}\"\/){1,}",
+    "syntaxUser": "lista desordenada >(( |-)\/opcion=\"[/.,A-Za-z0-9ñáéíóúÁÉÍÓÚ ]{1,}\"\/){1,}",
     "modelUse": "lista desordenada > \/opcion=\"valor de la opcion\"\/-\/opcion=\"valor de la opcion\"\/"
   },
   {
@@ -276,7 +276,7 @@
     "tagHTML": "ol",
     "content": "lista ordenada",
     "tagAndContent": "<ol>innerContent</ol>",
-    "syntaxUser": "lista ordenada >(( |-)\/opcion=\"[A-Za-z0-9 ]{1,}\"\/){1,}",
+    "syntaxUser": "lista ordenada >(( |-)\/opcion=\"[/.,A-Za-z0-9ñáéíóúÁÉÍÓÚ ]{1,}\"\/){1,}",
     "modelUse": "lista ordenada > \/opcion=\"valor de la opcion\"\/-\/opcion=\"valor de la opcion\"\/"
   }
   

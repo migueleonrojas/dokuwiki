@@ -4,7 +4,7 @@ h1{
 }
 
 .content-create-page{
-  height: 85vh;
+  height: auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -17,10 +17,12 @@ h1{
   align-items: center;
   flex-wrap: wrap;
   
+  
 }
 .edited-content {
-  width: 40vw;
-  height: 70vh;
+  width: 45%;
+  height: 70vh
+
 }
 
 .edited-content form{
@@ -31,8 +33,8 @@ h1{
 
 
 .rendered-content{
-  width: 40vw;
-  height: 80vh;
+  width: 45%;
+  height: 70vh;
   border: 0.2rem solid black;
   overflow-y: auto;
   word-wrap: break-word;
@@ -60,7 +62,7 @@ hr {
 .centeredText{
   display: flex;
   justify-content: center;
-  
+   
 }
 
 .endedText {
@@ -68,4 +70,14 @@ hr {
   justify-content: flex-end;
 }
 
+
+@media (max-width: 900px) {
+  .rendered-content {
+    width: 95%;
+  }
+
+  .edited-content {
+    width: 95%;
+  }
+}
 

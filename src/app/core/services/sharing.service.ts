@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
+import { MatDrawerToggleResult, MatSidenav } from "@angular/material/sidenav";
 import { BehaviorSubject, Observable } from "rxjs";
+
 import { Page } from "src/app/models/page.model";
 
 @Injectable()
@@ -16,6 +18,8 @@ export class SharingService {
   private sharingPagesObservablePrivate: BehaviorSubject<Page[]> = new BehaviorSubject<Page[]>([]);
 
   private sharingQuerySearchObservablePrivate: BehaviorSubject<string> = new BehaviorSubject<string>("");
+
+  private sharingSideNavObservablePrivate: BehaviorSubject<MatSidenav> = new BehaviorSubject<MatSidenav>(null);
 
 
   get sharingPageObservable(): Observable<Page> {
@@ -45,5 +49,16 @@ export class SharingService {
   set sharingQuerySearchObservableData(search: string) {
     this.sharingQuerySearchObservablePrivate.next(search);
   }
+
+
+  get sharingSideNavObservable(): Observable<MatSidenav> {
+    return this.sharingSideNavObservablePrivate.asObservable();
+  }
+
+  set sharingSideNavObservableData(matSidenav: MatSidenav) {
+    this.sharingSideNavObservablePrivate.next(matSidenav);
+  }
+
+
 
 }

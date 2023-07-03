@@ -1,2 +1,17 @@
-<app-header-component></app-header-component>
-<router-outlet></router-outlet>
+
+<mat-drawer-container #matSidenav class="example-container">
+  <mat-drawer mode="push">
+    <app-mat-drawer-elements></app-mat-drawer-elements>
+  </mat-drawer>
+  <mat-drawer-content>
+    <main>
+      <app-header-component></app-header-component>
+      <router-outlet></router-outlet>
+    </main>
+    
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+
+

@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponentComponent } from './components/header-component/header-component.component';
+import { HeaderComponent } from './components/header-component/header-component';
 import { RouterModule } from '@angular/router';
 import { MainPageComponent } from './components/main-component/main-page.component';
 import { CreatePageComponent } from './modules/page/create-page/create-page.component';
@@ -21,13 +21,15 @@ import { ViewSearchPagesComponent } from './modules/page/view-search-pages/view-
 import { DialogImageComponent } from './components/dialog-image/dialog-image.component';
 import { SizeFile } from './pipes/sizeFileConvert.pipe';
 import { SanitizeHtml } from './pipes/sanitize.pipe';
+import { MatDrawerElementsComponent } from './components/mat-drawer-elements/mat-drawer-elements.component';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponentComponent,
+    HeaderComponent,
     MainPageComponent,
     CreatePageComponent,
     ViewAllPagesComponent,
@@ -37,7 +39,8 @@ import { SanitizeHtml } from './pipes/sanitize.pipe';
     DateExactly,
     DialogImageComponent,
     SizeFile,
-    SanitizeHtml
+    SanitizeHtml,
+    MatDrawerElementsComponent
     
   ],
   imports: [

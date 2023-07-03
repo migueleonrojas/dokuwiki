@@ -1,0 +1,12 @@
+<div class="mat-drawer-elements">
+
+  <form>
+    <mat-form-field>
+      <mat-label>Buscar</mat-label>
+      <input type="search" matInput [formControl]="searchFormControl" placeholder="Buscar">
+      <mat-icon matSuffix class="color-icon-search" (click)="search()">search</mat-icon>
+      <mat-error *ngIf="searchFormControl.invalid">No puede realizar una busqueda vacia</mat-error>
+    </mat-form-field>
+  </form>
+
+</div>

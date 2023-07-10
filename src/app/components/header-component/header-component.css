@@ -9,12 +9,16 @@ header{
   flex: 1 1 auto;
 }
 
+.spacer:nth-child(1){
+  display: none;
+}
+
 .spacer:nth-child(1) {
   text-align: left;
 }
 
 .spacer:nth-child(2) {
-  text-align: center;
+  text-align: left;
 }
 
 .spacer:nth-child(3) {
@@ -42,6 +46,15 @@ form.ng-untouched.ng-pristine.ng-valid {
 }
 
 @media only screen and (max-width: 600px) {
+
+  .spacer:nth-child(1) {
+    display: block;
+  }
+
+  .spacer:nth-child(2) {
+    text-align: center;
+  }
+
   mat-form-field{
     display: none;
   }

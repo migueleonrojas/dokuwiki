@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
 
     });
 
-    this.router.navigate(['/view-search-page']);
+    this.router.navigate(['/page/view-search-page']);
 
   }
 

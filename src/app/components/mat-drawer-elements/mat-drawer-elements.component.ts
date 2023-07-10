@@ -44,7 +44,7 @@ export class MatDrawerElementsComponent implements OnInit {
 
     await this.matSide.close();
 
-    this.router.navigate(['/view-search-page']);
+    this.router.navigate(['page/view-search-page']);
 
   }
 

@@ -103,10 +103,10 @@ export class ModifyPageComponent implements OnInit {
   changeContenrRendered(contentEditValue: string) {
 
     let patternTags = {
-      patternSimpleTag: '\/[áéíóúÁÉÍÓÚ0-9a-zA-Z ]{1,}\/',
-      patternTagNoAttributes: '[0-9a-zA-Z ]{1,} = "[\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"',
-      patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"[\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"\/( \/[a-zA-Z]{0,}="[?:/\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}"\/){1,}',
-      patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="[\/\.\,a-zA-Z0-9ñáéíóúÁÉÍÓÚ ]{1,}"\/){1,}'
+      patternSimpleTag: '\/[ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{1,}\/',
+      patternTagNoAttributes: '[0-9a-zA-Z ]{1,} = "[\'\>\<\+\$\@\%\#\*\!\?\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"',
+      patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"[\'\>\<\+\$\@\%\#\*\!\?\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"\/( \/[a-zA-Z]{0,}="[\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"\/){1,}',
+      patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="[\'\>\<\+\$\@\%\#\*\!\?\)\(\-\_\:\/\.\,a-zA-Z0-9ñáéíóúÁÉÍÓÚ ]{1,}"\/){1,}'
     }
 
     this.allTagsSyntax = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g'));
@@ -116,7 +116,7 @@ export class ModifyPageComponent implements OnInit {
     if (this.allTagsSyntax) {
       for (let tagSyntax of this.allTagsSyntax) { 
         
-        let contentValue = tagSyntax.match(new RegExp('"[/:.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}"', 'g'));
+        let contentValue = tagSyntax.match(new RegExp('"[\'\>\<\+\$\@\%\#\*\!\?\)\(/:\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}"', 'g'));
         
         let tag = this.selectableTags.filter(tag => new RegExp(tag.syntaxUser).test(tagSyntax))[0];
         
@@ -143,11 +143,12 @@ export class ModifyPageComponent implements OnInit {
             
           else if (new RegExp(`${patternTags.patternTagWithElements}`).test(tagSyntax)) {
 
-            let options = tagSyntax.match(new RegExp('"[ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{1,}"', 'g'));
+            let options = tagSyntax.match(new RegExp('"[\'\>\<\+\$\@\%\#\*\!\?\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{1,}"', 'g'));
+
 
             let contentListItem: string = "";
             for (let option of options) {
-              contentListItem += `<li>${option.match(new RegExp('"[ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]+"'))[0].replaceAll('"',"")}</li>`;
+              contentListItem += `<li>${option.match(new RegExp('"[\'\>\<\+\$\@\%\#\*\!\?\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]+"'))[0].replaceAll('"',"")}</li>`;
             }
 
             

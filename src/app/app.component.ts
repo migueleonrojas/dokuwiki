@@ -15,7 +15,6 @@ export class AppComponent implements AfterViewInit {
     private router: Router,
     private sharingService: SharingService
   ) {
-     this.router.navigate(['/main-component']);
   }
 
   ngAfterViewInit() {

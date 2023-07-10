@@ -86,7 +86,7 @@ export class ViewSearchPagesComponent implements OnInit  {
 
     this.sharingService.sharingPageObservableData = page;
     
-    this.router.navigate(['/view-page']);
+    this.router.navigate(['/page/view-page']);
     
     
   }

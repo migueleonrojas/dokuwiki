@@ -259,7 +259,7 @@
     "nameTag": "imagen",
     "tagHTML": "img",
     "content": "imagen",
-    "tagAndContent": "<img style=\"max-width: 100%; height: 50vh\" src=value alt=\"innerContent\" class=\"media\">",
+    "tagAndContent": "<img style=\"max-width: 100%; height: auto\" src=value alt=\"innerContent\" class=\"media\">",
     "syntaxUser": "imagen = \/\"[/.,0-9a-zA-Z ]{0,}\"\/( \/url=\"[?:/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}\"\/){1,}",
     "modelUse": "imagen = \/\"descripcion de la imagen\"\/ \/url=\"url de la imagen\"\/"
   },

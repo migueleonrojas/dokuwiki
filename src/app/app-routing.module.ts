@@ -7,9 +7,19 @@ import { ModifyPageComponent } from './modules/page/modify-page/modify-page.comp
 import { ViewSearchPagesComponent } from './modules/page/view-search-pages/view-search-pages.component';
 
 
-
-
 const routes: Routes = [
+  {
+    path: '',
+    component: MainPageComponent,
+  },
+  {
+    path: 'page',
+    loadChildren: () => import('src/app/modules/page/page.module').then(m => m.PageModule)
+  }
+  
+];
+
+/* const routes: Routes = [
   {
     path: 'main-component',
     component: MainPageComponent
@@ -31,7 +41,7 @@ const routes: Routes = [
     component: ViewSearchPagesComponent
   }
 
-]
+]; */
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

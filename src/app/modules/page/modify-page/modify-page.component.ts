@@ -11,6 +11,8 @@ import Swal, { SweetAlertResult } from 'sweetalert2'
 import { SharingService } from 'src/app/core/services/sharing.service';
 import { Page } from 'src/app/models/page.model';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogImageComponent } from 'src/app/components/dialog-image/dialog-image.component';
 
 @Component({
   selector: 'app-modify-page',
@@ -44,7 +46,8 @@ export class ModifyPageComponent implements OnInit {
     private el: ElementRef,
     private pageService: PageService,
     private sharingService: SharingService,
-    private router:Router
+    private router: Router,
+    public dialog: MatDialog
     
   ) {
     this.formBuilds();
@@ -113,7 +116,7 @@ export class ModifyPageComponent implements OnInit {
     if (this.allTagsSyntax) {
       for (let tagSyntax of this.allTagsSyntax) { 
         
-        let contentValue = tagSyntax.match(new RegExp('"[/:.ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}"', 'g'));
+        let contentValue = tagSyntax.match(new RegExp('"[/:.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}"', 'g'));
         
         let tag = this.selectableTags.filter(tag => new RegExp(tag.syntaxUser).test(tagSyntax))[0];
         
@@ -125,6 +128,8 @@ export class ModifyPageComponent implements OnInit {
 
           }
           else if (new RegExp(`${patternTags.patternTagWithAttributes}`).test(tagSyntax)) { 
+
+            
 
             contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
 
@@ -171,13 +176,43 @@ export class ModifyPageComponent implements OnInit {
 
     let tag = (this.selectableTags.filter(tag => tag.syntaxUser.indexOf(value) === 0))[0];
 
-    this.formCreatePage.controls['contentEdit'].setValue(
-      this.formCreatePage.value.contentEdit +
-      `${this.formCreatePage.value.contentEdit === ""
-        ? `${tag.modelUse}`
-        : `\n\n${tag.modelUse}`
-      }`
-    );
+    if (tag.modelUse.includes('imagen')) {
+
+      let dialogImage: MatDialogRef<DialogImageComponent, any> = this.dialog.open(DialogImageComponent);
+      
+      dialogImage.afterClosed().subscribe((result: string) => {
+        
+        
+        if (result !== null && result !== "") {
+          let tagWithImage = tag.modelUse.replace("url de la imagen", result);
+
+          this.formCreatePage.controls['contentEdit'].setValue(
+            this.formCreatePage.value.contentEdit +
+            `${this.formCreatePage.value.contentEdit === ""
+              ? `${tagWithImage}`
+              : `\n\n${tagWithImage}`
+            }`
+          );
+
+        }
+      });
+
+      
+
+      
+      
+    }
+    else{
+      this.formCreatePage.controls['contentEdit'].setValue(
+        this.formCreatePage.value.contentEdit +
+        `${this.formCreatePage.value.contentEdit === ""
+          ? `${tag.modelUse}`
+          : `\n\n${tag.modelUse}`
+        }`
+      );
+    }
+
+    
     
     this.formCreatePage.controls['tagsControl'].setValue('');
   }
@@ -233,7 +268,7 @@ export class ModifyPageComponent implements OnInit {
       error: (err: any) => {
         Swal.fire({
           position: 'center',
-          icon: 'success',
+          icon: 'error',
           title: err.message,
           showConfirmButton: false,
           timer: 2500

@@ -36,8 +36,6 @@ export class CreatePageComponent implements OnInit {
     {name: 'Documentación', value: 'documentación'},
     {name: 'Incidente',     value: 'incidente'},
   ];
-
-  
   
   constructor(
     private location: Location,
@@ -88,19 +86,19 @@ export class CreatePageComponent implements OnInit {
 
     let patternTags = {
       patternSimpleTag: '\/[ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{1,}\/',
-      patternTagNoAttributes: '[0-9a-zA-Z ]{1,} = "[\'\>\<\+\$\@\%\#\*\!\?\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"',
-      patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"[\'\>\<\+\$\@\%\#\*\!\?\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"\/( \/[a-zA-Z]{0,}="[\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"\/){1,}',
-      patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="[\'\>\<\+\$\@\%\#\*\!\?\)\(\-\_\:\/\.\,a-zA-Z0-9ñáéíóúÁÉÍÓÚ ]{1,}"\/){1,}'
+      patternTagNoAttributes: '[0-9a-zA-Z ]{1,} = "[\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"',
+      patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"[\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"\/( \/[a-zA-Z]{0,}="[\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"\/){1,}',
+      patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="[\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,a-zA-Z0-9-ñáéíóúÁÉÍÓÚ ]{1,}"\/){1,}'
     }
 
-    this.allTagsSyntax = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g'));
+    this.allTagsSyntax = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g')); 
 
     let contentInHTML: string = "";
     
     if (this.allTagsSyntax) {
       for (let tagSyntax of this.allTagsSyntax) {
         
-        let contentValue = tagSyntax.match(new RegExp('"[\'\>\<\+\$\@\%\#\*\!\?\)\(/:\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z-_ ]{0,}"', 'g'));
+        let contentValue = tagSyntax.match(new RegExp('"[\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"', 'g'));
         
         let tag = this.selectableTags.filter(tag => new RegExp(tag.syntaxUser).test(tagSyntax))[0];
         
@@ -108,14 +106,11 @@ export class CreatePageComponent implements OnInit {
           
           if (new RegExp(`${patternTags.patternTagNoAttributes}`).test(tagSyntax)) {
 
-            console.log('patternTagNoAttributes');
-
             contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll("\"", "")) +  ' ';
 
           }
           else if (new RegExp(`${patternTags.patternTagWithAttributes}`).test(tagSyntax)) { 
 
-           
             
             contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
 

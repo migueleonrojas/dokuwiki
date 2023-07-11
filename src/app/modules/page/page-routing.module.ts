@@ -5,6 +5,7 @@ import { ModifyPageComponent } from './modify-page/modify-page.component';
 import { ViewAllPagesComponent } from './view-all-pages/view-all-pages.component';
 import { ViewPageComponent } from './view-page/view-page.component';
 import { ViewSearchPagesComponent } from './view-search-pages/view-search-pages.component';
+import { ViewPageByParamIdComponent } from './view-page-by-param-id/view-page-by-param-id.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'view-search-page',
     component: ViewSearchPagesComponent
+  },
+  {
+    path: 'view-page-by-param-id',
+    component: ViewPageByParamIdComponent,
   }
 ];
 

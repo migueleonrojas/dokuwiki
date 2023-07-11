@@ -8,7 +8,6 @@
 </div>
 
 <h1>{{page.type_of_page | uppercase}}</h1>
-<h2>Enlace para esta página: http://freshfish.sytes.net:9061/page/view-page-by-param-id?id_page={{page.id_page}}</h2>
 <h1>Titulo de la página: {{page.title_page}}</h1>
 <h2>Nombre del usuario autor: {{page.username}}</h2>
 <div *ngIf="page.type_of_page === 'incidente'" class="icons">
@@ -22,10 +21,9 @@
   
 <div class="buttons-row">
   <button mat-raised-button (click)="goTo('page/modify-page')" >Modificar Página</button>
-  
 </div>
 
-<div class="rendered-content" [innerHTML]="renderContent  | sanitizeHtml "></div>
+<div class="rendered-content" [innerHTML]="renderContent | sanitizeHtml"></div>
 
 <div class="buttons-row">
   <button mat-raised-button (click)="deletePage(page.id_page)">Eliminar Página</button>

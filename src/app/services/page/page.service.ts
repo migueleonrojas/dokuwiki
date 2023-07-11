@@ -8,6 +8,7 @@ import { CreatePageResponse } from 'src/app/models/createPageResponse.model';
 import { GetAllPages } from 'src/app/models/getAllPages.model';
 import { ModifyPageResponse } from 'src/app/models/modifyPageResponse.model';
 import { GetSearchPages } from 'src/app/models/getSearchPages.model';
+import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,10 @@ export class PageService {
   modifyPage(page: Page):Observable<ModifyPageResponse> {
 
     return this.http.put<ModifyPageResponse>(`${environment.apiUrl}/modify-page`, page);
+  }
+
+  deletePage(id_page: string): Observable<DeletePageResponse>{
+    return this.http.delete<DeletePageResponse>(`${environment.apiUrl}/delete-page?id_page=${id_page}`);
   }
 
 

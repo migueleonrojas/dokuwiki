@@ -1,39 +1,56 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Page } from 'src/app/models/page.model';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { SharingService } from 'src/app/core/services/sharing.service';
-import {Location} from '@angular/common';
-import { PageService } from 'src/app/services/page/page.service';
-import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
-import Swal, { SweetAlertResult } from 'sweetalert2'
-import { async } from '@angular/core/testing';
-@Component({
-  selector: 'app-view-page',
-  templateUrl: './view-page.component.html',
-  styleUrls: ['./view-page.component.css']
-})
-export class ViewPageComponent implements OnInit {
 
-  page: Page;
-  renderContent: string;
+import {Location} from '@angular/common';
+import { Page } from 'src/app/models/page.model';
+import { PageService } from 'src/app/services/page/page.service';
+import { GetSearchPages } from 'src/app/models/getSearchPages.model';
+import { SharingService } from 'src/app/core/services/sharing.service';
+import Swal, { SweetAlertResult } from 'sweetalert2';
+import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
+
+@Component({
+  selector: 'app-view-page-by-param-id',
+  templateUrl: './view-page-by-param-id.component.html',
+  styleUrls: ['./view-page-by-param-id.component.css']
+})
+export class ViewPageByParamIdComponent {
+  idPageParam: string = '';
+  page: Page = {
+    contents_html: '',
+    contents_user: '',
+    is_solved: '0',
+    title_page: '',
+    type_of_page: '',
+    username: ''
+  };
+  renderContent: string = '';
 
   constructor(
     private router: Router,
-    private sharingService: SharingService,
+    private pageService: PageService,
     private location: Location,
-    private pageService:PageService
-  ) { }
-  
-  
+    private activatedRoute: ActivatedRoute,
+    private sharingService:SharingService
+  ) {
+    
+  }
+
   ngOnInit() {
 
-    this.sharingService.sharingPageObservable.subscribe((page: Page) => {
-    
-      this.page = page;
+    this.activatedRoute.queryParams.subscribe((value: Params) => {
+
+      this.idPageParam = value['id_page'];
 
     });
 
-    this.renderContent = this.page.contents_html;
+
+    this.pageService.getSearchPages(this.idPageParam).subscribe((getSearchPages:GetSearchPages) => {
+      this.page = getSearchPages.pages[0];
+      this.renderContent = this.page.contents_html;
+      this.sharingService.sharingPageObservableData = this.page;
+    })
+    
     
   }
 
@@ -96,9 +113,5 @@ export class ViewPageComponent implements OnInit {
       
     })
   }
-  
-
-
-  
 
 }

@@ -22,6 +22,7 @@ import { DialogImageComponent } from './components/dialog-image/dialog-image.com
 import { SizeFile } from './pipes/sizeFileConvert.pipe';
 import { SanitizeHtml } from './pipes/sanitize.pipe';
 import { MatDrawerElementsComponent } from './components/mat-drawer-elements/mat-drawer-elements.component';
+import { ViewPageByParamIdComponent } from './modules/page/view-page-by-param-id/view-page-by-param-id.component';
 
 
 
@@ -34,6 +35,7 @@ import { MatDrawerElementsComponent } from './components/mat-drawer-elements/mat
     CreatePageComponent,
     ViewAllPagesComponent,
     ViewPageComponent,
+    ViewPageByParamIdComponent,
     ModifyPageComponent,
     ViewSearchPagesComponent,
     DateExactly,

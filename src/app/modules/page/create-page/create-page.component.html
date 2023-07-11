@@ -10,7 +10,8 @@
       <mat-label>Titulo de la página</mat-label>
       <input matInput placeholder="Titulo de la página" formControlName="titlePageControl">
       <mat-icon matSuffix>title</mat-icon>
-      <mat-error *ngIf="titlePageControl.invalid">Debe indicar el titulo</mat-error>
+      <mat-error *ngIf="titlePageControl.getError('required')">Debe indicar el titulo</mat-error>
+      <mat-error *ngIf="titlePageControl.getError('maxlength')">Debe colocar un máximo de 50 letras</mat-error>
     </mat-form-field>
     
     
@@ -18,7 +19,8 @@
       <mat-label>Nombre del Usuario</mat-label>
       <input matInput placeholder="Nombre del Usuario" formControlName="nameUserControl">
       <mat-icon matSuffix>person</mat-icon>
-      <mat-error *ngIf="nameUserControl.invalid">Debe indicar el nombre de usuario</mat-error>
+      <mat-error *ngIf="nameUserControl.getError('required')">Debe indicar el nombre de usuario</mat-error>
+      <mat-error *ngIf="nameUserControl.getError('maxlength')">Debe colocar un máximo de 50 letras</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -50,13 +52,15 @@
     
 
       <mat-form-field>
-        <mat-label>Defina contenido</mat-label>
+        <mat-label>Defina contenido, Cantidad de caracteres permitidos:({{contentEdit.value.length}}/8000)</mat-label>
         <textarea matInput #textArea formControlName="contentEdit"
         cdkTextareaAutosize 
         cdkAutosizeMinRows="35" 
         cdkAutosizeMaxRows="40"
         ></textarea>
-        <mat-error *ngIf="contentEdit.invalid || allTagsSyntax === undefined || allTagsSyntax === null">Debe indicar algun contenido valido</mat-error>
+        <mat-error *ngIf="contentEdit.getError('required') || allTagsSyntax === undefined || allTagsSyntax === null">Debe indicar algun contenido valido</mat-error>
+        <mat-error *ngIf="contentEdit.getError('maxlength')">Debe colocar un máximo de 8000 caracteres</mat-error>
+
       </mat-form-field>
     </form>
   </div>

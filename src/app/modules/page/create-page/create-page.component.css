@@ -21,7 +21,7 @@ h1{
 }
 .edited-content {
   width: 45%;
-  height: 70vh
+  height: 90vh
 
 }
 
@@ -34,7 +34,7 @@ h1{
 
 .rendered-content{
   width: 45%;
-  height: 70vh;
+  height: 90vh;
   border: 0.2rem solid black;
   overflow-y: auto;
   word-wrap: break-word;

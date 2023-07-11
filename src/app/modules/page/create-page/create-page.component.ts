@@ -19,14 +19,14 @@ import { DialogImageComponent } from 'src/app/components/dialog-image/dialog-ima
 export class CreatePageComponent implements OnInit {
   @ViewChild('textArea') textAreaElement: ElementRef<HTMLTextAreaElement>;
   formMetaDataPage: FormGroup;
-  titlePageControl = new FormControl('', [Validators.required]);
-  nameUserControl = new FormControl('', [Validators.required]);
+  titlePageControl = new FormControl('', [Validators.required, Validators.maxLength(50)]);
+  nameUserControl = new FormControl('', [Validators.required, Validators.maxLength(50)]);
   typePageControl = new FormControl('', [Validators.required]);
 
   formCreatePage: FormGroup;
   tagsControl = new FormControl('');
   alignsControl = new FormControl('');
-  contentEdit = new FormControl('',[Validators.required]);
+  contentEdit = new FormControl('',[Validators.required, Validators.maxLength(8000)]);
 
   allTagsSyntax: RegExpMatchArray | null;
   renderContent: string;
@@ -206,6 +206,7 @@ export class CreatePageComponent implements OnInit {
 
 
   async createPage()  {
+
 
     this.formMetaDataPage.markAllAsTouched();
     this.formCreatePage.markAllAsTouched();

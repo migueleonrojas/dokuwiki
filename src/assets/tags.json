@@ -264,6 +264,14 @@
     "modelUse": "imagen = \/\"descripcion de la imagen\"\/ \/url=\"url de la imagen\"\/"
   },
   {
+    "nameTag": "imagen centrada",
+    "tagHTML": "img",
+    "content": "imagen centrada",
+    "tagAndContent": "<img style=\"display:block; max-width: 40%; height: auto; width=40%; margin:auto\" src=value alt=\"innerContent\" class=\"media\">",
+    "syntaxUser": "imagen centrada = \/\"['-><+$@%#*!?_)(:/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"\/( \/url=\"['-><+$@%#*!?_)(:/.,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}\"\/){1,}",
+    "modelUse": "imagen centrada = \/\"descripcion de la imagen centrada\"\/ \/url=\"url de la imagen\"\/"
+  },
+  {
     "nameTag": "lista desordenada",
     "tagHTML": "ul",
     "content": "lista desordenada",

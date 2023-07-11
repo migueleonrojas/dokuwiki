@@ -8,6 +8,7 @@
 </div>
 
 <h1>{{page.type_of_page | uppercase}}</h1>
+<h1>Enlace para esta página: http://freshfish.sytes.net:9061/page/view-page-by-param-id?id_page={{page.id_page}}</h1>
 <h1>Titulo de la página: {{page.title_page}}</h1>
 <h2>Nombre del usuario autor: {{page.username}}</h2>
 <div *ngIf="page.type_of_page === 'incidente'" class="icons">

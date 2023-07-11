@@ -2,6 +2,10 @@ h1, h2, h3{
   text-align: center;
 }
 
+h1{
+  word-break: break-all;
+}
+
 .buttons{
   display: flex;
   flex-direction: column;

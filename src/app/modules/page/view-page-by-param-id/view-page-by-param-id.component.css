@@ -1,3 +1,15 @@
+.mat-nav-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.content-view-page {
+  height: 93.2vh;
+  margin: 0;
+  padding: 0;
+}
+
 h1,
 h2,
 h3 {
@@ -41,4 +53,8 @@ h1 {
 .rendered-content {
   padding: 2rem;
   word-wrap: break-word;
+}
+
+.is-mobile-sidenav {
+  width: 80%;
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Page } from 'src/app/models/page.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SharingService } from 'src/app/core/services/sharing.service';
@@ -6,24 +6,34 @@ import {Location} from '@angular/common';
 import { PageService } from 'src/app/services/page/page.service';
 import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
 import Swal, { SweetAlertResult } from 'sweetalert2'
-import { async } from '@angular/core/testing';
+import { GetAllPages } from 'src/app/models/getAllPages.model';
+import { MediaMatcher } from '@angular/cdk/layout';
+
+
 @Component({
   selector: 'app-view-page',
   templateUrl: './view-page.component.html',
   styleUrls: ['./view-page.component.css']
 })
 export class ViewPageComponent implements OnInit {
-
   page: Page;
   renderContent: string;
-
+  allPages: Page[];
+  mobileQuery: MediaQueryList;
   constructor(
     private router: Router,
     private sharingService: SharingService,
     private location: Location,
-    private pageService:PageService
-  ) { }
+    private pageService: PageService,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher
+  ) { 
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
   
+  private _mobileQueryListener: () => void;
   
   ngOnInit() {
 
@@ -31,9 +41,15 @@ export class ViewPageComponent implements OnInit {
     
       this.page = page;
 
+      this.renderContent = this.page.contents_html;
     });
 
-    this.renderContent = this.page.contents_html;
+
+    this.pageService.getAllPages().subscribe((getPageForPage: GetAllPages) => {
+      
+      this.allPages = getPageForPage.pages;
+
+    });
     
   }
 
@@ -48,6 +64,12 @@ export class ViewPageComponent implements OnInit {
 
   }
 
+  view(page: Page) {
+
+    this.sharingService.sharingPageObservableData = page;    
+    
+  }
+
   async deletePage(id_page: string)  {
 
 
@@ -55,6 +77,7 @@ export class ViewPageComponent implements OnInit {
       title: 'Coloque el titulo de la página para eliminarla',
       input: 'text',
       showCancelButton: true,
+      cancelButtonText: 'Cancelar',
       confirmButtonText: 'Eliminar Página',
       showLoaderOnConfirm: true,
       preConfirm: (result) => {

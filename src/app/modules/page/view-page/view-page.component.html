@@ -1,32 +1,52 @@
-<div class="buttons">
-  <button mat-icon-button color="primary" (click)="back()">
-    <mat-icon>arrow_back_ios</mat-icon>
-  </button>
-  <button mat-icon-button color="primary" (click)="goTo('')">
-    <mat-icon>home</mat-icon>
-  </button>
-</div>
 
-<h1>{{page.type_of_page | uppercase}}</h1>
-<h1>Enlace para esta página: http://freshfish.sytes.net:9061/page/view-page-by-param-id?id_page={{page.id_page}}</h1>
-<h1>Titulo de la página: {{page.title_page}}</h1>
-<h2>Nombre del usuario autor: {{page.username}}</h2>
-<div *ngIf="page.type_of_page === 'incidente'" class="icons">
-  <h3>
-    ¿Se resolvio el incidente?:
-  </h3>
-  <mat-icon class="icon icon_verified" *ngIf="page.is_solved">verified</mat-icon>
-  <mat-icon class="icon icon_cancel" *ngIf="!page.is_solved">cancel</mat-icon>
+<mat-sidenav-container>
+  <mat-sidenav #snav [class.is-mobile-sidenav]="mobileQuery.matches" opened [mode]="mobileQuery.matches ? 'over' : 'side'" position="end" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+    <mat-nav-list class="mat-nav-list">
+      <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="snav.toggle()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <h2>Todas las páginas creadas</h2>
+      <a matTooltip="{{page.title_page}}" mat-list-item routerLink="." *ngFor="let page of allPages" (click)="view(page)" >{{page.title_page}}</a>
+    </mat-nav-list>
+  </mat-sidenav>
 
-</div>
-  
-<div class="buttons-row">
-  <button mat-raised-button (click)="goTo('page/modify-page')" >Modificar Página</button>
-  
-</div>
+  <mat-sidenav-content>
+    <div class="content-view-page">
+      <div class="buttons">
+        <button mat-icon-button color="primary" (click)="back()">
+          <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="goTo('')">
+          <mat-icon>home</mat-icon>
+        </button>
+      </div>
+    
+      <h1>{{page.type_of_page | uppercase}}</h1>
+      <h1>Enlace para esta página: http://freshfish.sytes.net:9061/page/view-page-by-param-id?id_page={{page.id_page}}</h1>
+      <h1>Titulo de la página: {{page.title_page}}</h1>
+      <h2>Nombre del usuario autor: {{page.username}}</h2>
+      <div *ngIf="page.type_of_page === 'incidente'" class="icons">
+        <h3>
+          ¿Se resolvio el incidente?:
+        </h3>
+        <mat-icon class="icon icon_verified" *ngIf="page.is_solved">verified</mat-icon>
+        <mat-icon class="icon icon_cancel" *ngIf="!page.is_solved">cancel</mat-icon>
+    
+      </div>
+    
+      <div class="buttons-row">
+        <button mat-raised-button (click)="goTo('page/modify-page')">Modificar Página</button>
+        <button mat-raised-button (click)="snav.toggle()">Ver todas las Página</button>
+      </div>
+    
+      <div class="rendered-content" [innerHTML]="renderContent  | sanitizeHtml "></div>
+    
+      <div class="buttons-row">
+        <button mat-raised-button (click)="deletePage(page.id_page)">Eliminar Página</button>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
-<div class="rendered-content" [innerHTML]="renderContent  | sanitizeHtml "></div>
 
-<div class="buttons-row">
-  <button mat-raised-button (click)="deletePage(page.id_page)">Eliminar Página</button>
-</div>
+

@@ -5,35 +5,12 @@ header{
   z-index: 1000;
 }
 
-.spacer {
-  flex: 1 1 auto;
+.mat-row {
+ display: flex;
+ justify-content: space-between;
 }
-
 .spacer:nth-child(1){
-  display: none;
-}
-
-.spacer:nth-child(1) {
-  text-align: left;
-}
-
-.spacer:nth-child(2) {
-  text-align: left;
-}
-
-.spacer:nth-child(3) {
-  text-align: right;
-}
-
-form.spacer {
-  text-align: center;
-}
-
-mat-toolbar-row:nth-child(1) {
-
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+ display: none;
 }
 
 .color-icon-search {
@@ -46,14 +23,10 @@ form.ng-untouched.ng-pristine.ng-valid {
 }
 
 @media only screen and (max-width: 600px) {
-
   .spacer:nth-child(1) {
-    display: block;
+   display: block;
   }
-
-  .spacer:nth-child(2) {
-    text-align: center;
-  }
+ 
 
   mat-form-field{
     display: none;

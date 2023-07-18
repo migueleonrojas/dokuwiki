@@ -88,65 +88,13 @@ export class ViewPageByParamIdComponent {
     
   }
 
-  back() {
-    
-    this.location.back();
-  }
-
+  
   goTo(path: string) {
-    
+   
     this.router.navigate([`/${path}`]);
 
   }
 
-  async deletePage(id_page: string)  {
 
-
-    let resultAlert: SweetAlertResult = await Swal.fire({
-      title: 'Coloque el titulo de la página para eliminarla',
-      input: 'text',
-      showCancelButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Eliminar Página',
-      showLoaderOnConfirm: true,
-      preConfirm: (result) => {
-        if (result === this.page.title_page) {
-          return true
-        }
-        else {
-          Swal.showValidationMessage(
-            `El titulo de la página no es correcto`
-          );
-        }
-      },
-      allowOutsideClick: () => !Swal.isLoading()
-    });
-      
-    if (!resultAlert.isConfirmed) return;
-      
-    
-    this.pageService.deletePage(id_page).subscribe({
-      next: async (data: DeletePageResponse) =>{
-        await Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: data.message,
-          showConfirmButton: false,
-          timer: 2500
-        });
-        this.router.navigate([`/`]);
-      },
-      error: (error: any) => {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: error.message,
-          showConfirmButton: false,
-          timer: 2500
-        })
-      }
-      
-    })
-  }
 
 }

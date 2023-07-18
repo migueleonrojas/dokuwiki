@@ -1,11 +1,29 @@
 <header>
   <mat-toolbar class="mat-toolbar-header" color="primary">
-    <mat-toolbar-row>
+    <mat-toolbar-row class="mat-row">
       <span class="spacer">
-        <button (click)="toggleMatSide()"  mat-icon-button>
+        <button (click)="toggleMatSide()" mat-icon-button>
           <mat-icon >menu</mat-icon>
         </button>
       </span>
+      <span class="spacer" *ngIf="page.id_page != '' && (urlActual.includes('/page/view-page') || urlActual.includes('/page/view-page-by-param-id'))">
+       <button matTooltip= "Ir al inicio" mat-icon-button color="warning" (click)="goTo('')">
+        <mat-icon>home</mat-icon>
+       </button>
+       <button matTooltip= "Editar" mat-icon-button color="warning" (click)="goTo('page/modify-page')">
+        <mat-icon>edit</mat-icon>
+       </button>
+       <button matTooltip= "Ver todo" mat-icon-button color="warning" (click)="toggleMatCont()">
+        <mat-icon>view_list</mat-icon>
+       </button>
+       <button matTooltip= "Eliminar" mat-icon-button color="warning" (click)="deletePage(page.id_page)">
+        <mat-icon>delete</mat-icon>
+       </button>
+       <button matTooltip= "Ir para atras" mat-icon-button color="warning" (click)="back()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+
+     </span>
       <span class="spacer">Doku wiki</span>
       <span class="spacer">
         <form>

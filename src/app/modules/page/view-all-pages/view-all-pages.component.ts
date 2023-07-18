@@ -34,6 +34,17 @@ export class ViewAllPagesComponent implements OnInit  {
   ) {}
   
   ngOnInit() {
+     this.sharingService.sharingPageObservableData = {
+     id_page: '',
+     username: '',
+     contents_html: '',
+     contents_user: '',
+     is_solved: '0',
+     title_page: '',
+     type_of_page: '',
+     creation_date: null,
+     modification_date: null
+    }; 
     
     this.pageService.getAllPages().subscribe({
       next: (data: GetAllPages) => {

@@ -37,6 +37,18 @@ export class ViewSearchPagesComponent implements OnInit  {
   
   ngOnInit() {
 
+   this.sharingService.sharingPageObservableData = {
+    id_page: '',
+    username: '',
+    contents_html: '',
+    contents_user: '',
+    is_solved: '0',
+    title_page: '',
+    type_of_page: '',
+    creation_date: null,
+    modification_date: null
+   };
+
     
     this.sharingService.sharingPagesObservable.subscribe(
       (data: Page[]) => {

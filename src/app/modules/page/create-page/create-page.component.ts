@@ -1,7 +1,10 @@
 import { Component, Directive, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import {Location} from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import tags from 'src/assets/tags.json';
+/* import tags from 'src/assets/tags.json'; */
+import tags from 'src/assets/tags';
+
+
 import { Tag } from 'src/app/models/tag.model';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -85,34 +88,40 @@ export class CreatePageComponent implements OnInit {
   changeContentRendered(contentEditValue: string) {
 
     let patternTags = {
+
       patternSimpleTag: '\/[ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{1,}\/',
-      patternTagNoAttributes: '[0-9a-zA-Z ]{1,} = "[\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"',
-      patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"[\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"\/( \/[a-zA-Z]{0,}="[\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"\/){1,}',
-      patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="[\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,a-zA-Z0-9-ñáéíóúÁÉÍÓÚ ]{1,}"\/){1,}'
+      patternTagNoAttributes: '[a-zA-Z0-9 ]{1,} = "(.|\n|\r)+"',
+      patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/( \/[a-zA-Z]{0,}="([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/){1,}',
+      patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/){1,}'
     }
 
+    
     this.allTagsSyntax = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g')); 
+
+    
 
     let contentInHTML: string = "";
     
     if (this.allTagsSyntax) {
       for (let tagSyntax of this.allTagsSyntax) {
         
-        let contentValue = tagSyntax.match(new RegExp('"[\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{0,}"', 'g'));
+       let contentValue = tagSyntax.match(new RegExp('"(.|\n|\r)+"', 'g'));
         
         let tag = this.selectableTags.filter(tag => new RegExp(tag.syntaxUser).test(tagSyntax))[0];
+
         
         try {
           
           if (new RegExp(`${patternTags.patternTagNoAttributes}`).test(tagSyntax)) {
-
+           
             contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll("\"", "")) +  ' ';
 
           }
           else if (new RegExp(`${patternTags.patternTagWithAttributes}`).test(tagSyntax)) { 
 
-            
-            contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
+           contentValue = tagSyntax.match(new RegExp('"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"', 'g'));
+          
+           contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
 
           }
 
@@ -125,11 +134,11 @@ export class CreatePageComponent implements OnInit {
             
           else if (new RegExp(`${patternTags.patternTagWithElements}`).test(tagSyntax)) {
 
-            let options = tagSyntax.match(new RegExp('"[\'\>\<\+\$\@\%\#\*\!\?\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{1,}"', 'g'));
+            let options = tagSyntax.match(new RegExp('"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"', 'g'));
 
             let contentListItem: string = "";
             for (let option of options) {
-              contentListItem += `<li>${option.match(new RegExp('"[\'\>\<\+\$\@\%\#\*\!\?\)\(\-\_\:\/\.\,ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]+"'))[0].replaceAll('"',"")}</li>`;
+              contentListItem += `<li>${option.match(new RegExp('"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"'))[0].replaceAll('"',"")}</li>`;
             }
 
             
@@ -138,6 +147,7 @@ export class CreatePageComponent implements OnInit {
           }
 
           else {
+
             contentInHTML += tagSyntax;
           }
           

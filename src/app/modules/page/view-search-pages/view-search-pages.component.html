@@ -16,7 +16,8 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Buscador" #input>
   </mat-form-field>
 
-  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 demo-table" >
+  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 demo-table"
+  matSortActive="title_page" matSortDirection="asc" >
     
     <ng-container matColumnDef="index">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Número</th>

@@ -89,8 +89,8 @@ export class CreatePageComponent implements OnInit {
 
     let patternTags = {
 
-      patternSimpleTag: '\/[ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]{1,}\/',
-      patternTagNoAttributes: '[a-zA-Z0-9 ]{1,} = "(.|\n|\r)+"',
+      patternSimpleTag: '\/[a-zA-Z0-9 ]+\/',
+      patternTagNoAttributes: '[a-zA-Z0-9 ]{1,} = "([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"',
       patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/( \/[a-zA-Z]{0,}="([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/){1,}',
       patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/){1,}'
     }
@@ -105,7 +105,7 @@ export class CreatePageComponent implements OnInit {
     if (this.allTagsSyntax) {
       for (let tagSyntax of this.allTagsSyntax) {
         
-       let contentValue = tagSyntax.match(new RegExp('"(.|\n|\r)+"', 'g'));
+       let contentValue = tagSyntax.match(new RegExp('"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"', 'g'));
         
         let tag = this.selectableTags.filter(tag => new RegExp(tag.syntaxUser).test(tagSyntax))[0];
 

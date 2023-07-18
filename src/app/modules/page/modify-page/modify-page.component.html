@@ -41,6 +41,7 @@
 
     <mat-checkbox *ngIf="page.type_of_page === 'incidente'" class="example-margin" formControlName="isSolvedControl">¿Incidente resuelto?</mat-checkbox>
 
+    <button mat-stroked-button color="primary" (click)="modifyPage()" >Modificar página</button>
   </form>
 
 </div>
@@ -63,8 +64,8 @@
         <mat-label>Defina contenido, Cantidad de caracteres permitidos:({{contentEdit.value.length}}/8000)</mat-label>
         <textarea matInput #textArea formControlName="contentEdit"
         cdkTextareaAutosize 
-        cdkAutosizeMinRows="35" 
-        cdkAutosizeMaxRows="40"
+        cdkAutosizeMinRows="35.4" 
+        cdkAutosizeMaxRows="35.4"
         ></textarea>
         <mat-error *ngIf="contentEdit.getError('required') || allTagsSyntax === undefined || allTagsSyntax === null">Debe
           indicar algun contenido valido</mat-error>
@@ -76,6 +77,6 @@
   
 </div>
 
-<div class="buttons">
+<!-- <div class="buttons">
   <button mat-stroked-button color="primary" (click)="modifyPage()" >Modificar página</button>
-</div>
+</div> -->

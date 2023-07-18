@@ -1,15 +1,3 @@
-/* export default [
- 
- {
-  "nameTag": "parrafo",
-  "tagHTML": "p",
-  "content": "parrafo",
-  "tagAndContent": "<p style=\"white-space: pre;\">innerContent</p>",
-  "syntaxUser": "parrafo = \"(.|\n|\r)+\"",
-  "modelUse": "parrafo = \"parrafo\""
- },
-]; */
-
 export default [
   {
    "nameTag": "salto de linea",
@@ -32,7 +20,7 @@ export default [
    "tagHTML": "b",
    "content": "texto en negrita",
    "tagAndContent": "<b style=\"white-space: pre;\">innerContent</b>",
-   "syntaxUser": "negrita = \"(.|\n|\r)+\"",
+   "syntaxUser": "negrita = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "negrita = \"texto en negrita\""
  },
  {
@@ -40,7 +28,7 @@ export default [
    "tagHTML": "b",
    "content": "texto en negrita centrado",
    "tagAndContent": "<b style=\"white-space: pre; display: flex;justify-content: center;\">innerContent</b>",
-   "syntaxUser": "negrita centrado = \"(.|\n|\r)+\"",
+   "syntaxUser": "negrita centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "negrita centrado = \"texto en negrita centrado\""
  },
  {
@@ -48,7 +36,7 @@ export default [
    "tagHTML": "b",
    "content": "texto en negrita a la derecha",
    "tagAndContent": "<b style=\"white-space: pre; display: flex;justify-content: flex-end;\">innerContent</b>",
-   "syntaxUser": "negrita a la derecha = \"(.|\n|\r)+\"",
+   "syntaxUser": "negrita a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "negrita a la derecha = \"texto en negrita\""
  },
  {
@@ -56,7 +44,7 @@ export default [
    "tagHTML": "i",
    "content": "texto en italica",
    "tagAndContent": "<i style=\"white-space: pre;\">innerContent</i>",
-   "syntaxUser": "italica = \"(.|\n|\r)+\"",
+   "syntaxUser": "italica = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "italica = \"texto en italica\""
  },
  {
@@ -64,7 +52,7 @@ export default [
    "tagHTML": "i",
    "content": "texto en italica centrada",
    "tagAndContent": "<i style=\"white-space: pre; display: flex;justify-content: center;\">innerContent</i>",
-   "syntaxUser": "italica centrada = \"(.|\n|\r)+\"",
+   "syntaxUser": "italica centrada = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "italica centrada = \"texto en italica centrada\""
  },
  {
@@ -72,7 +60,7 @@ export default [
    "tagHTML": "i",
    "content": "texto en italica a la derecha",
    "tagAndContent": "<i style=\"white-space: pre; display: flex;justify-content: flex-end;\">innerContent</i>",
-   "syntaxUser": "italica a la derecha = \"(.|\n|\r)+\"",
+   "syntaxUser": "italica a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "italica a la derecha = \"texto en italica a la derecha\""
  },
  {
@@ -80,7 +68,7 @@ export default [
    "tagHTML": "p",
    "content": "parrafo",
    "tagAndContent": "<p style=\"white-space: pre;\">innerContent</p>",
-   "syntaxUser": "parrafo = \"(.|\n|\r)+\"",
+   "syntaxUser": "parrafo = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "parrafo = \"parrafo\""
  },
  {
@@ -88,7 +76,7 @@ export default [
    "tagHTML": "p",
    "content": "parrafo centrado",
    "tagAndContent": "<p style=\"white-space: pre; text-align: center;\">innerContent</p>",
-   "syntaxUser": "parrafo centrado = \"(.|\n|\r)+\"",
+   "syntaxUser": "parrafo centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "parrafo centrado = \"parrafo centrado\""
  },
  {
@@ -96,7 +84,7 @@ export default [
    "tagHTML": "p",
    "content": "parrafo a la derecha",
    "tagAndContent": "<p style=\"white-space: pre; text-align: end;\">innerContent</p>",
-   "syntaxUser": "parrafo a la derecha = \"(.|\n|\r)+\"",
+   "syntaxUser": "parrafo a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "parrafo a la derecha = \"parrafo a la derecha\""
  },
  {
@@ -104,7 +92,7 @@ export default [
    "tagHTML": "u",
    "content": "texto subrayado",
    "tagAndContent": "<u style=\"white-space: pre;\">innerContent</u>",
-   "syntaxUser": "subrayado = \"(.|\n|\r)+\"",
+   "syntaxUser": "subrayado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "subrayado = \"texto subrayado\""
  },
  {
@@ -112,7 +100,7 @@ export default [
    "tagHTML": "u",
    "content": "texto subrayado centrado",
    "tagAndContent": "<u style=\"white-space: pre; display: flex;justify-content: center;\">innerContent</u>",
-   "syntaxUser": "subrayado centrado = \"(.|\n|\r)+\"",
+   "syntaxUser": "subrayado centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "subrayado centrado = \"texto subrayado centrado\""
  },
  {
@@ -120,7 +108,7 @@ export default [
    "tagHTML": "u",
    "content": "texto subrayado a la derecha",
    "tagAndContent": "<u style=\"white-space: pre; display: flex;justify-content: flex-end;\">innerContent</u>",
-   "syntaxUser": "subrayado a la derecha = \"(.|\n|\r)+\"",
+   "syntaxUser": "subrayado a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "subrayado a la derecha = \"texto subrayado a la derecha\""
  },
  {
@@ -128,7 +116,7 @@ export default [
    "tagHTML": "h1",
    "content": "titulo tipo 1",
    "tagAndContent": "<h1>innerContent</h1>",
-   "syntaxUser": "titulo tipo 1 = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 1 = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 1 = \"titulo tipo 1\""
  },
  {
@@ -136,7 +124,7 @@ export default [
    "tagHTML": "h1",
    "content": "titulo tipo 1 centrado",
    "tagAndContent": "<h1 style=\"text-align: center;\">innerContent</h1>",
-   "syntaxUser": "titulo tipo 1 centrado = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 1 centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 1 centrado = \"titulo tipo 1 centrado\""
  },
  {
@@ -144,7 +132,7 @@ export default [
    "tagHTML": "h1",
    "content": "titulo tipo 1 a la derecha",
    "tagAndContent": "<h1 style=\"text-align: end;\">innerContent</h1>",
-   "syntaxUser": "titulo tipo 1 a la derecha = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 1 a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 1 a la derecha = \"titulo tipo 1 a la derecha\""
  },
  {
@@ -152,7 +140,7 @@ export default [
    "tagHTML": "h2",
    "content": "titulo tipo 2",
    "tagAndContent": "<h2>innerContent</h2>",
-   "syntaxUser": "titulo tipo 2 = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 2 = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 2 = \"titulo tipo 2\""
  },
  {
@@ -160,7 +148,7 @@ export default [
    "tagHTML": "h2",
    "content": "titulo tipo 2 centrado",
    "tagAndContent": "<h2 style=\"text-align: center;\">innerContent</h2>",
-   "syntaxUser": "titulo tipo 2 centrado = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 2 centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 2 centrado = \"titulo tipo 2 centrado\""
  },
  {
@@ -168,7 +156,7 @@ export default [
    "tagHTML": "h2",
    "content": "titulo tipo 2 a la derecha",
    "tagAndContent": "<h2 style=\"text-align: end;\">innerContent</h2>",
-   "syntaxUser": "titulo tipo 2 a la derecha = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 2 a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 2 a la derecha = \"titulo tipo 2 a la derecha\""
  },
  {
@@ -176,7 +164,7 @@ export default [
    "tagHTML": "h3",
    "content": "titulo tipo 3",
    "tagAndContent": "<h3>innerContent</h3>",
-   "syntaxUser": "titulo tipo 3 = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 3 = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 3 = \"titulo tipo 3\""
  },
  {
@@ -184,7 +172,7 @@ export default [
    "tagHTML": "h3",
    "content": "titulo tipo 3 centrado",
    "tagAndContent": "<h3 style=\"text-align: center;\">innerContent</h3>",
-   "syntaxUser": "titulo tipo 3 centrado = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 3 centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 3 centrado = \"titulo tipo 3 centrado\""
  },
  {
@@ -192,7 +180,7 @@ export default [
    "tagHTML": "h3",
    "content": "titulo tipo 3 a la derecha",
    "tagAndContent": "<h3 style=\"text-align: end;\">innerContent</h3>",
-   "syntaxUser": "titulo tipo 3 a la derecha = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 3 a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 3 a la derecha = \"titulo tipo 3 a la derecha\""
  },
  {
@@ -200,7 +188,7 @@ export default [
    "tagHTML": "h4",
    "content": "titulo tipo 4",
    "tagAndContent": "<h4>innerContent</h4>",
-   "syntaxUser": "titulo tipo 4 = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 4 = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 4 = \"titulo tipo 4\""
  },
  {
@@ -208,7 +196,7 @@ export default [
    "tagHTML": "h4",
    "content": "titulo tipo 4 centrado",
    "tagAndContent": "<h4 style=\"text-align: center;\">innerContent</h4>",
-   "syntaxUser": "titulo tipo 4 centrado = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 4 centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 4 centrado = \"titulo tipo 4 centrado\""
  },
  {
@@ -216,7 +204,7 @@ export default [
    "tagHTML": "h4",
    "content": "titulo tipo 4 a la derecha",
    "tagAndContent": "<h4 style=\"text-align: end;\">innerContent</h4>",
-   "syntaxUser": "titulo tipo 4 a la derecha = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 4 a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 4 a la derecha = \"titulo tipo 4 a la derecha\""
  },
  {
@@ -224,7 +212,7 @@ export default [
    "tagHTML": "h5",
    "content": "titulo tipo 5",
    "tagAndContent": "<h5>innerContent</h5>",
-   "syntaxUser": "titulo tipo 5 = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 5 = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 5 = \"titulo tipo 5\""
  },
  {
@@ -232,7 +220,7 @@ export default [
    "tagHTML": "h5",
    "content": "titulo tipo 5 centrado",
    "tagAndContent": "<h5 style=\"text-align: center;\">innerContent</h5>",
-   "syntaxUser": "titulo tipo 5 centrado = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 5 centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 5 centrado = \"titulo tipo 5 centrado\""
  },
  {
@@ -240,7 +228,7 @@ export default [
    "tagHTML": "h5",
    "content": "titulo tipo 5 a la derecha",
    "tagAndContent": "<h5 style=\"text-align: end;\">innerContent</h5>",
-   "syntaxUser": "titulo tipo 5 a la derecha = \"(.|\n|\r)+\"",
+   "syntaxUser": "titulo tipo 5 a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "titulo tipo 5 a la derecha = \"titulo tipo 5 a la derecha\""
  },
  {

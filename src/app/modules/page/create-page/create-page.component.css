@@ -4,37 +4,43 @@ h1{
 }
 
 .content-create-page{
+  margin-top: 2rem;
   height: auto;
   display: flex;
   justify-content: space-around;
-  align-items: center;
   flex-wrap: wrap;
 }
 
 .content-meta-datos-page form{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  width: 95%;
   align-items: center;
   flex-wrap: wrap;
-  
-  
+  margin: auto;
 }
+
+.content-meta-datos-page mat-form-field:nth-child(1) {
+ width: 35%;
+}
+
 .edited-content {
   width: 45%;
-  height: 90vh
+  height: 68vh
 
 }
 
 .edited-content form{
   display: flex;
   flex-direction: column;
+  height: auto;
   
 }
 
 
 .rendered-content{
   width: 45%;
-  height: 90vh;
+  height: 68vh;
   border: 0.2rem solid black;
   overflow-y: auto;
   word-wrap: break-word;

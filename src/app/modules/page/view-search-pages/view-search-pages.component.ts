@@ -11,12 +11,13 @@ import { DateExactly } from 'src/app/pipes/date.pipe';
 import { DatePipe } from '@angular/common';
 import { GetSearchPages } from 'src/app/models/getSearchPages.model';
 import {Location} from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-view-search-pages',
   templateUrl: './view-search-pages.component.html',
   styleUrls: ['./view-search-pages.component.css']
 })
-export class ViewSearchPagesComponent implements OnInit  {
+export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
@@ -24,6 +25,7 @@ export class ViewSearchPagesComponent implements OnInit  {
   dataToDisplay: Page[] = [];
   dataSource: MatTableDataSource<Page>;
   querySearch: string = "";
+  loadingData: boolean = false;
 
   constructor(
     private pageService: PageService,
@@ -32,11 +34,15 @@ export class ViewSearchPagesComponent implements OnInit  {
     private dateExactly: DateExactly,
     private datePipe: DatePipe,
     private location: Location,
+    private cdref: ChangeDetectorRef
 
   ) {}
+ ngOnInit(): void {
+  /* throw new Error('Method not implemented.'); */
+ }
   
-  ngOnInit() {
-
+ ngAfterViewInit() {
+   this.loadingData = true;
    this.sharingService.sharingPageObservableData = {
     id_page: '',
     username: '',
@@ -77,10 +83,11 @@ export class ViewSearchPagesComponent implements OnInit  {
             }
           }
         }
-        
+        this.loadingData = false;
       }
       
     );
+    this.cdref.detectChanges();
     
   }
 

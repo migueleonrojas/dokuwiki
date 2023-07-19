@@ -22,7 +22,7 @@ export class ViewAllPagesComponent implements OnInit  {
   displayedColumns: string[] = ['index', 'title_page', 'username', 'creation_date', 'modification_date', 'is_solved', 'type_of_page','options'];
   dataToDisplay: Page[] = [];
   dataSource: MatTableDataSource<Page>;
-
+  loadingData: boolean = false;
 
   constructor(
     private pageService: PageService,
@@ -34,6 +34,7 @@ export class ViewAllPagesComponent implements OnInit  {
   ) {}
   
   ngOnInit() {
+     this.loadingData = true;
      this.sharingService.sharingPageObservableData = {
      id_page: '',
      username: '',
@@ -73,7 +74,7 @@ export class ViewAllPagesComponent implements OnInit  {
             }
           }
         }
-        
+        this.loadingData = false;
       },
       error: (err: any) => {
         

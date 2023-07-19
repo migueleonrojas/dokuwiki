@@ -2,13 +2,32 @@
   <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="closeMatSidenav()">
     <mat-icon>close</mat-icon>
   </button>
-  <form>
-    <mat-form-field>
+  <form class="input-search">
+    <mat-form-field class="input-search">
       <mat-label>Buscar</mat-label>
-      <input type="search" matInput [formControl]="searchFormControl" placeholder="Buscar">
+      <input  type="search" matInput [formControl]="searchFormControl" placeholder="Buscar">
       <mat-icon matSuffix class="color-icon-search" (click)="search()">search</mat-icon>
       <mat-error *ngIf="searchFormControl.invalid">No puede realizar una busqueda vacia</mat-error>
     </mat-form-field>
   </form>
+  
+  <span  *ngIf="page.id_page != '' && (urlActual.includes('/page/view-page') || urlActual.includes('/page/view-page-by-param-id'))">
+   <button matTooltip= "Ir al inicio" mat-icon-button color="warning" (click)="goTo('')">
+    <mat-icon>home</mat-icon>
+   </button>
+   <button matTooltip= "Editar" mat-icon-button color="warning" (click)="goTo('page/modify-page')">
+    <mat-icon>edit</mat-icon>
+   </button>
+   <button matTooltip= "Ver todo" mat-icon-button color="warning" (click)="toggleMatCont()">
+    <mat-icon>view_list</mat-icon>
+   </button>
+   <button matTooltip= "Eliminar" mat-icon-button color="warning" (click)="deletePage(page.id_page)">
+    <mat-icon>delete</mat-icon>
+   </button>
+   <button matTooltip= "Ir para atras" mat-icon-button color="warning" (click)="back()">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+
+ </span>
 
 </div>

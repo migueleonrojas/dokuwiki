@@ -1,3 +1,7 @@
 main {
   height: 100vh;
 }
+
+.is-mobile-sidenav{
+ width: 80%;
+}

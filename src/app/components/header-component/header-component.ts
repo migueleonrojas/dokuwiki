@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 import {
   FormControl,
@@ -6,13 +6,14 @@ import {
 } from '@angular/forms';
 import { SharingService } from 'src/app/core/services/sharing.service';
 import { PageService } from 'src/app/services/page/page.service';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {Location} from '@angular/common';
 import { GetSearchPages } from 'src/app/models/getSearchPages.model';
 import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
 import { Page } from 'src/app/models/page.model';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
+
 
 
 @Component({
@@ -32,7 +33,9 @@ export class HeaderComponent implements OnInit {
     private pageService:PageService,
     private router: Router,
     private location: Location,
-  ) { }
+  ) { 
+   
+  }
   
   
 

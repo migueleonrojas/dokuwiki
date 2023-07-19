@@ -1,6 +1,6 @@
 
 <mat-drawer-container #matSidenav class="example-container">
-  <mat-drawer mode="push">
+  <mat-drawer [class.is-mobile-sidenav]="mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'over'" position="start" fixedTopGap="56">
     <app-mat-drawer-elements></app-mat-drawer-elements>
   </mat-drawer>
   <mat-drawer-content>

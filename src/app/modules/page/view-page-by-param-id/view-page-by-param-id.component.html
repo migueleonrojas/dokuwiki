@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container #matSideContainer>
   <mat-sidenav #snav [class.is-mobile-sidenav]="mobileQuery.matches" opened [mode]="mobileQuery.matches ? 'over' : 'side'" position="end" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
     <mat-nav-list class="mat-nav-list">
       <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="snav.toggle()">

@@ -1,11 +1,9 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Page } from 'src/app/models/page.model';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { SharingService } from 'src/app/core/services/sharing.service';
 import {Location} from '@angular/common';
 import { PageService } from 'src/app/services/page/page.service';
-import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
-import Swal, { SweetAlertResult } from 'sweetalert2'
 import { GetAllPages } from 'src/app/models/getAllPages.model';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenavContainer } from '@angular/material/sidenav';
@@ -30,9 +28,9 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher
   ) { 
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia('(max-width: 700px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
   }
 
  

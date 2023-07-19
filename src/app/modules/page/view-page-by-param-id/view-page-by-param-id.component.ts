@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {Location} from '@angular/common';
 import { Page } from 'src/app/models/page.model';
 import { PageService } from 'src/app/services/page/page.service';
@@ -10,13 +9,15 @@ import Swal, { SweetAlertResult } from 'sweetalert2';
 import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { GetAllPages } from 'src/app/models/getAllPages.model';
+import { MatSidenavContainer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-view-page-by-param-id',
   templateUrl: './view-page-by-param-id.component.html',
   styleUrls: ['./view-page-by-param-id.component.css']
 })
-export class ViewPageByParamIdComponent {
+export class ViewPageByParamIdComponent implements AfterViewInit {
+  @ViewChild('matSideContainer') matSideContainer: MatSidenavContainer;
   idPageParam: string = '';
   page: Page = {
     contents_html: '',
@@ -41,14 +42,17 @@ export class ViewPageByParamIdComponent {
   ) {
     
   }
+ ngAfterViewInit(): void {
+  this.sharingService.sharingSideContainerObservableData = this.matSideContainer;
+ }
 
   private _mobileQueryListener: () => void;
 
   ngOnInit() {
 
-    this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = this.media.matchMedia('(max-width: 700px)');
     this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
 
     this.activatedRoute.queryParams.subscribe((value: Params) => {
 

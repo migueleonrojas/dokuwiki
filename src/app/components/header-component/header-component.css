@@ -8,6 +8,7 @@ header{
 .mat-row {
  display: flex;
  justify-content: space-between;
+ align-items: center
 }
 .spacer:nth-child(1){
  display: none;
@@ -18,15 +19,24 @@ header{
   cursor: pointer;
 }
 
-form.ng-untouched.ng-pristine.ng-valid {
-  height: 6vh;
+.input-search{
+ 
+ display: flex;
+ margin-top: 1.2rem;
+ 
+ 
 }
 
-@media only screen and (max-width: 600px) {
+
+
+
+@media only screen and (max-width: 700px) {
   .spacer:nth-child(1) {
    display: block;
   }
- 
+  .spacer:nth-child(2) {
+   display: none;
+  }
 
   mat-form-field{
     display: none;

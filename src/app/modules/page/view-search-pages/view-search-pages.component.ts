@@ -21,11 +21,11 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  displayedColumns: string[] = ['index', 'title_page', 'username', 'creation_date', 'modification_date', 'is_solved', 'type_of_page','options'];
+  displayedColumns: string[] = ['index', 'title_page', 'username', 'creation_date', 'modification_date', 'category','type_of_page','options'];
   dataToDisplay: Page[] = [];
   dataSource: MatTableDataSource<Page>;
   querySearch: string = "";
-  loadingData: boolean = false;
+  loadingData: boolean;
 
   constructor(
     private pageService: PageService,
@@ -48,17 +48,20 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
     username: '',
     contents_html: '',
     contents_user: '',
-    is_solved: '0',
     title_page: '',
     type_of_page: '',
     creation_date: null,
-    modification_date: null
+    modification_date: null,
+    category: ''
    };
 
     
     this.sharingService.sharingPagesObservable.subscribe(
       (data: Page[]) => {
         this.dataSource = new MatTableDataSource(data);
+        this.dataToDisplay = data;
+        
+        
         if (this.paginator) {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
@@ -83,10 +86,10 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
             }
           }
         }
-        this.loadingData = false;
-      }
+       }
       
     );
+    this.loadingData = false;
     this.cdref.detectChanges();
     
   }

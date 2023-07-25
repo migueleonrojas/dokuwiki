@@ -22,7 +22,6 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
   page: Page = {
     contents_html: '',
     contents_user: '',
-    is_solved: '0',
     title_page: '',
     type_of_page: '',
     username: ''

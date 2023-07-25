@@ -23,6 +23,21 @@ h1{
   align-items: center;
 }
 
+.title_page{
+ cursor: pointer;
+ 
+}
+
+mat-paginator{
+ display: inline;
+}
+
+.title_page:hover{
+ font-weight: bolder;
+ text-decoration: underline;
+ color: blue;
+}
+
 @media (max-width: 900px) {
 
   .title-matcell {

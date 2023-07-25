@@ -15,14 +15,7 @@
           
       <h1>{{page.title_page}}</h1>
       <h2>Nombre del usuario autor: {{page.username}}</h2>
-      <div *ngIf="page.type_of_page === 'incidente'" class="icons">
-        <h3>
-          ¿Se resolvio el incidente?:
-        </h3>
-        <mat-icon class="icon icon_verified" *ngIf="page.is_solved">verified</mat-icon>
-        <mat-icon class="icon icon_cancel" *ngIf="!page.is_solved">cancel</mat-icon>
-    
-      </div>
+      
     
       <div class="rendered-content" [innerHTML]="renderContent  | sanitizeHtml "></div>
 

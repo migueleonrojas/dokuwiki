@@ -37,9 +37,19 @@
       </mat-select>
       <mat-error *ngIf="typePageControl.invalid">Debe indicar el tipo de página a crear</mat-error>
     </mat-form-field>
+
+    <mat-form-field>
+     <mat-label>Categoría de la página</mat-label>
+     <mat-select formControlName="categoryControl">
+       <mat-option *ngFor="let category of categories" [value]="category.name_category">
+         {{category.name_category}}
+       </mat-option>
+     </mat-select>
+     <mat-error *ngIf="categoryControl.invalid">Debe indicar la categoría a la que pertenece la página</mat-error>
+   </mat-form-field>
   
 
-    <mat-checkbox *ngIf="page.type_of_page === 'incidente'" class="example-margin" formControlName="isSolvedControl">¿Incidente resuelto?</mat-checkbox>
+   <!--  <mat-checkbox *ngIf="page.type_of_page === 'incidente'" class="example-margin" formControlName="isSolvedControl">¿Incidente resuelto?</mat-checkbox> -->
 
     <button mat-stroked-button color="primary" (click)="modifyPage()" >Modificar página</button>
   </form>

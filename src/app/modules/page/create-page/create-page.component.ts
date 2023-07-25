@@ -9,10 +9,13 @@ import { Tag } from 'src/app/models/tag.model';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { PageService } from 'src/app/services/page/page.service';
+import { CategoryService } from 'src/app/services/category/category.service';
 import { CreatePageResponse } from 'src/app/models/createPageResponse.model';
 import Swal, { SweetAlertResult } from 'sweetalert2'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogImageComponent } from 'src/app/components/dialog-image/dialog-image.component';
+import { Category } from 'src/app/models/category';
+import { GetAllCategoryResponse } from 'src/app/models/getAllCategoryResponse';
 
 @Component({
   selector: 'app-create-page',
@@ -25,6 +28,7 @@ export class CreatePageComponent implements OnInit {
   titlePageControl = new FormControl('', [Validators.required, Validators.maxLength(50)]);
   nameUserControl = new FormControl('', [Validators.required, Validators.maxLength(50)]);
   typePageControl = new FormControl('', [Validators.required]);
+  categoryControl = new FormControl('', [Validators.required]);
 
   formCreatePage: FormGroup;
   tagsControl = new FormControl('');
@@ -39,12 +43,14 @@ export class CreatePageComponent implements OnInit {
     {name: 'Documentación', value: 'documentación'},
     {name: 'Incidente',     value: 'incidente'},
   ];
+  categories: Category[] = [];
   
   constructor(
     private location: Location,
     private el: ElementRef,
     private pageService: PageService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private categoryService:CategoryService
     
   ) {
     this.formBuilds();
@@ -52,6 +58,10 @@ export class CreatePageComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.categoryService.getAllCategories().subscribe((data:GetAllCategoryResponse) => {
+     this.categories= data.categories;
+    });
    
     this.filteredTags = this.formCreatePage.controls['tagsControl'].valueChanges.pipe(
       startWith(''),
@@ -73,8 +83,9 @@ export class CreatePageComponent implements OnInit {
 
     this.formMetaDataPage = new FormGroup({
       titlePageControl: this.titlePageControl,
-      nameUserControl: this.nameUserControl,
-      typePageControl: this.typePageControl,
+      nameUserControl:  this.nameUserControl,
+      typePageControl:  this.typePageControl,
+      categoryControl:  this.categoryControl
     });
 
     this.formCreatePage = new FormGroup({
@@ -248,8 +259,8 @@ export class CreatePageComponent implements OnInit {
       contents_user: this.contentEdit.value,
       contents_html: this.renderContent,
       username: this.nameUserControl.value,
-      is_solved: '0',
-      type_of_page: this.typePageControl.value
+      type_of_page: this.typePageControl.value,
+      category: this.categoryControl.value
     }).subscribe({
       next: (data: CreatePageResponse) => {
         Swal.fire({

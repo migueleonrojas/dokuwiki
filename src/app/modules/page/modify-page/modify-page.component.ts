@@ -7,6 +7,7 @@ import { Tag } from 'src/app/models/tag.model';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { PageService } from 'src/app/services/page/page.service';
+import { CategoryService } from 'src/app/services/category/category.service';
 import { CreatePageResponse } from 'src/app/models/createPageResponse.model';
 import Swal, { SweetAlertResult } from 'sweetalert2'
 import { SharingService } from 'src/app/core/services/sharing.service';
@@ -14,6 +15,8 @@ import { Page } from 'src/app/models/page.model';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogImageComponent } from 'src/app/components/dialog-image/dialog-image.component';
+import { Category } from 'src/app/models/category';
+import { GetAllCategoryResponse } from 'src/app/models/getAllCategoryResponse';
 
 @Component({
   selector: 'app-modify-page',
@@ -26,11 +29,13 @@ export class ModifyPageComponent implements OnInit {
   titlePageControl = new FormControl('', [Validators.required, Validators.maxLength(50)]);
   nameUserControl = new FormControl('', [Validators.required, Validators.maxLength(50)]);
   typePageControl = new FormControl({value: '', disabled: true}, [Validators.required]);
-  isSolvedControl = new FormControl(false);
+  categoryControl = new FormControl('', [Validators.required]);
+
   types_of_pages: {name:string, value:string}[] = [
     {name: 'Documentación', value: 'documentación'},
     {name: 'Incidente',     value: 'incidente'},
   ];
+  categories: Category[] = [];
 
   formCreatePage: FormGroup;
   tagsControl = new FormControl('');
@@ -46,6 +51,7 @@ export class ModifyPageComponent implements OnInit {
     private location: Location,
     private el: ElementRef,
     private pageService: PageService,
+    private categoryService:CategoryService,
     private sharingService: SharingService,
     private router: Router,
     public dialog: MatDialog
@@ -56,6 +62,10 @@ export class ModifyPageComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+   this.categoryService.getAllCategories().subscribe((data:GetAllCategoryResponse) => {
+    this.categories= data.categories;
+   });
    
     this.filteredTags = this.formCreatePage.controls['tagsControl'].valueChanges.pipe(
       startWith(''),
@@ -73,7 +83,7 @@ export class ModifyPageComponent implements OnInit {
       this.titlePageControl.setValue(page.title_page);
       this.contentEdit.setValue(page.contents_user);
       this.typePageControl.setValue(page.type_of_page);
-      this.isSolvedControl.setValue(page.is_solved ? true : false) 
+      this.categoryControl.setValue(page.category);
 
     });
    
@@ -91,7 +101,7 @@ export class ModifyPageComponent implements OnInit {
       titlePageControl: this.titlePageControl,
       nameUserControl: this.nameUserControl,
       typePageControl: this.typePageControl,
-      isSolvedControl: this.isSolvedControl,
+      categoryControl: this.categoryControl
     });
 
     this.formCreatePage = new FormGroup({
@@ -256,8 +266,8 @@ export class ModifyPageComponent implements OnInit {
       contents_html: this.renderContent,
       username: this.page.username,
       creation_date: this.page.creation_date,
-      is_solved: this.isSolvedControl.value ? '1' : '0',
-      type_of_page: this.page.type_of_page
+      type_of_page: this.page.type_of_page,
+      category: this.categoryControl.value
     }).subscribe({
       next: (data: CreatePageResponse) => {
         this.sharingService.sharingPageObservableData = data.page;

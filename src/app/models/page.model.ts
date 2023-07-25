@@ -6,7 +6,8 @@ export interface Page {
   username:           string;
   creation_date?:     Date;
   modification_date?: Date;
-  is_solved:          string;
+
   type_of_page:       string;
+  category?:           string;
   
 }

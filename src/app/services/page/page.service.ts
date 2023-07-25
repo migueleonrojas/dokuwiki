@@ -9,6 +9,7 @@ import { GetAllPages } from 'src/app/models/getAllPages.model';
 import { ModifyPageResponse } from 'src/app/models/modifyPageResponse.model';
 import { GetSearchPages } from 'src/app/models/getSearchPages.model';
 import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
+import { GetPagesByCategory } from 'src/app/models/getPagesByCategory';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class PageService {
 
   getSearchPages(search: string): Observable<GetSearchPages> {
     return this.http.get<GetSearchPages>(`${environment.apiUrl}/search-page?search=${search}`);
+  }
+
+
+  getPagesByCategory(category:string): Observable<GetPagesByCategory> {
+   return this.http.get<GetPagesByCategory>(`${environment.apiUrl}/search-page-by-category?category=${category}`);
   }
  
 

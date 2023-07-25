@@ -26,7 +26,7 @@ import { GetAllCategoryResponse } from 'src/app/models/getAllCategoryResponse';
 export class ModifyPageComponent implements OnInit {
   @ViewChild('textArea') textAreaElement: ElementRef<HTMLTextAreaElement>;
   formMetaDataPage: FormGroup;
-  titlePageControl = new FormControl('', [Validators.required, Validators.maxLength(50)]);
+  titlePageControl = new FormControl('', [Validators.required, Validators.maxLength(500)]);
   nameUserControl = new FormControl('', [Validators.required, Validators.maxLength(50)]);
   typePageControl = new FormControl({value: '', disabled: true}, [Validators.required]);
   categoryControl = new FormControl('', [Validators.required]);

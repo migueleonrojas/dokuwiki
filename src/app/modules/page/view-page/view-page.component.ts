@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Page } from 'src/app/models/page.model';
 import {  Router } from '@angular/router';
 import { SharingService } from 'src/app/core/services/sharing.service';
@@ -7,6 +7,7 @@ import { PageService } from 'src/app/services/page/page.service';
 import { GetAllPages } from 'src/app/models/getAllPages.model';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenavContainer } from '@angular/material/sidenav';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -33,7 +34,47 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
     this.mobileQuery.addEventListener("change", this._mobileQueryListener);
   }
 
- 
+  @HostListener('document:click', ['$event'])
+  clickElements(event: any){
+
+   if( event.target.constructor.name === 'HTMLImageElement'){
+
+    let imageSrc = event.target.src;
+
+    let height = event.target.naturalHeight;
+    let width = event.target.naturalWidth;
+
+    if(height < 400){
+     width = event.target.naturalWidth * 5.0;
+     height = event.target.naturalHeight * 1.5;
+    }
+
+    if(height < 400 && width < 400) {
+     width = event.target.naturalWidth * 3.0;
+     height = event.target.naturalHeight * 2.0;
+    }
+        
+
+    Swal.fire({
+     imageHeight: height,
+     heightAuto: true,
+     width: width,
+     showConfirmButton: true,
+     
+     padding: '3em',
+     color: '#716add',
+     imageUrl: imageSrc,
+
+     backdrop: `
+       rgba(0,0,12,0.4)
+       left top
+       no-repeat
+     `,
+
+    });
+   }
+
+  }
   
   private _mobileQueryListener: () => void;
   

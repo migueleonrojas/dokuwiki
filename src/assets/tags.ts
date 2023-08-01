@@ -16,6 +16,14 @@ export default [
    "modelUse": "/linea divisora/"
  },
  {
+  "nameTag": "codigo",
+  "tagHTML": "xmp",
+  "content": "codigo",
+  "tagAndContent": "<xmp>innerContent</xmp>",
+  "syntaxUser": "codigo = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
+  "modelUse": "codigo = \"codigo\""
+ },
+ {
    "nameTag": "negrita",
    "tagHTML": "b",
    "content": "texto en negrita",
@@ -286,5 +294,6 @@ export default [
    "tagAndContent": "<ol>innerContent</ol>",
    "syntaxUser": "lista ordenada >(( |-)\/opcion=\"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"\/){1,}",
    "modelUse": "lista ordenada > \/opcion=\"valor de la opcion\"\/-\/opcion=\"valor de la opcion\"\/"
- }
+ },
+ 
 ]

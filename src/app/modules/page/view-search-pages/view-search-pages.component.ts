@@ -21,7 +21,7 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  displayedColumns: string[] = ['index', 'title_page', 'username', 'creation_date', 'modification_date', 'category','type_of_page','options'];
+  displayedColumns: string[] = ['id', 'title_page', 'username', 'creation_date', 'modification_date', 'category','type_of_page','options'];
   dataToDisplay: Page[] = [];
   dataSource: MatTableDataSource<Page>;
   querySearch: string = "";
@@ -66,6 +66,10 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.dataSource.filterPredicate = (data: Page, filter: string) => {
+
+            if (data.id_page.toLowerCase().includes(filter.toLowerCase())) {
+             return true;
+            }
             
             if (data.title_page.toLowerCase().includes(filter.toLowerCase())) {
               return true;
@@ -75,7 +79,13 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
               return true;
             }
 
+            if(data.category.toLowerCase().includes(filter.toLowerCase())){
+             return true;
+            }
 
+           if(data.type_of_page.toLowerCase().includes(filter.toLowerCase())){
+            return true;
+           }
 
             if ( this.datePipe.transform(this.dateExactly.transform(data.creation_date.toString()).toString(), 'dd/MM/yyyy hh:mm:ss a').toLowerCase().includes(filter.toLowerCase()) ) {
               return true;

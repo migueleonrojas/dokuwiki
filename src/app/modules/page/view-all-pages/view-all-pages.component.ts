@@ -31,11 +31,12 @@ export class ViewAllPagesComponent implements AfterViewInit   {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  displayedColumns: string[] = ['index', 'title_page', 'username', 'creation_date', 'modification_date', 'type_of_page', 'category','options'];
+  displayedColumns: string[] = ['id', 'title_page', 'username', 'creation_date', 'modification_date', 'type_of_page', 'category','options'];
   dataToDisplay: Page[] = [];
   dataSource: MatTableDataSource<Page>;
   loadingData: boolean = false;
   categories: Category[] = [];
+  auxCategories: Category[] = [];
   
   constructor(
     private pageService: PageService,
@@ -64,15 +65,21 @@ export class ViewAllPagesComponent implements AfterViewInit   {
 
      this.categoryService.getAllCategories().subscribe((data:GetAllCategoryResponse) => {
       this.categories= data.categories;
+      this.auxCategories = data.categories;
      });
     
-    this.pageService.getAllPages().subscribe({
-      next: (data: GetAllPages) => {
+    this.pageService.getAllPages().subscribe(
+      (data: GetAllPages) => {
         this.dataSource = new MatTableDataSource(data.pages);
+        
         if (this.paginator) {
          this.dataSource.paginator = this.paginator;
          this.dataSource.sort = this.sort;
           this.dataSource.filterPredicate = (data: Page, filter: string) => {
+
+           if (data.id_page.toLowerCase().includes(filter.toLowerCase())) {
+            return true;
+           }
             
             if (data.title_page.toLowerCase().includes(filter.toLowerCase())) {
               return true;
@@ -81,6 +88,14 @@ export class ViewAllPagesComponent implements AfterViewInit   {
             if (data.username.toLowerCase().includes(filter.toLowerCase())) {
               return true;
             }
+
+            if(data.category.toLowerCase().includes(filter.toLowerCase())){
+              return true;
+            }
+
+            if(data.type_of_page.toLowerCase().includes(filter.toLowerCase())){
+             return true;
+           }
 
 
 
@@ -93,12 +108,11 @@ export class ViewAllPagesComponent implements AfterViewInit   {
             }
           }
         }
-        this.loadingData = false;
-      },
-      error: (err: any) => {
         
-      }
-    });
+      },
+      
+    );
+    this.loadingData = false;
     this.cdref.detectChanges();
   }
 
@@ -108,6 +122,13 @@ export class ViewAllPagesComponent implements AfterViewInit   {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  searchCategory(event:Event) {
+   const filterValue = (event.target as HTMLInputElement).value.toLocaleLowerCase();
+   this.categories = this.auxCategories;
+   this.categories = this.categories.filter(el => el.name_category.toLocaleLowerCase().includes(filterValue));
+
   }
   
 

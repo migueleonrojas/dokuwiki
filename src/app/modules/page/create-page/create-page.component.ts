@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Directive, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import {Location} from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 /* import tags from 'src/assets/tags.json'; */
@@ -56,6 +56,14 @@ export class CreatePageComponent implements OnInit {
     this.formBuilds();
   }
 
+  @HostListener('document:click', ['$event'])
+  getRowLineCursor(event: any){
+   
+   if( event.target.constructor.name === 'HTMLTextAreaElement'){
+    
+   }
+
+  }
 
   ngOnInit(): void {
 
@@ -175,8 +183,6 @@ export class CreatePageComponent implements OnInit {
   }
 
   chooseElement(value: string) {
-
-    
 
     let tag = (this.selectableTags.filter(tag => tag.syntaxUser.indexOf(value) === 0))[0];
 

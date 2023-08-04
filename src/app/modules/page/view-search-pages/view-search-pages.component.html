@@ -20,10 +20,11 @@
   <table *ngIf="!loadingData" mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 demo-table"
   matSortActive="title_page" matSortDirection="asc" >
     
-    <ng-container matColumnDef="index">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Número</th>
-      <td mat-cell *matCellDef="let element; let i = index">
-        <span class="index-row">{{i + 1}}</span>
+     <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let page">
+        <span class="title-matcell">ID:</span>
+        <span class="title-content">{{page.id_page}}</span>
       </td>
     </ng-container>
 

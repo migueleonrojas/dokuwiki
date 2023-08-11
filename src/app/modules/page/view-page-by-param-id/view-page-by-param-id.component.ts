@@ -61,8 +61,8 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
     });
 
 
-    this.pageService.getPageById(this.idPageParam).subscribe((getSearchPages: GetPageById) => {
-      this.page = getSearchPages.page;
+    this.pageService.getPageById(this.idPageParam).subscribe((getPageById: GetPageById) => {
+      this.page = getPageById.page;
       this.renderContent = this.page.contents_html;
       this.sharingService.sharingPageObservableData = this.page;
     });

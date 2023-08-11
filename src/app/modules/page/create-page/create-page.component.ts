@@ -34,7 +34,7 @@ export class CreatePageComponent implements OnInit {
   tagsControl = new FormControl('');
   alignsControl = new FormControl('');
   contentEdit = new FormControl('',[Validators.required, Validators.maxLength(8000)]);
-
+  cursorPositionRow: number = 0;
   allTagsSyntax: RegExpMatchArray | null;
   renderContent: string;
   selectableTags: Tag[] = tags;
@@ -44,6 +44,7 @@ export class CreatePageComponent implements OnInit {
     {name: 'Incidente',     value: 'incidente'},
   ];
   categories: Category[] = [];
+
   
   constructor(
     private location: Location,
@@ -57,12 +58,30 @@ export class CreatePageComponent implements OnInit {
   }
 
   @HostListener('document:click', ['$event'])
-  getRowLineCursor(event: any){
-   
-   if( event.target.constructor.name === 'HTMLTextAreaElement'){
+  getRowLineCursor(event: PointerEvent ){
+   if(event.target instanceof HTMLTextAreaElement){
+    
+    let textAreaElement: HTMLTextAreaElement = event.target;
+    let patternTags = {
+      patternSimpleTag: '\/[a-zA-Z0-9 ]+\/',
+      patternTagNoAttributes: '[a-zA-Z0-9 ]{1,} = "([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"',
+      patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/( \/[a-zA-Z]{0,}="([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/){1,}',
+      patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/){1,}'
+    }
+    let tagsSyntax: RegExpMatchArray;
+    tagsSyntax = textAreaElement.value.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g')); 
+
+    console.clear();
+    /* console.log(tagsSyntax);
+    console.log(textAreaElement.value.substring(0, textAreaElement.selectionStart).split("\n").length - 1); */
+    /* console.log(textAreaElement.value.substring(0, textAreaElement.selectionStart).split("\n")); */
+    /* console.log(textAreaElement.value.charAt(textAreaElement.selectionStart)); */
+    console.log(textAreaElement.value.charAt(textAreaElement.selectionStart));
+    console.log(textAreaElement.selectionStart);
+    console.log(textAreaElement.selectionEnd);
+
     
    }
-
   }
 
   ngOnInit(): void {
@@ -162,6 +181,7 @@ export class CreatePageComponent implements OnInit {
 
             
             contentInHTML += tag.tagAndContent.replace("innerContent", contentListItem) + " ";
+           
             
           }
 
@@ -220,15 +240,18 @@ export class CreatePageComponent implements OnInit {
           : `\n\n${tag.modelUse}`
         }`
       );
+
     }
 
     
+
     
     this.formCreatePage.controls['tagsControl'].setValue('');
-
-    
+   
 
   }
+
+  
 
 
 

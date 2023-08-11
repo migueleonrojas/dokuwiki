@@ -10,6 +10,7 @@ import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { GetAllPages } from 'src/app/models/getAllPages.model';
 import { MatSidenavContainer } from '@angular/material/sidenav';
+import { GetPageById } from 'src/app/models/getPageById.model';
 
 @Component({
   selector: 'app-view-page-by-param-id',
@@ -60,8 +61,8 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
     });
 
 
-    this.pageService.getSearchPages(this.idPageParam).subscribe((getSearchPages: GetSearchPages) => {
-      this.page = getSearchPages.pages[0];
+    this.pageService.getPageById(this.idPageParam).subscribe((getSearchPages: GetPageById) => {
+      this.page = getSearchPages.page;
       this.renderContent = this.page.contents_html;
       this.sharingService.sharingPageObservableData = this.page;
     });

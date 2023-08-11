@@ -27,7 +27,7 @@ export default [
    "nameTag": "negrita",
    "tagHTML": "b",
    "content": "texto en negrita",
-   "tagAndContent": "<b style=\"white-space: pre;\">innerContent</b>",
+   "tagAndContent": "<b style=\"white-space: pre-wrap;\">innerContent</b>",
    "syntaxUser": "negrita = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "negrita = \"texto en negrita\""
  },
@@ -35,7 +35,7 @@ export default [
    "nameTag": "negrita centrado",
    "tagHTML": "b",
    "content": "texto en negrita centrado",
-   "tagAndContent": "<b style=\"white-space: pre; display: flex;justify-content: center;\">innerContent</b>",
+   "tagAndContent": "<b style=\"white-space: pre-wrap; display: flex;justify-content: center;\">innerContent</b>",
    "syntaxUser": "negrita centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "negrita centrado = \"texto en negrita centrado\""
  },
@@ -43,7 +43,7 @@ export default [
    "nameTag": "negrita a la derecha",
    "tagHTML": "b",
    "content": "texto en negrita a la derecha",
-   "tagAndContent": "<b style=\"white-space: pre; display: flex;justify-content: flex-end;\">innerContent</b>",
+   "tagAndContent": "<b style=\"white-space: pre-wrap; display: flex;justify-content: flex-end;\">innerContent</b>",
    "syntaxUser": "negrita a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "negrita a la derecha = \"texto en negrita\""
  },
@@ -51,7 +51,7 @@ export default [
    "nameTag": "italica",
    "tagHTML": "i",
    "content": "texto en italica",
-   "tagAndContent": "<i style=\"white-space: pre;\">innerContent</i>",
+   "tagAndContent": "<i style=\"white-space: pre-wrap;\">innerContent</i>",
    "syntaxUser": "italica = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "italica = \"texto en italica\""
  },
@@ -59,7 +59,7 @@ export default [
    "nameTag": "italica centrada",
    "tagHTML": "i",
    "content": "texto en italica centrada",
-   "tagAndContent": "<i style=\"white-space: pre; display: flex;justify-content: center;\">innerContent</i>",
+   "tagAndContent": "<i style=\"white-space: pre-wrap; display: flex;justify-content: center;\">innerContent</i>",
    "syntaxUser": "italica centrada = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "italica centrada = \"texto en italica centrada\""
  },
@@ -67,7 +67,7 @@ export default [
    "nameTag": "italica a la derecha",
    "tagHTML": "i",
    "content": "texto en italica a la derecha",
-   "tagAndContent": "<i style=\"white-space: pre; display: flex;justify-content: flex-end;\">innerContent</i>",
+   "tagAndContent": "<i style=\"white-space: pre-wrap; display: flex;justify-content: flex-end;\">innerContent</i>",
    "syntaxUser": "italica a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "italica a la derecha = \"texto en italica a la derecha\""
  },
@@ -75,7 +75,7 @@ export default [
    "nameTag": "parrafo",
    "tagHTML": "p",
    "content": "parrafo",
-   "tagAndContent": "<p style=\"white-space: pre;\">innerContent</p>",
+   "tagAndContent": "<p style=\"white-space: pre-wrap;\">innerContent</p>",
    "syntaxUser": "parrafo = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "parrafo = \"parrafo\""
  },
@@ -83,7 +83,7 @@ export default [
    "nameTag": "parrafo centrado",
    "tagHTML": "p",
    "content": "parrafo centrado",
-   "tagAndContent": "<p style=\"white-space: pre; text-align: center;\">innerContent</p>",
+   "tagAndContent": "<p style=\"white-space: pre-wrap; text-align: center;\">innerContent</p>",
    "syntaxUser": "parrafo centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "parrafo centrado = \"parrafo centrado\""
  },
@@ -91,7 +91,7 @@ export default [
    "nameTag": "parrafo a la derecha",
    "tagHTML": "p",
    "content": "parrafo a la derecha",
-   "tagAndContent": "<p style=\"white-space: pre; text-align: end;\">innerContent</p>",
+   "tagAndContent": "<p style=\"white-space: pre-wrap; text-align: end;\">innerContent</p>",
    "syntaxUser": "parrafo a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "parrafo a la derecha = \"parrafo a la derecha\""
  },
@@ -99,7 +99,7 @@ export default [
    "nameTag": "subrayado",
    "tagHTML": "u",
    "content": "texto subrayado",
-   "tagAndContent": "<u style=\"white-space: pre;\">innerContent</u>",
+   "tagAndContent": "<u style=\"white-space: pre-wrap;\">innerContent</u>",
    "syntaxUser": "subrayado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "subrayado = \"texto subrayado\""
  },
@@ -107,7 +107,7 @@ export default [
    "nameTag": "subrayado centrado",
    "tagHTML": "u",
    "content": "texto subrayado centrado",
-   "tagAndContent": "<u style=\"white-space: pre; display: flex;justify-content: center;\">innerContent</u>",
+   "tagAndContent": "<u style=\"white-space: pre-wrap; display: flex;justify-content: center;\">innerContent</u>",
    "syntaxUser": "subrayado centrado = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "subrayado centrado = \"texto subrayado centrado\""
  },
@@ -115,7 +115,7 @@ export default [
    "nameTag": "subrayado a la derecha",
    "tagHTML": "u",
    "content": "texto subrayado a la derecha",
-   "tagAndContent": "<u style=\"white-space: pre; display: flex;justify-content: flex-end;\">innerContent</u>",
+   "tagAndContent": "<u style=\"white-space: pre-wrap; display: flex;justify-content: flex-end;\">innerContent</u>",
    "syntaxUser": "subrayado a la derecha = \"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+\"",
    "modelUse": "subrayado a la derecha = \"texto subrayado a la derecha\""
  },

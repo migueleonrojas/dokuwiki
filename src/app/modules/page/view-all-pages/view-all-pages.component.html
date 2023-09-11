@@ -1,4 +1,195 @@
-<div class="main-content"> 
+<mat-sidenav-container #matSideContainer>
+  <mat-sidenav 
+    opened
+    [class.is-mobile-sidenav]="mobileQuery.matches" 
+    [mode]="mobileQuery.matches ? 'over' : 'side'" 
+    position="start" 
+    [fixedInViewport] = "mobileQuery.matches" 
+    fixedTopGap="56"
+    #snav
+  >
+  
+  <div class="header-matside">
+    <button class="btn-close" mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="snav.toggle()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h2>Categorias</h2>
+    <mat-form-field>
+      <mat-label>Buscador de categorias</mat-label>
+      <input matInput (keyup)="searchCategory($event)" placeholder="Buscador de categorias" #input>
+    </mat-form-field>
+  </div>
+  <mat-nav-list>
+    <div class="view-all-categories">
+      <span mat-list-item routerLink="." *ngFor="let category of categories">
+        <mat-label (click)="viewPageByCategory(category.name_category)" matTooltip="Ver páginas con la Categoría: {{category.name_category}}">{{category.name_category}}</mat-label>
+        <div class="options-categories">
+          <button mat-icon-button  matTooltip="Editar Categoría" (click)="modifyCategory(category)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          
+          <button mat-icon-button  matTooltip="Eliminar Categoría" (click)="deleteCategory(category)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </span>
+    </div>
+
+    
+    <!-- <div class="view-all-categories">
+      
+      
+      <span class="category-item" mat-list-item routerLink="." *ngFor="let category of categories">
+       
+       <mat-label (click)="viewPageByCategory(category.name_category)" matTooltip="Ver páginas con la Categoría: {{category.name_category}}">{{category.name_category}}</mat-label>
+      
+       <button mat-icon-button  matTooltip="Editar Categoría" (click)="modifyCategory(category)">
+        <mat-icon>edit</mat-icon>
+       </button>
+       <button mat-icon-button  matTooltip="Eliminar Categoría" (click)="deleteCategory(category)">
+        <mat-icon>delete</mat-icon>
+       </button>
+      </span>
+    </div> -->
+  </mat-nav-list>
+  <!-- <mat-nav-list class="mat-nav-list">
+    <button mat-fab color="primary"  (click)="snav.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h2>Categorias</h2>
+    <mat-form-field>
+      <mat-label>Buscador de categorias</mat-label>
+      <input matInput (keyup)="searchCategory($event)" placeholder="Buscador de categorias" #input>
+    </mat-form-field>
+    <span class="category-item" mat-list-item routerLink="." *ngFor="let category of categories">
+    
+      <mat-label (click)="viewPageByCategory(category.name_category)" matTooltip="Ver páginas con la Categoría: {{category.name_category}}">{{category.name_category}}</mat-label>
+      
+      <button mat-icon-button  matTooltip="Editar Categoría" (click)="modifyCategory(category)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button  matTooltip="Eliminar Categoría" (click)="deleteCategory(category)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      
+      
+    </span>
+
+  </mat-nav-list> -->
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content-view-page">
+
+    
+      <button class="button-mat-sidenav" mat-icon-button (click)="snav.toggle()" >
+        <mat-icon >menu</mat-icon>
+      </button>
+      <div class="view-all-content">
+        
+        <h1>Listado de documentación</h1>
+        <div class="table-header">
+        <mat-form-field>
+          <mat-label>Buscador</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Buscador" #input>
+          </mat-form-field>
+          <span class="buttons">
+          <button mat-fab color="primary" matTooltip="Agregar página" aria-label="Example icon button with a delete icon" (click)="addPage()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-fab color="primary" matTooltip="Agregar Categoría para las páginas" aria-label="Example icon button with a delete icon" (click)="addCategory()">
+            <mat-icon>category</mat-icon>
+          </button>
+          </span>
+        </div>
+        
+        
+        <mat-spinner *ngIf="loadingData"></mat-spinner>
+        <table *ngIf="!loadingData" mat-table matSort  [dataSource]="dataSource" class="mat-elevation-z8 demo-table" 
+          matSortActive="title_page" matSortDirection="asc">
+      
+          <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let page">
+            <span class="title-matcell">ID:</span>
+            <span class="title-content">{{page.id_page}}</span>
+          </td>
+        </ng-container>
+        
+          <ng-container matColumnDef="title_page">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Título.</th>
+            <td mat-cell *matCellDef="let page">
+              <span class="title-matcell">Título: </span>
+              <span class="title-content title_page" matTooltip="Ver página" (click)="view(page)">{{page.title_page}}</span>
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre del Usuario</th>
+            <td mat-cell *matCellDef="let page">
+              <span class="title-matcell">Nombre del Usuario:</span>
+              <span class="title-content">{{page.username}}</span>
+            </td>
+          </ng-container>
+      
+        
+          <ng-container matColumnDef="creation_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Creación</th>
+            <td mat-cell *matCellDef="let page">
+              <span class="title-matcell">Fecha de Creación: </span>
+              <span class="title-content">{{ page.creation_date | dateExactly | date: 'dd/MM/yyyy hh:mm:ss a'}}</span>
+              
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="modification_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Modificación</th>
+            <td mat-cell *matCellDef="let page">
+              <span class="title-matcell">Fecha de Modificación: </span>
+              <span class="title-content">{{ page.modification_date | dateExactly | date:'dd/MM/yyyy hh:mm:ss a'}}</span>
+            </td>
+          </ng-container>
+      
+          
+      
+          <ng-container matColumnDef="type_of_page">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de página</th>
+            <td mat-cell *matCellDef="let page">
+              <span class="title-matcell">Tipo de página: </span>
+              <span class="title-content">{{ page.type_of_page}}</span>
+              
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoría de la página</th>
+            <td mat-cell *matCellDef="let page">
+              <span class="title-matcell">Categoría de la página: </span>
+              <span class="title-content">{{ page.category}}</span>
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let page;">
+              <span class="title-matcell">Acciones: </span>
+              <button mat-icon-button  matTooltip="Ver página" (click)="view(page)">
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <div class="main-content"> 
 
  <div class="view-all-categories">
    <h2>Categorias</h2>
@@ -124,3 +315,4 @@
 
 
 
+ -->

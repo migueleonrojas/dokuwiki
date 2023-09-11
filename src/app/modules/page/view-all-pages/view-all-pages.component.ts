@@ -20,7 +20,7 @@ import { GetAllCategoryResponse } from 'src/app/models/getAllCategoryResponse';
 import { GetSearchPages } from 'src/app/models/getSearchPages.model';
 import { GetPagesByCategory } from 'src/app/models/getPagesByCategory';
 import { ModifyCategoryResponse } from 'src/app/models/modifyCategoryResponse.model';
-
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-view-all-pages',
@@ -34,9 +34,10 @@ export class ViewAllPagesComponent implements AfterViewInit   {
   displayedColumns: string[] = ['id', 'title_page', 'username', 'creation_date', 'modification_date', 'type_of_page', 'category','options'];
   dataToDisplay: Page[] = [];
   dataSource: MatTableDataSource<Page>;
-  loadingData: boolean = false;
+  loadingData: boolean = true;
   categories: Category[] = [];
   auxCategories: Category[] = [];
+  mobileQuery: MediaQueryList;
   
   constructor(
     private pageService: PageService,
@@ -45,13 +46,21 @@ export class ViewAllPagesComponent implements AfterViewInit   {
     private sharingService: SharingService,
     private dateExactly: DateExactly,
     private datePipe:DatePipe,
-    private cdref: ChangeDetectorRef
+    private cdref: ChangeDetectorRef,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher
 
-  ) {}
+  ) {
+    this.mobileQuery = media.matchMedia('(max-width: 1500px)');
+   this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+   this.mobileQuery.addEventListener("change", this._mobileQueryListener);
+  }
   
+  private _mobileQueryListener: () => void;
+
   ngAfterViewInit() {
 
-     this.loadingData = true;
+     
      this.sharingService.sharingPageObservableData = {
       id_page: '',
       username: '',

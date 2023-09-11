@@ -1,3 +1,30 @@
+mat-sidenav-container{
+  height: 89vh;
+  margin: 0;
+  padding: 0;
+
+}
+
+.content-view-page{
+  height: 89vh;
+  margin: 0!important;
+  padding: 0!important;
+  
+}
+
+
+.mat-nav-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 2rem;
+}
+
+.mat-nav-list button {
+  margin-top: 1rem;
+  align-self: center;
+}
 
 .main-content {
  display: flex;
@@ -5,18 +32,56 @@
  height:auto;
 }
 
-.view-all-categories{
- 
-  padding: 0 1rem;
-  max-width: 20%;
-  width: 20%;
-  height: 89vh;
-  overflow-y: auto;
-  overflow-x: visible;
- 
+.btn-close{
+  text-align: center;
+  display: block;
+  margin: 1rem auto 1rem auto;
+  
 }
 
+.button-mat-sidenav {
+  margin-left: 1rem;
+}
 
+.header-matside{
+  width: auto;
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-top: 2rem;
+}
+
+.header-matside mat-form-field {
+  max-width: 95%;
+  width: 95%;
+}
+
+.header-matside h2 {
+  word-break: break-all;
+}
+
+.view-all-categories {
+  display: flex;
+  flex-direction: column;
+}
+
+.view-all-categories span {
+  max-width: 90%;
+  width: 90%;
+  border-radius: 0.4rem;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+  margin: 1rem auto;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
+.view-all-categories mat-label {
+  
+  margin: auto auto auto 1rem;
+}
+.view-all-categories .options-categories {
+  margin: auto 1rem auto auto;
+  text-align: right;
+}
 
 mat-paginator{
  display: inline;
@@ -24,30 +89,7 @@ mat-paginator{
  
 }
 
-.view-all-categories span mat-label {
- padding: 0.3rem;
- background-color: rgb(255, 255, 255);
- max-width: 10rem;
- width: 10rem;
- box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
- border-radius: 0.4rem;
- font-weight: bold;
- word-break: break-all;
-}
 
-
-.view-all-categories span mat-label:hover{
- scale: 1.1;
-}
-
-.view-all-categories h2 {
- position: sticky;
- top: 0;
- background-color: white;
- width: 100%;
- z-index: 1000;
- margin-bottom: 1rem;
-}
 
 .category-item{
  margin-top: 0.8rem;
@@ -119,34 +161,11 @@ h1{
  color: blue;
 }
 
-
+.is-mobile-sidenav{
+  width: 45%;
+}
 
 @media (max-width: 1250px) {
-
-  .view-all-categories{
-   max-width: 100%;
-   width: 100%;
-   
-   height: 40%;
-   max-width: 100%;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   overflow-y: hidden;
-  }
-
-  .view-all-categories h2 {
-   position: absolute;
-   z-index: 0;
-   
-  }
-
-  .view-all-categories h2 {
-   text-align: center;
-  }
-
-  
 
   .title-matcell {
     display: flex;
@@ -188,6 +207,14 @@ h1{
     text-align-last: right;
   }
 
+}
+
+@media (max-width: 700px) {
+
+  .is-mobile-sidenav{
+    width: 90%;
+  }
+  
 }
 
 

@@ -1,12 +1,28 @@
 <mat-sidenav-container #matSideContainer>
-  <mat-sidenav #snav [class.is-mobile-sidenav]="mobileQuery.matches" opened [mode]="mobileQuery.matches ? 'over' : 'side'" position="end" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-    <mat-nav-list class="mat-nav-list">
+  <mat-sidenav 
+    #snav
+    [class.is-mobile-sidenav]="mobileQuery.matches"
+    [class.is-desktop-sidenav]="!mobileQuery.matches"
+    opened 
+    [mode]="mobileQuery.matches ? 'over' : 'side'" 
+    position="end" 
+    [fixedInViewport]="mobileQuery.matches" 
+    fixedTopGap="56"
+  >
+    <div class="header-matside">
       <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="snav.toggle()">
         <mat-icon>close</mat-icon>
       </button>
       <h2>Todas las páginas creadas</h2>
-      <a matTooltip="{{page.title_page}}" mat-list-item routerLink="." *ngFor="let page of allPages"
-        (click)="view(page)">{{page.title_page}}</a>
+      <mat-form-field>
+        <mat-label>Buscador de Paginas</mat-label>
+        <input matInput (keyup)="searchPage($event)" placeholder="Buscador de Paginas" #input>
+      </mat-form-field>
+    </div>
+    <mat-nav-list>
+
+      <a class="page-item-a" matTooltip="{{page.title_page}}" mat-list-item routerLink="." *ngFor="let page of allPages" (click)="view(page)" >{{page.title_page}}</a>
+    
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

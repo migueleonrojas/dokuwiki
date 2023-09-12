@@ -21,7 +21,7 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  displayedColumns: string[] = ['id', 'title_page', 'username', 'creation_date', 'modification_date', 'category','type_of_page','options'];
+  displayedColumns: string[] = [/* 'id', */ 'title_page', 'username', 'creation_date', 'modification_date', 'category','type_of_page','options'];
   dataToDisplay: Page[] = [];
   dataSource: MatTableDataSource<Page>;
   querySearch: string = "";

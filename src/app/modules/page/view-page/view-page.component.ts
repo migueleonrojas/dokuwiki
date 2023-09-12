@@ -20,6 +20,7 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
   page: Page;
   renderContent: string;
   allPages: Page[];
+  allPagesAux: Page[];
   mobileQuery: MediaQueryList;
   constructor(
     private router: Router,
@@ -93,6 +94,7 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
     this.pageService.getAllPages().subscribe((getPageForPage: GetAllPages) => {
       
       this.allPages = getPageForPage.pages;
+      this.allPagesAux = getPageForPage.pages;
 
     });
     
@@ -108,5 +110,12 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
     this.sharingService.sharingPageObservableData = page;    
     
   }
+
+  searchPage(event:Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLocaleLowerCase();
+    this.allPages = this.allPagesAux;
+    this.allPages = this.allPages.filter(el => el.title_page.toLocaleLowerCase().includes(filterValue));
+ 
+   }
 
 }

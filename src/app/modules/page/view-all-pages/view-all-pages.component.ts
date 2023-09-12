@@ -31,7 +31,7 @@ export class ViewAllPagesComponent implements AfterViewInit   {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  displayedColumns: string[] = ['id', 'title_page', 'username', 'creation_date', 'modification_date', 'type_of_page', 'category','options'];
+  displayedColumns: string[] = [/* 'id', */ 'title_page', 'username', 'creation_date', 'modification_date', 'type_of_page', 'category','options'];
   dataToDisplay: Page[] = [];
   dataSource: MatTableDataSource<Page>;
   loadingData: boolean = true;
@@ -161,7 +161,8 @@ export class ViewAllPagesComponent implements AfterViewInit   {
 
   }
 
-  async modifyCategory(category:Category){
+  async modifyCategory(event: Event, category:Category){
+    event.stopPropagation();
 
    let resultAlertConfirm: SweetAlertResult = await Swal.fire({
     title: 'Coloque el nombre de la categoría para confirmar su modificación',
@@ -249,7 +250,10 @@ export class ViewAllPagesComponent implements AfterViewInit   {
   }
 
 
-  async deleteCategory(category:Category){
+  async deleteCategory(event: Event, category:Category){
+
+   event.stopPropagation();
+
    let resultAlertConfirm: SweetAlertResult = await Swal.fire({
     title: 'Coloque el nombre de la categoría para confirmar su eliminación\nNota: Solo se eliminará la categoría si no ha sido asignada a ninguna página.',
     input: 'text',
@@ -305,7 +309,7 @@ export class ViewAllPagesComponent implements AfterViewInit   {
     return;
    }
 
-   return;
+   
    let resultAlertDeleteNewNameCategory: SweetAlertResult = await Swal.fire({
     title: 'Coloque el nuevo nombre que desea asignarle a la categoría.\nNota: Las páginas que poseen la categoría que se esta modificando tambien cambiará su valor.',
     input: 'text',

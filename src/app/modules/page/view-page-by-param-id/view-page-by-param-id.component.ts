@@ -28,6 +28,7 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
     username: ''
   };
   allPages: Page[];
+  allPagesAux: Page[];
   renderContent: string = '';
   mobileQuery: MediaQueryList;
 
@@ -72,7 +73,7 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
     this.pageService.getAllPages().subscribe((getPageForPage: GetAllPages) => {
       
       this.allPages = getPageForPage.pages;
-
+      this.allPagesAux = getPageForPage.pages;
     });
     
     
@@ -98,6 +99,13 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
     this.router.navigate([`/${path}`]);
 
   }
+
+  searchPage(event:Event) {
+    const filterValue = (event.target as HTMLInputElement).value.toLocaleLowerCase();
+    this.allPages = this.allPagesAux;
+    this.allPages = this.allPages.filter(el => el.title_page.toLocaleLowerCase().includes(filterValue));
+ 
+   }
 
 
 

@@ -32,6 +32,12 @@ mat-paginator{
  display: inline;
 }
 
+.table-mat-pages{
+  height: 35rem;
+  overflow: auto;
+}
+
+
 .title_page:hover{
  font-weight: bolder;
  text-decoration: underline;

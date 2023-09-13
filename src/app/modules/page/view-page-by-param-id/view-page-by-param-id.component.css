@@ -72,6 +72,14 @@ h1 {
   color: #c01111;
 }
 
+.loading-data{
+
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  background: white;
+}
+
 .buttons-row {
   display: flex;
   justify-content: center;

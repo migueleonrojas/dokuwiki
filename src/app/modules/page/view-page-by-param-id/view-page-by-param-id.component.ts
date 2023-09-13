@@ -29,6 +29,7 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
   };
   allPages: Page[];
   allPagesAux: Page[];
+  loadingData: boolean = true;
   renderContent: string = '';
   mobileQuery: MediaQueryList;
 
@@ -74,6 +75,7 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
       
       this.allPages = getPageForPage.pages;
       this.allPagesAux = getPageForPage.pages;
+      this.loadingData = false;
     });
     
     

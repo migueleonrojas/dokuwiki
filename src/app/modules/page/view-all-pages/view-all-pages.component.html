@@ -20,7 +20,14 @@
     </mat-form-field>
   </div>
   <mat-nav-list>
+    
     <div class="view-all-categories">
+      <div class="loading-data" *ngIf="loadingCategories">
+        <mat-progress-spinner 
+          color="primary" 
+          mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
       <span mat-list-item routerLink="." *ngFor="let category of categories" (click)="viewPageByCategory(category.name_category)">
         <mat-label  matTooltip="Ver páginas con la Categoría: {{category.name_category}}">{{category.name_category}}</mat-label>
         <div class="options-categories">
@@ -33,7 +40,10 @@
           </button>
         </div>
       </span>
-    </div>  
+      
+    </div>
+
+    
     
   </mat-nav-list>
   
@@ -64,10 +74,10 @@
         </div>
         
         
-        <mat-spinner *ngIf="loadingData"></mat-spinner>
+        
 
         <div class="table-mat-pages">
-          <table *ngIf="!loadingData" mat-table matSort  [dataSource]="dataSource" class="mat-elevation-z8 demo-table" 
+          <table mat-table matSort  [dataSource]="dataSource" class="mat-elevation-z8 demo-table" 
             matSortActive="title_page" matSortDirection="asc">
         
             <!-- <ng-container matColumnDef="id">
@@ -144,9 +154,17 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
+          </table>
+            
+          <div class="loading-data" *ngIf="loadingData">
+            <mat-progress-spinner 
+              color="primary" 
+              mode="indeterminate">
+            </mat-progress-spinner>
           </div>
-          <mat-paginator [pageSizeOptions]="[25, 50, 100, 125]" aria-label="Select page of users"></mat-paginator>
+
+        </div>
+        <mat-paginator class="loader" [pageSizeOptions]="[25, 50, 100, 125]" aria-label="Select page of users"></mat-paginator>
         
       </div>
     </div>

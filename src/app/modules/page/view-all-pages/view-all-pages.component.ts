@@ -13,13 +13,11 @@ import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { CreateCategoryResponse } from 'src/app/models/createCategoryResponse.model';
-import { Observable, Subscription, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Category } from 'src/app/models/category';
 import { GetAllCategoryResponse } from 'src/app/models/getAllCategoryResponse';
-import { GetSearchPages } from 'src/app/models/getSearchPages.model';
 import { GetPagesByCategory } from 'src/app/models/getPagesByCategory';
-import { ModifyCategoryResponse } from 'src/app/models/modifyCategoryResponse.model';
 import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
@@ -27,7 +25,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
   templateUrl: './view-all-pages.component.html',
   styleUrls: ['./view-all-pages.component.css']
 })
-export class ViewAllPagesComponent implements AfterViewInit   {
+export class ViewAllPagesComponent implements OnInit   {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
@@ -35,6 +33,7 @@ export class ViewAllPagesComponent implements AfterViewInit   {
   dataToDisplay: Page[] = [];
   dataSource: MatTableDataSource<Page>;
   loadingData: boolean = true;
+  loadingCategories: boolean = true;
   categories: Category[] = [];
   auxCategories: Category[] = [];
   mobileQuery: MediaQueryList;
@@ -58,7 +57,7 @@ export class ViewAllPagesComponent implements AfterViewInit   {
   
   private _mobileQueryListener: () => void;
 
-  ngAfterViewInit() {
+  ngOnInit() {
 
      
      this.sharingService.sharingPageObservableData = {
@@ -73,13 +72,16 @@ export class ViewAllPagesComponent implements AfterViewInit   {
      }; 
 
      this.categoryService.getAllCategories().subscribe((data:GetAllCategoryResponse) => {
+
       this.categories= data.categories;
       this.auxCategories = data.categories;
+      this.loadingCategories = false;
      });
     
     this.pageService.getAllPages().subscribe(
       (data: GetAllPages) => {
         this.dataSource = new MatTableDataSource(data.pages);
+        this.loadingData = false;
         
         if (this.paginator) {
          this.dataSource.paginator = this.paginator;
@@ -117,12 +119,12 @@ export class ViewAllPagesComponent implements AfterViewInit   {
             }
           }
         }
-        
       },
       
     );
-    this.loadingData = false;
-    this.cdref.detectChanges();
+      
+    
+    
   }
 
   applyFilter(event: Event) {
@@ -234,7 +236,7 @@ export class ViewAllPagesComponent implements AfterViewInit   {
        timer: 2500
       });
 
-      this.ngAfterViewInit();
+      this.ngOnInit();
       
      })
      .catch((err:HttpErrorResponse) => {
@@ -291,7 +293,7 @@ export class ViewAllPagesComponent implements AfterViewInit   {
        timer: 2500
       });
 
-      this.ngAfterViewInit();
+      this.ngOnInit();
       
      })
      .catch((err:HttpErrorResponse) => {
@@ -343,7 +345,7 @@ export class ViewAllPagesComponent implements AfterViewInit   {
        timer: 2500
       });
 
-      this.ngAfterViewInit();
+      this.ngOnInit();
       
      })
      .catch((err:HttpErrorResponse) => {

@@ -167,7 +167,13 @@ h1{
   
 }
 
+.loading-data{
 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  background: white;
+}
 
 .title_page{
  cursor: pointer;

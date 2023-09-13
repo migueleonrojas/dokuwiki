@@ -21,6 +21,7 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
   renderContent: string;
   allPages: Page[];
   allPagesAux: Page[];
+  loadingData: boolean = true;
   mobileQuery: MediaQueryList;
   constructor(
     private router: Router,
@@ -95,7 +96,7 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
       
       this.allPages = getPageForPage.pages;
       this.allPagesAux = getPageForPage.pages;
-
+      this.loadingData = false;
     });
     
   }

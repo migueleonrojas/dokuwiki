@@ -56,6 +56,12 @@ h1{
   max-width: 100%;
 }
 
+.text-area {
+  height: 56.7vh;
+  resize: none;
+  
+}
+
 hr {
   flex-grow: 1;
  

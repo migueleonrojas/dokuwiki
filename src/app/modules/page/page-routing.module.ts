@@ -6,15 +6,18 @@ import { ViewAllPagesComponent } from './view-all-pages/view-all-pages.component
 import { ViewPageComponent } from './view-page/view-page.component';
 import { ViewSearchPagesComponent } from './view-search-pages/view-search-pages.component';
 import { ViewPageByParamIdComponent } from './view-page-by-param-id/view-page-by-param-id.component';
+import { CanDeactivateGuard } from 'src/app/guards/can-deactivate.guard';
 
 const routes: Routes = [
   {
     path: 'create-page',
-    component: CreatePageComponent
+    component: CreatePageComponent,
+    canDeactivate: [CanDeactivateGuard]
   },
   {
     path: 'modify-page',
-    component: ModifyPageComponent
+    component: ModifyPageComponent,
+    canDeactivate: [CanDeactivateGuard]
   },
   {
     path: 'view-all-pages',

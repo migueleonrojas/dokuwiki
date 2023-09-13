@@ -1,4 +1,4 @@
-import { Component, Directive, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Directive, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import {Location} from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 /* import tags from 'src/assets/tags.json'; */
@@ -59,6 +59,38 @@ export class ModifyPageComponent implements OnInit {
   ) {
     this.formBuilds();
   }
+
+  @HostListener('window:beforeunload', ['$event'])
+  validateCreatePage(event:BeforeUnloadEvent){
+
+    if(event && this.formCreatePage.controls['contentEdit'].value !== this.page.contents_user){
+      event.preventDefault();
+      event.returnValue = false;
+    }
+    
+  
+  }
+
+  async canDeactivate() {
+
+    if(this.formCreatePage.controls['contentEdit'].value === this.page.contents_user){
+      return true
+    }
+
+    let result: SweetAlertResult = await Swal.fire({
+      title: '¡Se detecto cambios en la página!\n ¿Deseas salir sin guardar los cambios de la página?',
+      showDenyButton: true,
+      confirmButtonText: 'Si',
+      denyButtonText: `No`,
+    })
+
+    if (result.isConfirmed) return true;
+    else{
+      return false;
+    }
+    
+    
+  };
 
 
   ngOnInit(): void {
@@ -306,7 +338,7 @@ export class ModifyPageComponent implements OnInit {
 
 
   back() {
-    this.location.back();
+    this.router.navigate([`/page/view-page`]);
   }
 
 

@@ -16,13 +16,16 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogImageComponent } from 'src/app/components/dialog-image/dialog-image.component';
 import { Category } from 'src/app/models/category';
 import { GetAllCategoryResponse } from 'src/app/models/getAllCategoryResponse';
+import { CanDeactivateType } from 'src/app/types/can-deactivate-type.type';
+import { CanComponentDeactivate } from 'src/app/models/CanComponentDeactivate.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-page',
   templateUrl: './create-page.component.html',
   styleUrls: ['./create-page.component.css'],
 })
-export class CreatePageComponent implements OnInit {
+export class CreatePageComponent implements OnInit, CanComponentDeactivate {
   @ViewChild('textArea') textAreaElement: ElementRef<HTMLTextAreaElement>;
   formMetaDataPage: FormGroup;
   titlePageControl = new FormControl('', [Validators.required, Validators.maxLength(500)]);
@@ -51,10 +54,43 @@ export class CreatePageComponent implements OnInit {
     private el: ElementRef,
     private pageService: PageService,
     public dialog: MatDialog,
-    private categoryService:CategoryService
+    private categoryService:CategoryService,
+    private router:Router
     
   ) {
     this.formBuilds();
+  }
+  
+  async canDeactivate() {
+
+    if(this.formCreatePage.controls['contentEdit'].value.length === 0){
+      return true
+    }
+
+    let result: SweetAlertResult = await Swal.fire({
+      title: '¡Hay contenido en la página a crear!\n ¿Deseas salir sin crear la página?',
+      showDenyButton: true,
+      confirmButtonText: 'Si',
+      denyButtonText: `No`,
+    })
+
+    if (result.isConfirmed) return true;
+    else{
+      return false;
+    }
+    
+    
+  };
+
+  @HostListener('window:beforeunload', ['$event'])
+  validateCreatePage(event:BeforeUnloadEvent){
+
+    if(event && this.formCreatePage.controls['contentEdit'].value.length !== 0){
+      event.preventDefault();
+      event.returnValue = false;
+    }
+    
+  
   }
 
   @HostListener('document:click', ['$event'])
@@ -70,19 +106,11 @@ export class CreatePageComponent implements OnInit {
     }
     let tagsSyntax: RegExpMatchArray;
     tagsSyntax = textAreaElement.value.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g')); 
-
-    console.clear();
-    /* console.log(tagsSyntax);
-    console.log(textAreaElement.value.substring(0, textAreaElement.selectionStart).split("\n").length - 1); */
-    /* console.log(textAreaElement.value.substring(0, textAreaElement.selectionStart).split("\n")); */
-    /* console.log(textAreaElement.value.charAt(textAreaElement.selectionStart)); */
-    console.log(textAreaElement.value.charAt(textAreaElement.selectionStart));
-    console.log(textAreaElement.selectionStart);
-    console.log(textAreaElement.selectionEnd);
-
     
    }
   }
+
+
 
   ngOnInit(): void {
 
@@ -323,7 +351,7 @@ export class CreatePageComponent implements OnInit {
   }
 
   back() {
-    this.location.back();
+    this.router.navigate(['']);
   }
 
 

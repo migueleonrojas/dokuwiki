@@ -38,6 +38,11 @@
 
       <div class="rendered-content" [innerHTML]="renderContent | sanitizeHtml"></div>
 
+      <div *ngIf="viewImageZoom" [style]="styleContentImage">
+        <img data-image-zoom  [src]="zoomImage" [style]="styleImage">
+      </div>
+      
+
       <a href="http://freshfish.sytes.net:9061/page/view-page-by-param-id?id_page={{page.id_page}}" 
          matTooltip= "Ver página: http://freshfish.sytes.net:9061/page/view-page-by-param-id?id_page={{page.id_page}}" 
          target="_blank">

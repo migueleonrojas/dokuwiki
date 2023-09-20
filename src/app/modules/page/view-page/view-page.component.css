@@ -47,6 +47,21 @@ h1{
   flex-direction: row;
 }
 
+.mat-drawer.mat-drawer-side {
+  z-index: 1!important;
+}
+
+.mat-drawer-content {
+  z-index: auto!important;
+}
+
+.mat-drawer-container {
+  z-index: auto!important;
+}
+
+.image-page {
+  cursor: crosshair;
+}
 
 .icons {
   display: flex;
@@ -73,6 +88,7 @@ h1{
   align-items: center; 
   background: white;
 }
+
 
 .buttons-row{
   display: flex;

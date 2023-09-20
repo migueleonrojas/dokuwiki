@@ -80,6 +80,22 @@ h1 {
   background: white;
 }
 
+.mat-drawer.mat-drawer-side {
+  z-index: 1!important;
+}
+
+.mat-drawer-content {
+  z-index: auto!important;
+}
+
+.mat-drawer-container {
+  z-index: auto!important;
+}
+
+.image-page {
+  cursor: crosshair;
+}
+
 .buttons-row {
   display: flex;
   justify-content: center;

@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 export class ViewPageComponent implements OnInit, AfterViewInit {
  @ViewChild('matSideContainer') matSideContainer: MatSidenavContainer;
  @ViewChild('snav') snav: MatSidenav;
-  page: Page;
+  pageView: Page;
   renderContent: string;
   allPages: Page[];
   allPagesAux: Page[];
@@ -187,12 +187,12 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
 
     this.sharingService.sharingPageObservable.subscribe((page: Page) => {
     
-      this.page = page;
+      this.pageView = page;
 
-      this.renderContent = this.page.contents_html;
+      this.renderContent = this.pageView.contents_html;
     });
 
-    this.sharingService.sharingPageObservableData = this.page; 
+    this.sharingService.sharingPageObservableData = this.pageView; 
 
 
     this.pageService.getAllPages().subscribe((getPageForPage: GetAllPages) => {
@@ -219,6 +219,8 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value.toLocaleLowerCase();
     this.allPages = this.allPagesAux;
     this.allPages = this.allPages.filter(el => el.title_page.toLocaleLowerCase().includes(filterValue));
+
+    this.sharingService.sharingPagesObservableData = this.allPages;
  
    }
 

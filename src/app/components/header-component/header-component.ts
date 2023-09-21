@@ -13,6 +13,7 @@ import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
 import { Page } from 'src/app/models/page.model';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
+import { GetAllPages } from 'src/app/models/getAllPages.model';
 
 
 
@@ -28,6 +29,8 @@ export class HeaderComponent implements OnInit {
   matSide: MatSidenav;
   matSidenavContainer: MatSidenavContainer;
   urlActual:string = '';
+  allPages: Page[];
+  auxPages: Page[];
   constructor(
     private sharingService: SharingService,
     private pageService:PageService,
@@ -45,9 +48,21 @@ export class HeaderComponent implements OnInit {
     this.urlActual = window.location.pathname; 
     
    });
+   this.sharingService.sharingPagesObservable.subscribe((pages:Page[]) => {
+
+    this.allPages = pages;
+
+    this.auxPages = pages;
+
+   })
+   /* this.pageService.getAllPages().subscribe((pages:GetAllPages) => {
+    this.allPages = pages.pages;
+
+    this.auxPages = pages.pages;
+   }); */
+
    this.sharingService.sharingPageObservable.subscribe((page: Page) => {
     this.page = page;
-    
    });
     
     this.sharingService.sharingSideNavObservable.subscribe((matSidenav:MatSidenav) => {
@@ -105,6 +120,34 @@ export class HeaderComponent implements OnInit {
     
    this.router.navigate([`/${path}`]);
 
+  }
+
+
+  previousPage(){
+    this.allPages = this.auxPages;
+
+    let indexPage = this.allPages.findIndex(el => el.id_page.toLocaleLowerCase().includes(this.page.id_page));
+
+    if(indexPage === 0) {
+      indexPage = this.allPages.length ;
+    }
+
+    this.sharingService.sharingPageObservableData = this.allPages[indexPage - 1]; 
+  }
+
+  nextPage(){
+
+    this.allPages = this.auxPages;
+
+    let indexPage = this.allPages.findIndex(el => el.id_page.toLocaleLowerCase().includes(this.page.id_page));
+
+    if(indexPage >  this.allPages.length - 2) {
+      indexPage = -1;
+    }
+
+    this.sharingService.sharingPageObservableData = this.allPages[indexPage + 1]; 
+    
+    
   }
 
   back() {

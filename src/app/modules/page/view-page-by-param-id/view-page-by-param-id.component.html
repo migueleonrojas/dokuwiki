@@ -26,14 +26,23 @@
           mode="indeterminate">
         </mat-progress-spinner>
       </div>
-      <a class="page-item-a" matTooltip="{{page.title_page}}" mat-list-item routerLink="." *ngFor="let page of allPages" (click)="view(page)" >{{page.title_page}}</a>
+      <a 
+        class="page-item-a" 
+        matTooltip="{{page.title_page}}" 
+        mat-list-item routerLink="." 
+        *ngFor="let page of allPages" 
+        (click)="view(page)" 
+        [style.backgroundColor] =" pageView.id_page === page.id_page ? '#009fdc':'#fff'"
+      >
+        {{page.title_page}}
+      </a>
     
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content-view-page">
-      <h1>{{page.title_page}}</h1>
-      <h2>Nombre del usuario autor: {{page.username}}</h2>
+      <h1>{{pageView.title_page}}</h1>
+      <h2>Nombre del usuario autor: {{pageView.username}}</h2>
       
 
       <div class="rendered-content" [innerHTML]="renderContent | sanitizeHtml"></div>
@@ -43,8 +52,8 @@
       </div>
       
 
-      <a href="http://freshfish.sytes.net:9061/page/view-page-by-param-id?id_page={{page.id_page}}" 
-         matTooltip= "Ver página: http://freshfish.sytes.net:9061/page/view-page-by-param-id?id_page={{page.id_page}}" 
+      <a href="http://freshfish.sytes.net:9061/page/view-page-by-param-id?id_page={{pageView.id_page}}" 
+         matTooltip= "Ver página: http://freshfish.sytes.net:9061/page/view-page-by-param-id?id_page={{pageView.id_page}}" 
          target="_blank">
          Enlace para esta página
       </a>

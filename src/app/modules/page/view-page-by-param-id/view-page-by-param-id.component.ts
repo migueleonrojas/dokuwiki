@@ -11,6 +11,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { GetAllPages } from 'src/app/models/getAllPages.model';
 import { MatSidenavContainer } from '@angular/material/sidenav';
 import { GetPageById } from 'src/app/models/getPageById.model';
+import { async } from 'rxjs';
 
 @Component({
   selector: 'app-view-page-by-param-id',
@@ -20,7 +21,7 @@ import { GetPageById } from 'src/app/models/getPageById.model';
 export class ViewPageByParamIdComponent implements AfterViewInit {
   @ViewChild('matSideContainer') matSideContainer: MatSidenavContainer;
   idPageParam: string = '';
-  page: Page = {
+  pageView: Page = {
     contents_html: '',
     contents_user: '',
     title_page: '',
@@ -206,11 +207,24 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
 
 
     this.pageService.getPageById(this.idPageParam).subscribe((getPageById: GetPageById) => {
-      this.page = getPageById.page;
-      this.renderContent = this.page.contents_html;
-      this.sharingService.sharingPageObservableData = this.page;
+      this.pageView = getPageById.page;
+      this.renderContent = this.pageView.contents_html;
+      this.sharingService.sharingPageObservableData = this.pageView;
     });
 
+    this.sharingService.sharingPageObservable.subscribe((page: Page) => {
+      
+      
+      this.pageView = page;
+      this.renderContent = page.contents_html;
+      this.router.navigate([], {
+        queryParams: {
+          'id_page': page.id_page
+        },
+        skipLocationChange: false,
+        queryParamsHandling: 'merge',
+      });
+    });
     
 
     this.pageService.getAllPages().subscribe((getPageForPage: GetAllPages) => {
@@ -225,8 +239,8 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
 
   async view(page: Page) {
     
-    this.page = page;
-    this.renderContent = this.page.contents_html;
+    this.pageView = page;
+    this.renderContent = this.pageView.contents_html;
     await this.router.navigate([], {
       queryParams: {
         'id_page': page.id_page
@@ -248,7 +262,7 @@ export class ViewPageByParamIdComponent implements AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value.toLocaleLowerCase();
     this.allPages = this.allPagesAux;
     this.allPages = this.allPages.filter(el => el.title_page.toLocaleLowerCase().includes(filterValue));
- 
+    this.sharingService.sharingPagesObservableData = this.allPages;
    }
 
 

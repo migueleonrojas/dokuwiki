@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Page } from 'src/app/models/page.model';
 import {  Router } from '@angular/router';
 import { SharingService } from 'src/app/core/services/sharing.service';
@@ -6,8 +6,10 @@ import {Location} from '@angular/common';
 import { PageService } from 'src/app/services/page/page.service';
 import { GetAllPages } from 'src/app/models/getAllPages.model';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
+import { MatSidenavContainer } from '@angular/material/sidenav';
 import Swal from 'sweetalert2';
+import { filter} from 'rxjs';
+
 
 
 @Component({
@@ -15,9 +17,13 @@ import Swal from 'sweetalert2';
   templateUrl: './view-page.component.html',
   styleUrls: ['./view-page.component.css']
 })
-export class ViewPageComponent implements OnInit, AfterViewInit {
+export class ViewPageComponent implements OnInit, AfterViewInit  {
  @ViewChild('matSideContainer') matSideContainer: MatSidenavContainer;
- @ViewChild('snav') snav: MatSidenav;
+ @ViewChild('snav') snav: ElementRef<HTMLElement>;
+ @ViewChild('headerMatSide') headerMatSide: ElementRef<HTMLDivElement>;
+ @ViewChildren('itemsLink') itemsLink:QueryList<ElementRef<HTMLSpanElement>>
+
+
   pageView: Page;
   renderContent: string;
   allPages: Page[];
@@ -44,6 +50,7 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
     this.mobileQuery.addEventListener("change", this._mobileQueryListener);
 
   }
+  
 
 
   @HostListener("wheel", ['$event'])
@@ -185,27 +192,50 @@ export class ViewPageComponent implements OnInit, AfterViewInit {
   
   ngOnInit() {
 
-    this.sharingService.sharingPageObservable.subscribe((page: Page) => {
-    
+    this.sharingService.sharingPageObservable
+    .subscribe((page: Page) => {
+
       this.pageView = page;
 
       this.renderContent = this.pageView.contents_html;
-    });
 
-    this.sharingService.sharingPageObservableData = this.pageView; 
-
-
-    this.pageService.getAllPages().subscribe((getPageForPage: GetAllPages) => {
       
-      this.allPages = getPageForPage.pages;
-      this.allPagesAux = getPageForPage.pages;
-      this.loadingData = false;
     });
+
+    
+
+    this.pageService.getAllPages().subscribe((getAllPages: GetAllPages) => {
+      
+      this.allPages = getAllPages.pages;
+      this.allPagesAux = getAllPages.pages;
+      this.loadingData = false;
+      this.sharingService.sharingPagesObservableData = getAllPages.pages;
+    });
+
+
     
   }
 
   ngAfterViewInit() {
    this.sharingService.sharingSideContainerObservableData = this.matSideContainer;
+
+   this.itemsLink.changes.subscribe((itemsLink:QueryList<ElementRef<HTMLSpanElement>>) => {
+
+      this.sharingService.sharingIndexPageSelectedObservable
+      .pipe(
+        filter((n:number) => n !== null)
+      )
+      .subscribe((index:number) => {
+        let matSideNav: HTMLElement = this.snav['_elementRef']['nativeElement']['firstChild'];
+
+        let itemSelected: HTMLElement = itemsLink['_results'][index]['_elementRef']['nativeElement'];
+
+        let distanceYItemSelected = itemSelected.offsetTop - this.headerMatSide.nativeElement.scrollHeight;
+
+        matSideNav.scrollTo(0, distanceYItemSelected);
+      })
+   });
+
   }
 
 

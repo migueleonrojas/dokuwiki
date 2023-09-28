@@ -9,7 +9,10 @@
     [fixedInViewport]="mobileQuery.matches" 
     fixedTopGap="56"
   >
-    <div class="header-matside">
+    <div 
+      #headerMatSide
+      class="header-matside"
+    >
       <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="snav.toggle()">
         <mat-icon>close</mat-icon>
       </button>
@@ -27,6 +30,7 @@
         </mat-progress-spinner>
       </div>
       <a 
+        #itemsLink
         class="page-item-a" 
         matTooltip="{{page.title_page}}" 
         mat-list-item routerLink="." 

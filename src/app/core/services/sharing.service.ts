@@ -22,6 +22,8 @@ export class SharingService {
 
   private sharingSideContainerObservablePrivate: BehaviorSubject<MatSidenavContainer> = new BehaviorSubject<MatSidenavContainer>(null);
 
+  private sharingIndexPageSelectedObservablePrivate: BehaviorSubject<number|null> = new BehaviorSubject<number>(null)
+
 
   get sharingPageObservable(): Observable<Page> {
     return this.sharingPageObservablePrivate.asObservable();
@@ -66,6 +68,14 @@ export class SharingService {
 
   set sharingSideContainerObservableData(matSidenavContainer:MatSidenavContainer){
    this.sharingSideContainerObservablePrivate.next(matSidenavContainer);
+  }
+
+  get sharingIndexPageSelectedObservable(): Observable<number|null> {
+    return this.sharingIndexPageSelectedObservablePrivate.asObservable();
+  }
+
+  set sharingIndexPageSelectedObservableData(indexSelected:number|null){
+    this.sharingIndexPageSelectedObservablePrivate.next(indexSelected);
   }
 
 

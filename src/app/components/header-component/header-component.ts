@@ -132,7 +132,8 @@ export class HeaderComponent implements OnInit {
       indexPage = this.allPages.length ;
     }
 
-    this.sharingService.sharingPageObservableData = this.allPages[indexPage - 1]; 
+    this.sharingService.sharingPageObservableData = this.allPages[indexPage - 1];
+    this.sharingService.sharingIndexPageSelectedObservableData = indexPage - 1;
   }
 
   nextPage(){
@@ -140,13 +141,13 @@ export class HeaderComponent implements OnInit {
     this.allPages = this.auxPages;
 
     let indexPage = this.allPages.findIndex(el => el.id_page.toLocaleLowerCase().includes(this.page.id_page));
-
+    
     if(indexPage >  this.allPages.length - 2) {
       indexPage = -1;
     }
-
-    this.sharingService.sharingPageObservableData = this.allPages[indexPage + 1]; 
     
+    this.sharingService.sharingPageObservableData = this.allPages[indexPage + 1]; 
+    this.sharingService.sharingIndexPageSelectedObservableData = indexPage + 1;
     
   }
 

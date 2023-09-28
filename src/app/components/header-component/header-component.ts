@@ -131,6 +131,13 @@ export class HeaderComponent implements OnInit {
     if(indexPage === 0) {
       indexPage = this.allPages.length ;
     }
+    if(indexPage === - 1){
+
+      this.sharingService.sharingPageObservableData = this.allPages[this.allPages.length - 1];
+      this.sharingService.sharingIndexPageSelectedObservableData = this.allPages.length - 1;
+      
+      return;
+    }
 
     this.sharingService.sharingPageObservableData = this.allPages[indexPage - 1];
     this.sharingService.sharingIndexPageSelectedObservableData = indexPage - 1;

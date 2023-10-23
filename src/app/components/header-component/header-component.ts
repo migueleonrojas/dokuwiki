@@ -160,7 +160,8 @@ export class HeaderComponent implements OnInit {
 
   back() {
     
-   this.location.back();
+    this.router.navigate([`/page/view-search-page`]);
+   /* this.location.back(); */
   }
 
  async deletePage(id_page: string)  {
@@ -173,8 +174,9 @@ export class HeaderComponent implements OnInit {
     cancelButtonText: 'Cancelar',
     confirmButtonText: 'Eliminar Página',
     showLoaderOnConfirm: true,
-    preConfirm: (result) => {
-      if (result === this.page.title_page) {
+    preConfirm: (result:string) => {
+
+      if (result.trim() === this.page.title_page.trim()) {
         return true
       }
       else {

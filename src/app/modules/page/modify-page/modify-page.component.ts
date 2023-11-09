@@ -43,7 +43,7 @@ export class ModifyPageComponent implements OnInit {
 
   allTagsSyntax: RegExpMatchArray | null;
   renderContent: string;
-  selectableTags: Tag[] = tags;
+  selectableTags: Tag[] = tags.sort((a, b) => (a.nameTag > b.nameTag) ? 1 : ((b.nameTag > a.nameTag) ? -1 : 0));;
   filteredTags: Observable<Tag[]>;
   page: Page;
   
@@ -69,6 +69,18 @@ export class ModifyPageComponent implements OnInit {
     }
     
   
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  
+  inputListener(event: KeyboardEvent){
+    
+    
+    if(event.target instanceof HTMLTextAreaElement){
+      if(event.key === 'Tab'){
+        event.preventDefault();
+      }
+    }
   }
 
   async canDeactivate() {
@@ -145,13 +157,13 @@ export class ModifyPageComponent implements OnInit {
 
   changeContenrRendered(contentEditValue: string) {
 
-   let patternTags = {
+    let patternTags = {
 
-    patternSimpleTag: '\/[a-zA-Z0-9 ]+\/',
-    patternTagNoAttributes: '[a-zA-Z0-9 ]{1,} = "([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"',
-    patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/( \/[a-zA-Z]{0,}="([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/){1,}',
-    patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/){1,}'
-  }
+      patternSimpleTag: '\/[a-zA-Z0-9 ]+\/',
+      patternTagNoAttributes: '[a-zA-Z0-9 ]{1,} = "([\&\t\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"',
+      patternTagWithAttributes: '[a-zA-Z ]{0,} = \/"([\&\t\'\n\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/( \/[a-zA-Z]{0,}="([\&\t\'\n\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/){1,}',
+      patternTagWithElements: '[a-zA-Z ]{0,} >(( |-)\/[a-zA-Z]{1,}="([\&\t\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"\/){1,}'
+    }
 
     this.allTagsSyntax = contentEditValue.match(new RegExp(`(${patternTags.patternTagWithAttributes}|${patternTags.patternTagNoAttributes}|${patternTags.patternSimpleTag}|${patternTags.patternTagWithElements})`, 'g'));
      
@@ -160,7 +172,7 @@ export class ModifyPageComponent implements OnInit {
     if (this.allTagsSyntax) {
       for (let tagSyntax of this.allTagsSyntax) { 
         
-       let contentValue = tagSyntax.match(new RegExp('"([\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"', 'g'));
+        let contentValue = tagSyntax.match(new RegExp('"([\&\t\n\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"', 'g'));
         
         let tag = this.selectableTags.filter(tag => new RegExp(tag.syntaxUser).test(tagSyntax))[0];
         
@@ -173,7 +185,7 @@ export class ModifyPageComponent implements OnInit {
           }
           else if (new RegExp(`${patternTags.patternTagWithAttributes}`).test(tagSyntax)) { 
 
-           contentValue = tagSyntax.match(new RegExp('"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"', 'g'));
+            contentValue = tagSyntax.match(new RegExp('"([\&\t\'\n\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"', 'g'));
 
             contentInHTML += tag.tagAndContent.replace("innerContent", contentValue[0].replaceAll('"',"")).replace("value", `${contentValue[1]}`) + " ";
 
@@ -187,13 +199,13 @@ export class ModifyPageComponent implements OnInit {
             
           else if (new RegExp(`${patternTags.patternTagWithElements}`).test(tagSyntax)) {
 
-           let options = tagSyntax.match(new RegExp('"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"', 'g'));
+            let options = tagSyntax.match(new RegExp('"([\&\t\'\n\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"', 'g'));
 
 
 
             let contentListItem: string = "";
             for (let option of options) {
-             contentListItem += `<li>${option.match(new RegExp('"([\'\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"'))[0].replaceAll('"',"")}</li>`;
+              contentListItem += `<li>${option.match(new RegExp('"([\&\t\'\n\>\<\+\$\@\%\#\*\!\?\)\(\_\:\/\.\,-ñáéíóúÁÉÍÓÚ0-9a-zA-Z ]|\[|\])+"'))[0].replaceAll('"',"")}</li>`;
             }
 
             

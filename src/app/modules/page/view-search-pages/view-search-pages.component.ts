@@ -56,7 +56,7 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
    };
 
     
-    this.sharingService.sharingPagesObservable.subscribe(
+    this.sharingService.sharingSearchPagesObservable.subscribe(
       (data: Page[]) => {
         this.dataSource = new MatTableDataSource(data);
         this.dataToDisplay = data;

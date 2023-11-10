@@ -155,7 +155,7 @@ export class ViewAllPagesComponent implements OnInit   {
 
    this.pageService.getPagesByCategory(category).subscribe((data:GetPagesByCategory) => {
 
-    this.sharingService.sharingPagesObservableData = data.pages;
+    this.sharingService.sharingSearchPagesObservableData = data.pages;
 
     this.router.navigate(['/page/view-search-page']);
    });

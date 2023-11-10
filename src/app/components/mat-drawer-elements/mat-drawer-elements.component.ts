@@ -62,7 +62,7 @@ export class MatDrawerElementsComponent implements OnInit {
 
     this.pageService.getSearchPages(this.searchFormControl.value).subscribe((data:GetSearchPages) => {
 
-      this.sharingService.sharingPagesObservableData = data.pages;
+      this.sharingService.sharingSearchPagesObservableData = data.pages;
 
       
 

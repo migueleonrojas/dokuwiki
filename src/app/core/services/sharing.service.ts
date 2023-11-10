@@ -16,6 +16,8 @@ export class SharingService {
 
   private sharingPagesObservablePrivate: BehaviorSubject<Page[]> = new BehaviorSubject<Page[]>([]);
 
+  private sharingSearchPagesObservablePrivate: BehaviorSubject<Page[]> = new BehaviorSubject<Page[]>([]);
+
   private sharingQuerySearchObservablePrivate: BehaviorSubject<string> = new BehaviorSubject<string>("");
 
   private sharingSideNavObservablePrivate: BehaviorSubject<MatSidenav> = new BehaviorSubject<MatSidenav>(null);
@@ -34,7 +36,6 @@ export class SharingService {
   }
 
 
-
   get sharingPagesObservable(): Observable<Page[]> {
     return this.sharingPagesObservablePrivate.asObservable();
   }
@@ -43,6 +44,14 @@ export class SharingService {
     this.sharingPagesObservablePrivate.next(pages);
   }
 
+
+  get sharingSearchPagesObservable(): Observable<Page[]> {
+    return this.sharingSearchPagesObservablePrivate.asObservable();
+  }
+
+  set sharingSearchPagesObservableData(pages:Page[]){
+    this.sharingSearchPagesObservablePrivate.next(pages);
+  }
 
 
   get sharingQuerySearchObservable(): Observable<string> {

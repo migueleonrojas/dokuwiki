@@ -26,6 +26,8 @@ export class SharingService {
 
   private sharingIndexPageSelectedObservablePrivate: BehaviorSubject<number|null> = new BehaviorSubject<number>(null)
 
+  private sharingPreviousUrlObservablePrivate: BehaviorSubject<string> = new BehaviorSubject<string>("");
+
 
   get sharingPageObservable(): Observable<Page> {
     return this.sharingPageObservablePrivate.asObservable();
@@ -85,6 +87,14 @@ export class SharingService {
 
   set sharingIndexPageSelectedObservableData(indexSelected:number|null){
     this.sharingIndexPageSelectedObservablePrivate.next(indexSelected);
+  }
+
+  get sharingPreviousUrlObservable(): Observable<string>{
+    return this.sharingPreviousUrlObservablePrivate.asObservable();
+  }
+
+  set sharingPreviousUrlObservableData(previousUrl:string){
+    this.sharingPreviousUrlObservablePrivate.next(previousUrl);
   }
 
 

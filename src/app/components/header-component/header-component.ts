@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { SharingService } from 'src/app/core/services/sharing.service';
 import { PageService } from 'src/app/services/page/page.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import {Location} from '@angular/common';
 import { GetSearchPages } from 'src/app/models/getSearchPages.model';
 import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
@@ -14,6 +14,7 @@ import { Page } from 'src/app/models/page.model';
 import Swal, { SweetAlertResult } from 'sweetalert2';
 import { DeletePageResponse } from 'src/app/models/deletePageResponse.model';
 import { GetAllPages } from 'src/app/models/getAllPages.model';
+import { filter } from 'rxjs';
 
 
 
@@ -31,6 +32,7 @@ export class HeaderComponent implements OnInit {
   urlActual:string = '';
   allPages: Page[];
   auxPages: Page[];
+  previousUrl: string = '';
   constructor(
     private sharingService: SharingService,
     private pageService:PageService,
@@ -43,11 +45,17 @@ export class HeaderComponent implements OnInit {
   
 
   ngOnInit() {
+
+    this.router.events.subscribe((val) => {
+      this.urlActual = window.location.pathname; 
+      
+     });
    
-   this.router.events.subscribe((val) => {
-    this.urlActual = window.location.pathname; 
-    
-   });
+    this.sharingService.sharingPreviousUrlObservable.subscribe((prevUrl: string) => {
+
+      this.previousUrl = prevUrl;
+
+    });
    this.sharingService.sharingPagesObservable.subscribe((pages:Page[]) => {
 
     this.allPages = pages;
@@ -160,8 +168,8 @@ export class HeaderComponent implements OnInit {
 
   back() {
     
-    this.router.navigate([`/page/view-search-page`]);
-   /* this.location.back(); */
+    this.router.navigate([this.previousUrl]);
+
   }
 
  async deletePage(id_page: string)  {

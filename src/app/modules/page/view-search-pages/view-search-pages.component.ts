@@ -26,6 +26,7 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
   dataSource: MatTableDataSource<Page>;
   querySearch: string = "";
   loadingData: boolean;
+  previousUrl: string = '';
 
   constructor(
     private pageService: PageService,
@@ -38,6 +39,7 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
 
   ) {}
  ngOnInit(): void {
+
   /* throw new Error('Method not implemented.'); */
  }
   
@@ -125,7 +127,8 @@ export class ViewSearchPagesComponent implements OnInit, AfterViewInit  {
 
   back() {
     
-    this.location.back();
+    this.router.navigate(['/']);
+   
   }
 
   goTo(path: string) {
